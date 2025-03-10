@@ -10,8 +10,9 @@
             <span class="mx-4 font-medium inline-block">NOSOTROS</span>
         </router-link>
     </nav>
- </template>
- <script>
- 
- </script>
+</template>
+
+<script>
+    
+</script>
      

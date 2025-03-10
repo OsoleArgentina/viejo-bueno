@@ -14,6 +14,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@site': '/resources/js/Site',
+            '@admin': '/resources/js/Admin',
         },
     },
 });

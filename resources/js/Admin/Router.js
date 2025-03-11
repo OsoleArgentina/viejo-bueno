@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 // HOME PAGE
 import Dashboard from '@admin/Pages/Dashboard.vue'
-import Slider from '@admin/Pages/Home/Slider.vue'
+import Slider from '@admin/Pages/Home/Sliders/Slider.vue'
 import Main from '@admin/Main.vue'
 
 const Routes = [

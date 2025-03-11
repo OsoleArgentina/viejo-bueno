@@ -17,11 +17,8 @@ class HomeController extends Controller
         return $this->success_response('', $sliders);
     }
 
-
-
     public function set_slider(Request $request)
     {   
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'titulo' => 'nullable|string',
             'subtitulo' => 'nullable|string',
@@ -48,79 +45,71 @@ class HomeController extends Controller
         return $this->success_response('Slider creado correctamente.', $slider);
     }
 
-    // public function edit_slider(Request $request)
-    // {   
-    //     $validator = Validator::make($request->all(), [
-    //         'slider_id' => 'required',
-    //         'titulo' => 'required|string',
-    //         'descripcion' => 'required|string',
-    //         'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-    //         'orden' => 'nullable|string|max:2',
-    //     ]);
+    public function edit_slider(Request $request)
+    {   
+        $validator = Validator::make($request->all(), [
+            'slider_id' => 'required',
+            'titulo' => 'nullable|string',
+            'subtitulo' => 'nullable|string',
+            'path' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg',
+            'orden' => 'required|string|max:2',
+        ]);
 
-    //     if ($validator->fails()) {
-    //         return $this->error_response($validator->messages()->first());
-    //     }
+        if ($validator->fails()) {
+            return $this->error_response($validator->messages()->first());
+        }
 
-    //     $slider = SliderHome::findOrFail($request->slider_id);
+        $slider = Slider::findOrFail($request->slider_id);
 
-    //     $slider->update([
-    //         'titulo' => $request->titulo,
-    //         'descripcion' => $request->descripcion,
-    //     ]);
-
-    //     $imagen_slider = $slider->imagen;
-
-    //     if (!is_null($request->orden)) {
-    //         $imagen_slider->update([
-    //             'orden' => $request->orden,
-    //         ]);
-    //     }
-
-    //     if (!is_null($request->imagen)) {
-    //         if($imagen_slider){
-    //             $image_path = public_path('img/' . $imagen_slider->name);
+        $imagen_slider = $slider->imagen;
+        $image_name = null;
+        if (!is_null($request->path)) {
+            if($imagen_slider){
+                $image_path = public_path('img/' . $imagen_slider->name);
                 
-    //             if (file_exists($image_path)) {
-    //                 unlink($image_path);  
-    //             }
-    //         }
+                if (file_exists($image_path)) {
+                    unlink($image_path);  
+                }
+            }
 
-    //         $imagen = $request->file('imagen');
+            $imagen = $request->file('path');
     
-    //         $image_name = time() . '.' . $imagen->extension();
+            $image_name = time() . '.' . $imagen->extension();
         
-    //         $imagen->move(public_path('img'), $image_name);
+            $imagen->move(public_path('img'), $image_name);
+        }
 
-    //         $imagen_slider->update([
-    //             'name' => $image_name,
-    //         ]);
-    //     }
+        $slider->update([
+            'titulo' => $request->titulo,
+            'subtitulo' => $request->subtitulo,
+            'orden' => $request->orden,
+            'path' => $image_name ?? $slider->path,
+        ]);
 
-    //     return $this->success_response('Slider actualizado correctamente.');
-    // }
+        return $this->success_response('Slider actualizado correctamente.');
+    }
 
-    // public function delete_slider(Request $request)
-    // {   
-    //     $validator = Validator::make($request->all(), [
-    //         'slider_id' => 'required',
-    //     ]);
+    public function delete_slider(Request $request)
+    {   
+        $validator = Validator::make($request->all(), [
+            'slider_id' => 'required',
+        ]);
  
-    //     if ($validator->fails()) {
-    //         return $this->error_response($validator->messages()->first());
-    //     }
+        if ($validator->fails()) {
+            return $this->error_response($validator->messages()->first());
+        }
 
-    //     $slider = SliderHome::findOrFail($request->slider_id);
+        $slider = Slider::findOrFail($request->slider_id);
 
-    //     $image_path = public_path('img/' . $slider->imagen->name);  
-    //     if (File::exists($image_path)) {
-    //         File::delete($image_path);
-    //     }
+        $image_path = public_path('img/' . $slider->path);  
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
         
-    //     $slider->delete();
+        $slider->delete();
 
-    //     return $this->success_response('Slider eliminado correctamente.');
-    // }
+        return $this->success_response('Slider eliminado correctamente.');
+    }
 
     // public function delete_image(Request $request)
     // {   

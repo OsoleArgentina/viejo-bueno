@@ -5,7 +5,7 @@
 
       <navbar></navbar>
       <!-- Main content -->
-      <div class="transition-all duration-300 min-h-screen mt-20" :class="[isOpen ? 'lg:ml-36' : 'lg:ml-16']">
+      <div class="transition-all duration-300 min-h-screen mt-20 p-2" :class="[isOpen ? 'lg:ml-36' : 'lg:ml-16']">
         <!-- Toggle button (visible on desktop) -->
         <!-- <button @click="toggleSidebar" class="fixed top-4 left-4 z-10 bg-gray-800 text-white p-2 rounded-md hidden lg:block">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

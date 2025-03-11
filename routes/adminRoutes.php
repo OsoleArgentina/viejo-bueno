@@ -27,4 +27,6 @@ Route::middleware('auth_admin')->group(function () {
     // Home
     Route::get('/get_sliders', [HomeController::class, 'get_sliders'])->name('get_sliders');
     Route::post('/set_slider', [HomeController::class, 'set_slider'])->name('set_slider');
+    Route::post('/edit_slider', [HomeController::class, 'edit_slider'])->name('edit_slider');
+    Route::delete('/delete_slider', [HomeController::class, 'delete_slider'])->name('delete_slider');
 });

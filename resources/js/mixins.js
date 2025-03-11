@@ -47,7 +47,6 @@ const mixins = {
         },
 
         emit_event(event_name, data) {
-            console.log('asd');
             this.$emit(event_name, data)
         },
 

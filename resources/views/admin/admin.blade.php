@@ -6,19 +6,21 @@
         <link rel="icon" href="{{ asset('img/logo-viejo-bueno.png') }}" type="image/png">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="user-data" content="{{$user ?? null}}">
-
+        
         <title>Administrador</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+        {{-- Font awesome --}}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
         @vite(['resources/css/app.css', 'resources/js/admin.js'])
 
     </head>
     <body>
         <div id="admin">
-            <router-view></router-view>
+            {{-- <router-view></router-view> --}}
         </div>
     </body>
 </html>

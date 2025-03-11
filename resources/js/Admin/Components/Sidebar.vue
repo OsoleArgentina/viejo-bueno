@@ -61,7 +61,7 @@
                   class="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:bg-theme-300 rounded-md transition-colors cursor-pointer"
                 >
                   <div class="flex items-center">
-                    <component :is="section.icon" class="h-5 w-5" />
+                    <i :class="section.icon"></i>
                     <span 
                       class="ml-3 transition-opacity duration-300"
                       :class="[isOpen || window.innerWidth >= 1024 ? 'opacity-100' : 'opacity-0 hidden lg:inline-block lg:opacity-0']"
@@ -139,7 +139,7 @@ export default {
         collapsibleSections: [
           { 
             name: 'Home', 
-            icon: 'CogIcon', 
+            icon: 'fa-solid fa-house', 
             isOpen: false,
             items: [
               { name: 'Slider', path: '/settings/profile' },

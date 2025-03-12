@@ -1,5 +1,5 @@
 <template>
-    <div class="relative min-h-screen">
+    <div v-if="render_app" class="relative min-h-screen">
       <!-- Sidebar -->
       <sidebar v-if="isOpen"></sidebar>
 
@@ -28,7 +28,8 @@ export default {
         isOpen: true,  // Sidebar abierto por defecto
         window: {
           innerWidth: 0
-        }
+        },
+        render_app: false,
       };
     },
     methods: {
@@ -40,7 +41,7 @@ export default {
         this.isOpen = !this.isOpen;
       }
     },
-    mounted() {
+    created() {
       this.load_user_data();
 
       // Establece el tamaño inicial de la ventana
@@ -55,6 +56,8 @@ export default {
       window.addEventListener('resize', () => {
         this.window.innerWidth = window.innerWidth;
       });
+
+      this.render_app = true;
     },
     computed:{
         ...mapGetters([

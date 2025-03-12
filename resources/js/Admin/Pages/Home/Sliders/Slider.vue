@@ -10,7 +10,7 @@
     </div>
 
     <!-- DataTable -->
-    <div v-if="sliders" class="overflow-x-auto mt-6">
+    <div v-if="sliders.length > 0" class="overflow-x-auto mt-6">
         <table class="min-w-full table-auto">
             <thead class="border-b border-gray-100">
                 <tr class="text-left">
@@ -24,7 +24,15 @@
             <tbody>
                 <tr v-for="(slider, index) in sliders" :key="slider.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
                     <td class="px-4 py-2">
-                        <img v-if="slider.path" :src="`/img/${slider.path}`" alt="Slider Image" class="w-20 h-20 object-cover">
+                        <template v-if="isVideo(slider.path)">
+                            <video :src="`/img/${slider.path}`" autoplay muted controls class="w-20 h-20 object-cover
+                            ">
+                                Tu navegador no soporta el video.
+                            </video>
+                        </template>
+                        <template v-else>
+                            <img v-if="slider.path" :src="`/img/${slider.path}`" alt="Slider Image" class="w-20 h-20 object-cover">
+                        </template>
                     </td>
                     <td class="px-4 py-2">{{ slider.titulo }}</td>
                     <td class="px-4 py-2">{{ slider.subtitulo }}</td>
@@ -49,7 +57,7 @@
 
     <create_slider v-if="slider_modal" @close_modal="slider_modal = !slider_modal" @cargar_slider="cargar_slider" />
     <confirmation-modal v-if="delete_slider_modal" :message="'Estas seguro de eliminar el slider? ' + slider_selected.titulo" :data_id="slider_selected.id" @cancel="delete_slider_modal = !delete_slider_modal" @confirm="delete_slider(slider_selected.id)"/>
-    <edit_slider v-if="edit_slider_modal"  :slider_edit="slider_selected" @close_modal="edit_slider_modal = !edit_slider_modal" @editar_slider="editar_slider"/>
+    <edit-slider v-if="edit_slider_modal"  :slider_edit="slider_selected" @close_modal="edit_slider_modal = !edit_slider_modal" @editar_slider="editar_slider"/>
 </template> 
 
 <script>
@@ -61,7 +69,7 @@ import EditSlider from './EditSlider.vue';
 export default {
     components:{
         'create_slider': CreateSlider,
-        'edit_slider': EditSlider
+        'edit-slider': EditSlider
     },
     data() {
         return {
@@ -78,6 +86,11 @@ export default {
         ...mapActions([
             'get_sliders',
         ]),
+        isVideo(path) {
+            const videoExtensions = ['mp4', 'avi', 'mov', 'wmv', 'webm'];
+            const fileExtension = path.split('.').pop().toLowerCase();
+            return videoExtensions.includes(fileExtension);
+        },
         async cargar_slider(data) {
             this.isLoading = true; 
             const method = 'POST';
@@ -89,7 +102,7 @@ export default {
 
             this.isLoading = false; 
 
-            if(!response){
+            if(response.data.error){
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.slider_modal = false;
@@ -121,7 +134,7 @@ export default {
 
             this.isLoading = false; 
 
-            if (!response) {
+            if (response.data.error) {
                 this.toast_notification({ message: response.data.error, type: 'error' })
             } else {
                 this.edit_slider_modal = !this.edit_slider_modal;
@@ -139,7 +152,7 @@ export default {
 
             this.isLoading = false;
 
-            if(!response){
+            if(response.data.error){
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.delete_slider_modal = !this.delete_slider_modal;
@@ -159,9 +172,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-
-
-
-</style>

@@ -38,22 +38,6 @@
   
         <!-- Navigation -->
         <nav class="mt-5 px-2">
-          <!-- Regular menu items -->
-          <a 
-            v-for="(item, index) in regularItems" 
-            :key="`regular-${index}`"
-            href="#" 
-            class="flex items-center px-4 py-3 text-gray-300 hover:bg-theme-300 rounded-md transition-colors group cursor-pointer"
-          >
-            <span class="inline-flex">
-              <component :is="item.icon" class="h-5 w-5" />
-            </span>
-            <span 
-              class="ml-3 transition-opacity duration-300"
-              :class="[isOpen || window.innerWidth >= 1024 ? 'opacity-100' : 'opacity-0 hidden lg:inline-block lg:opacity-0']"
-            >{{ item.name }}</span>
-          </a>
-  
           <!-- Collapsible sections -->
           <div v-for="(section, sectionIndex) in collapsibleSections" :key="`section-${sectionIndex}`" class="mt-2">
                 <button 
@@ -62,12 +46,19 @@
                 >
                   <div class="flex items-center">
                     <i :class="section.icon"></i>
-                    <span 
+                    <span v-if="section.items"
                       class="ml-3 transition-opacity duration-300"
                       :class="[isOpen || window.innerWidth >= 1024 ? 'opacity-100' : 'opacity-0 hidden lg:inline-block lg:opacity-0']"
-                    >{{ section.name }}</span>
+                    >
+                      {{ section.name }}
+                    </span>
+                    <span class="ml-3" v-else>
+                      <router-link  :to="{ name: section.path }">
+                        {{ section.name }}
+                      </router-link>
+                    </span>
                   </div>
-                  <svg 
+                  <svg v-if="section.items"
                     xmlns="http://www.w3.org/2000/svg" 
                     class="h-4 w-4 transition-transform duration-200"
                     :class="[section.isOpen ? 'rotate-180' : '', isOpen || window.innerWidth >= 1024 ? 'opacity-100' : 'opacity-0 hidden lg:inline-block lg:opacity-0']"
@@ -81,10 +72,9 @@
   
             <!-- Submenu -->
             <div 
-              v-if="section.isOpen && (isOpen || window.innerWidth >= 1024)" 
+              v-if="section.items && section.isOpen && (isOpen || window.innerWidth >= 1024)" 
               class="mt-1 ml-4 pl-4 border-l border-white space-y-1 transition-all duration-300 ease-in-out"
             >
-
                 <span 
                     v-for="(subItem, subIndex) in section.items" 
                     :key="`sub-${sectionIndex}-${subIndex}`"
@@ -116,11 +106,6 @@ export default {
           innerWidth: 0
         },
         // Regular menu items
-        regularItems: [
-        //   { name: 'Home', icon: 'HomeIcon', path: '/home' },
-        //   { name: 'Analytics', icon: 'ChartBarIcon', path: '/analytics' },
-        //   { name: 'Projects', icon: 'FolderIcon', path: '/projects' },
-        ],
         // Collapsible sections
         collapsibleSections: [
           { 
@@ -132,6 +117,25 @@ export default {
               { name: 'Nosotros', path: 'home-nosotros' },
             ]
           },
+          { 
+            name: 'Nosotros', 
+            icon: 'fa-solid fa-users', 
+            isOpen: false,
+            items: [
+              { name: 'Principal', path: 'nosotros' },
+              { name: '¿Por qué elegirnos?', path: 'elegirnos' },
+            ]
+          },
+          { 
+            name: 'Catalogo', 
+            icon: 'fa-solid fa-layer-group',
+            isOpen: false,
+            items: [
+              { name: 'Categorias', path: 'nosotros' },
+              { name: 'Productos', path: 'elegirnos' },
+            ]
+          },
+          // { name: 'Nosotros', icon: 'fa-solid fa-users', path: 'nosotros' },
         //   { 
         //     name: 'Team', 
         //     icon: 'UsersIcon', 

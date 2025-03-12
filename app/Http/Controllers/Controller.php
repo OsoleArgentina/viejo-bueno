@@ -16,7 +16,7 @@ abstract class Controller
     public function error_response($message = ''): JsonResponse
     {
         return response()->json([
-            'message' => $message,
+            'error' => $message,
         ], 200);
     }
 }

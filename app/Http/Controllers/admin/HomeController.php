@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Slider;
+use App\Models\HomeNosotros;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
+    // SLIDER
     public function get_sliders(Request $request)
     {
         $sliders = Slider::orderBy('orden', 'asc')->get();
@@ -111,26 +113,50 @@ class HomeController extends Controller
         return $this->success_response('Slider eliminado correctamente.');
     }
 
-    // public function delete_image(Request $request)
-    // {   
-    //     $validator = Validator::make($request->all(), [
-    //         'image_id' => 'required',
-    //     ]);
- 
-    //     if ($validator->fails()) {
-    //         return $this->error_response($validator->messages()->first());
-    //     }
+    // NOSOTROS
+    public function get_home_nosotros(Request $request)
+    {
+        $home_nosotros = HomeNosotros::first();
+        return $this->success_response('', $home_nosotros);
+    }
 
-    //     $image = Imagen::findOrFail($request->image_id);
+    public function set_home_nosotros(Request $request)
+    {   
+        $validator = Validator::make($request->all(), [
+            'titulo' => 'required|string',
+            'descripcion' => 'required|string',
+            'path' => 'sometimes|required|image|mimes:jpeg,png,jpg,svg|max:20480',
+        ]);
 
-    //     $image_path = public_path('img/' . $image->name);
-
-    //     if (file_exists($image_path)) {
-    //         unlink($image_path);  
-    //     }
+        if ($validator->fails()) {
+            return $this->error_response($validator->messages()->first());
+        }
         
-    //     $image->delete();
+        $home_nosotros = HomeNosotros::first();
+        
+        if (!$home_nosotros && is_null($request->path)) {
+            return $this->error_response("La imagen es obligatorio");
+        }
 
-    //     return $this->success_response('Imagen eliminada correctamente.');
-    // }
+        $imagen = $request->file('path');
+        $image_name = null;
+        if (!is_null($request->path)) {
+            $image_name = time() . '.' . $imagen->extension();
+        }
+        
+        HomeNosotros::updateOrCreate(
+            ['id' => $home_nosotros->id ?? -1],
+            [
+                'titulo' => $request->titulo,     
+                'descripcion' => $request->descripcion,     
+                'path' => $image_name ?? $home_nosotros->path,  
+            ]
+        );
+        
+        if (!is_null($request->path)) {
+            $imagen->move(public_path('img'), $image_name);
+        }
+
+        return $this->success_response('Nosotros guardado correctamente.', $home_nosotros);
+    }
 }

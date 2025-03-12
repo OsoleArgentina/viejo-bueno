@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\NosotrosController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -24,9 +25,22 @@ Route::middleware('auth_admin')->group(function () {
         return view('admin.admin', ['user' => auth()->user()]);
     })->name('dashboard');
 
-    // Home
+    // slider - HOME
     Route::get('/get_sliders', [HomeController::class, 'get_sliders'])->name('get_sliders');
     Route::post('/set_slider', [HomeController::class, 'set_slider'])->name('set_slider');
     Route::post('/edit_slider', [HomeController::class, 'edit_slider'])->name('edit_slider');
     Route::delete('/delete_slider', [HomeController::class, 'delete_slider'])->name('delete_slider');
+    // nosotros - HOME
+    Route::get('/get_home_nosotros', [HomeController::class, 'get_home_nosotros'])->name('get_home_nosotros');
+    Route::post('/set_home_nosotros', [HomeController::class, 'set_home_nosotros'])->name('set_home_nosotros');
+
+    // NOSOTROS
+    Route::get('/get_nosotros', [NosotrosController::class, 'get_nosotros'])->name('get_nosotros');
+    Route::post('/set_nosotros', [NosotrosController::class, 'set_nosotros'])->name('set_nosotros');
+    //ELEGIRNOS
+    Route::get('/get_nosotros_elegirnos', [NosotrosController::class, 'get_nosotros_elegirnos'])->name('get_nosotros_elegirnos');
+    Route::post('/create_elegirnos', [NosotrosController::class, 'create_elegirnos'])->name('create_elegirnos');
+    Route::post('/edit_elegirnos', [NosotrosController::class, 'edit_elegirnos'])->name('edit_elegirnos');
+    Route::delete('/delete_elegirnos', [NosotrosController::class, 'delete_elegirnos'])->name('delete_elegirnos');
+
 });

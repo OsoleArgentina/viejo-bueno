@@ -1,33 +1,33 @@
-// import { useToast } from "vue-toastification";
+import { useToast } from "vue-toastification";
 import { mapGetters } from "vuex";
 
 const mixins = {
     methods: {
-        // toast_notification(
-        //     { message = "", type = "success" }
-        // ) {
-        //     const toast = useToast();
+        toast_notification(
+            { message = "", type = "success" }
+        ) {
+            const toast = useToast();
 
-        //     toast(
-        //         message,
-        //         {
-        //             type: type,
-        //             position: "bottom-right",
-        //             maxToasts: 2,
-        //             timeout: 5000,
-        //             closeOnClick: true,
-        //             pauseOnFocusLoss: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             draggablePercent: 0.6,
-        //             showCloseButtonOnHover: true,
-        //             hideProgressBar: false,
-        //             closeButton: "button",
-        //             icon: true,
-        //             rtl: false
-        //         }
-        //     )
-        // },
+            toast(
+                message,
+                {
+                    type: type,
+                    position: "bottom-right",
+                    maxToasts: 2,
+                    timeout: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: true,
+                    hideProgressBar: false,
+                    closeButton: "button",
+                    icon: true,
+                    rtl: false
+                }
+            )
+        },
 
         send_http_request(endpoint, method, headers, params, data = null) {
             return new Promise((resolve, reject) => {

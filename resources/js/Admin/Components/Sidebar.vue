@@ -84,36 +84,22 @@
               v-if="section.isOpen && (isOpen || window.innerWidth >= 1024)" 
               class="mt-1 ml-4 pl-4 border-l border-white space-y-1 transition-all duration-300 ease-in-out"
             >
-                <router-link  :to="{ name: 'slider' }">
 
-                <a 
+                <span 
                     v-for="(subItem, subIndex) in section.items" 
                     :key="`sub-${sectionIndex}-${subIndex}`"
                     href="#" 
                     class="flex items-center px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-theme-300 rounded-md transition-colors cursor-pointer"
                 >
+                  <router-link  :to="{ name: subItem.path }">
+
                     {{ subItem.name }}
-                </a>
-                </router-link>
+                  </router-link>
+                </span>
             </div>
           </div>
         </nav>
       </aside>
-  
-      <!-- Main content -->
-      <!-- <div 
-        class="transition-all duration-300 min-h-screen"
-        :class="[isOpen ? 'lg:ml-64' : 'lg:ml-16']"
-      >
-        <button 
-          @click="toggleSidebar" 
-          class="fixed top-4 left-4 z-10 bg-gray-800 text-white p-2 rounded-md hidden lg:block"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8M4 18h16" />
-          </svg>
-        </button>
-      </div> -->
     </div>
   </template>
   
@@ -142,8 +128,8 @@ export default {
             icon: 'fa-solid fa-house', 
             isOpen: false,
             items: [
-              { name: 'Slider', path: '/settings/profile' },
-              { name: 'Nosotros', path: '/settings/security' },
+              { name: 'Slider', path: 'slider' },
+              { name: 'Nosotros', path: 'home-nosotros' },
             ]
           },
         //   { 

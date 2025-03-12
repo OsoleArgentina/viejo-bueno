@@ -70,6 +70,8 @@ export default {
             delete_slider_modal: false, 
             slider_selected: null,
             isLoading: false,
+            descripcion: '',
+
         };
     },
     methods: {
@@ -77,7 +79,7 @@ export default {
             'get_sliders',
         ]),
         async cargar_slider(data) {
-            this.isLoading = true; // Mostrar spinner de carga
+            this.isLoading = true; 
             const method = 'POST';
             const headers = {
                 'Content-Type': 'multipart/form-data',
@@ -85,18 +87,19 @@ export default {
 
             const response = await this.send_http_request(API_ADMIN.set_slider, method, headers, {}, data);
 
-            this.isLoading = false; // Ocultar spinner de carga
+            this.isLoading = false; 
 
             if(!response){
-                console.error('Error', response);
+                this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.slider_modal = false;
                 await this.get_sliders();
+                this.toast_notification({ message: response.data.message })
             }
         },
 
         async editar_slider(data) {
-            this.isLoading = true; // Mostrar spinner de carga
+            this.isLoading = true; 
 
             let formData = new FormData();
             formData.append('slider_id', data.slider_id);
@@ -116,30 +119,32 @@ export default {
                 formData
             );
 
-            this.isLoading = false; // Ocultar spinner de carga
+            this.isLoading = false; 
 
             if (!response) {
-                console.error('Error', response);
+                this.toast_notification({ message: response.data.error, type: 'error' })
             } else {
                 this.edit_slider_modal = !this.edit_slider_modal;
                 await this.get_sliders();
+                this.toast_notification({ message: response.data.message })
             }
         },
 
         async delete_slider(slider_id) {
-            this.isLoading = true; // Mostrar spinner de carga
+            this.isLoading = true; 
 
             const method = 'DELETE';
             const data = {slider_id: slider_id};
             const response = await this.send_http_request(API_ADMIN.delete_slider, method, {}, {}, data);
 
-            this.isLoading = false; // Ocultar spinner de carga
+            this.isLoading = false;
 
             if(!response){
-                console.error('Error', response);
+                this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.delete_slider_modal = !this.delete_slider_modal;
                 await this.get_sliders();
+                this.toast_notification({ message: response.data.message })
             }
         }
 

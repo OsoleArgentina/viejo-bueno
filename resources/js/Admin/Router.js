@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 // HOME PAGE
+import Main from '@admin/Main.vue'
 import Dashboard from '@admin/Pages/Dashboard.vue'
 import Slider from '@admin/Pages/Home/Sliders/Slider.vue'
-import Main from '@admin/Main.vue'
+import Nosotros from '@admin/Pages/Nosotros/Nosotros.vue';
 
 const Routes = [
     {
@@ -19,6 +20,11 @@ const Routes = [
                 path: "/slider",
                 name: "slider",
                 component: Slider,
+            },
+            {
+                path: "/home-nosotros",
+                name: "home-nosotros",
+                component: Nosotros,
             },
         ]
     },

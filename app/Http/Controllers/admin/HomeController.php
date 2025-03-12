@@ -34,8 +34,8 @@ class HomeController extends Controller
         $image_name = time() . '.' . $imagen->extension();
         
         $slider = Slider::create([
-            'titulo' => $request->titulo,     
-            'subtitulo' => $request->subtitulo,     
+            'titulo' => $request->titulo ?? '',     
+            'subtitulo' => $request->subtitulo ?? '',     
             'orden' => $request->orden,     
             'path' => $image_name,     
         ]);
@@ -51,7 +51,7 @@ class HomeController extends Controller
             'slider_id' => 'required',
             'titulo' => 'nullable|string',
             'subtitulo' => 'nullable|string',
-            'path' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg',
+            'path' => 'sometimes|required|mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov|max:20480',
             'orden' => 'required|string|max:2',
         ]);
 
@@ -80,8 +80,8 @@ class HomeController extends Controller
         }
 
         $slider->update([
-            'titulo' => $request->titulo,
-            'subtitulo' => $request->subtitulo,
+            'titulo' => $request->titulo ?? '',
+            'subtitulo' => $request->subtitulo ?? '',
             'orden' => $request->orden,
             'path' => $image_name ?? $slider->path,
         ]);

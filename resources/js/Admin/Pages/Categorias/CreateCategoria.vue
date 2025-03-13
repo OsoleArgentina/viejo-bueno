@@ -37,7 +37,7 @@
 export default {
     data() {
         return {
-            descripcion: '',
+            nombre: '',
             orden: '',
             path: '',
             icono: '',

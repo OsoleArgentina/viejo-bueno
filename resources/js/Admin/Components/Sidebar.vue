@@ -10,7 +10,7 @@
       <!-- Sidebar -->
       <aside 
         class="fixed top-0 left-0 z-30 h-screen transition-all duration-300 ease-in-out bg-theme-400 text-white shadow-lg"
-        :class="[isOpen ? 'w-64' : 'w-16', 'lg:w-64 lg:translate-x-0', !isOpen && '-translate-x-full lg:translate-x-0 lg:w-16']"
+        :class="[isOpen ? 'w-[5%]' : 'w-16', 'lg:w-[15%] lg:translate-x-0', !isOpen && '-translate-x-full lg:translate-x-0 lg:w-[5%]']"
       >
         <!-- Toggle button (visible on mobile) -->
         <!-- <button 
@@ -132,7 +132,8 @@ export default {
             isOpen: false,
             items: [
               { name: 'Categorias', path: 'categorias' },
-              { name: 'Productos', path: 'elegirnos' },
+              { name: 'Subcategorias', path: 'subcategorias' },
+              { name: 'Productos', path: 'productos' },
             ]
           },
           // { name: 'Nosotros', icon: 'fa-solid fa-users', path: 'nosotros' },

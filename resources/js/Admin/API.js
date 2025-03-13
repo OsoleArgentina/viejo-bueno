@@ -24,6 +24,22 @@ const API_ADMIN = {
     create_categoria: '/create_categoria',
     edit_categoria: '/edit_categoria',
     delete_categoria: '/delete_categoria',
+
+    // CATEGORIAS
+    get_subcategorias: '/get_subcategorias',
+    create_subcategoria: '/create_subcategoria',
+    edit_subcategoria: '/edit_subcategoria',
+    delete_subcategoria: '/delete_subcategoria',
+
+    // PRODUCTOS
+    get_producto_by_id: '/get_producto_by_id',
+    get_productos: '/get_productos',
+    create_producto: '/create_producto',
+    edit_producto: '/edit_producto',
+    edit_producto_destacado: '/edit_producto_destacado',
+    add_imagenes_producto: '/add_imagenes_producto',
+    delete_imagen_producto: '/delete_imagen_producto',
+    delete_producto: '/delete_producto',
 };
 
 export default API_ADMIN;

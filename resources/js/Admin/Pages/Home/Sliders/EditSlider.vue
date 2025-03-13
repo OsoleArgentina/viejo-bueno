@@ -6,15 +6,15 @@
             <div>
                 <div class="mb-4">
                     <label for="titulo" class="block text-sm font-medium text-gray-700">Título</label>
-                    <input type="text" id="titulo" v-model="slider_edit.titulo" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Título">
+                    <input type="text" id="titulo" v-model="titulo" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Título">
                 </div>
                 <div class="mb-4">
                     <label for="subtitulo" class="block text-sm font-medium text-gray-700">Subtítulo</label>
-                    <input type="text" id="subtitulo" v-model="slider_edit.subtitulo" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Subtítulo">
+                    <input type="text" id="subtitulo" v-model="subtitulo" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Subtítulo">
                 </div>
                 <div class="mb-4">
                     <label for="orden" class="block text-sm font-medium text-gray-700">Orden *</label>
-                    <input type="text" id="orden" v-model="slider_edit.orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
+                    <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
                 <div class="mb-4">
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
@@ -53,9 +53,9 @@ export default {
         editar_slider() {
             const data = {
                 'slider_id': this.slider_edit.id,
-                'titulo': this.slider_edit.titulo,
-                'subtitulo': this.slider_edit.subtitulo,
-                'orden': this.slider_edit.orden,
+                'titulo': this.titulo,
+                'subtitulo': this.subtitulo,
+                'orden': this.orden,
             }
 
             if(this.path){
@@ -65,5 +65,10 @@ export default {
             this.emit_event('editar_slider', data);
         },
     },
+    created(){
+        this.titulo = this.slider_edit.titulo;
+        this.subtitulo = this.slider_edit.subtitulo;
+        this.orden = this.slider_edit.orden;
+    }
 };
 </script>

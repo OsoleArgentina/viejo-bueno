@@ -68,7 +68,7 @@
     
         <!-- Spinner de carga -->
         <div v-if="isLoading" class="fixed inset-0 bg-opacity-50 bg-gray-600 flex justify-center items-center" style="z-index: 1000;">
-            <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-blue-500"></div>
+            <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-theme-400"></div>
         </div>
     </div>
 
@@ -125,23 +125,25 @@ export default {
                 data
             );
 
-            this.isLoading = false; 
 
             if(response.data.error){
-                console.log(response);
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 await this.get_nosotros();
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })
             }
         },
     },
     async created(){
+        this.isLoading = true;
         await this.get_nosotros();
         this.descripcion = this.nosotros?.descripcion
         this.titulo = this.nosotros?.titulo
 
         this.render_nosotros = true;
+        this.isLoading = false;
     },
     computed:{
         ...mapGetters([

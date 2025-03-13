@@ -41,7 +41,7 @@
 
     <!-- Spinner de carga -->
     <div v-if="isLoading" class="fixed inset-0 bg-opacity-50 bg-gray-600 flex justify-center items-center" style="z-index: 1000;">
-        <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-blue-500"></div>
+        <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-theme-400"></div>
     </div>
     
     <create-elegirnos v-if="elegirnos_modal" @close_modal="elegirnos_modal = !elegirnos_modal" @crear_elegirnos="crear_elegirnos" />
@@ -86,13 +86,14 @@ export default {
                 {}, 
                 data);
 
-            this.isLoading = false; 
 
             if(response.data.error){
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.elegirnos_modal = false;
                 await this.get_nosotros_elegirnos();
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })
             }
         },
@@ -117,13 +118,14 @@ export default {
                 formData
             );
 
-            this.isLoading = false; 
 
             if (response.data.error) {
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             } else {
                 this.edit_elegirnos_modal = !this.edit_elegirnos_modal;
                 await this.get_nosotros_elegirnos();
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })
             }
         },
@@ -153,7 +155,9 @@ export default {
 
     },
     async created(){
+        this.isLoading = true;
         await this.get_nosotros_elegirnos();
+        this.isLoading = false;
     },
     computed:{
         ...mapGetters([

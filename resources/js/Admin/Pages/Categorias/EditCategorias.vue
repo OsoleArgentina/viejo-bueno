@@ -6,22 +6,27 @@
 
             <div>
                 <div class="mb-4">
-                    <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripcion *</label>
-                    <input type="text" id="descripcion" v-model="descripcion" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Descripcion">
+                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre *</label>
+                    <input type="text" id="nombre" v-model="nombre" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Nombre">
                 </div>
                 <div class="mb-4">
                     <label for="orden" class="block text-sm font-medium text-gray-700">Orden *</label>
                     <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
                 <div class="mb-4">
-                    <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
+                    <label for="path" class="block text-sm font-medium text-gray-700">Imagen</label>
                     <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label for="icono" class="block text-sm font-medium text-gray-700">Icono</label>
+                    <input type="file" id="icono" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
 
                 <div class="flex justify-end space-x-2">
                     <button @click="emit_event('close_modal')" type="button" class="px-4 py-2 bg-gray-300 duration-300 hover:bg-gray-400 text-black rounded-md cursor-pointer">Cancelar</button>
-                    <button @click="edit_elegirnos" class="px-4 py-2 bg-theme-400 text-white rounded-md duration-300 hover:bg-theme-600 cursor-pointer">Actualizar</button>
+                    <button @click="edit_categoria" class="px-4 py-2 bg-theme-400 text-white rounded-md duration-300 hover:bg-theme-600 cursor-pointer">Actualizar</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -31,38 +36,39 @@
 
 export default {
     props: [
-      'elegirnos_edit',
+      'categoria_edit',
     ],
     data() {
         return {
-            descripcion: '',
+            nombre: '',
             orden: '',
             path: '',
+            icono: '',
         };
     },
     methods: {
         handleImageUpload(event) {
             if (event.target.files[0]) {
-                this.path = event.target.files[0]; 
+                if(event.target.id == 'path') this.path = event.target.files[0];
+                if(event.target.id == 'icono') this.icono = event.target.files[0];
             }
         },
-        edit_elegirnos() {
+        edit_categoria() {
             const data = {
-                'elegirnos_id': this.elegirnos_edit.id,
-                'descripcion': this.descripcion,
+                'categoria_id': this.categoria_edit.id,
+                'nombre': this.nombre,
                 'orden': this.orden,
             }
 
-            if(this.path){
-                data.path = this.path;
-            }
+            if(this.path) data.path = this.path;;
+            if(this.icono) data.icono = this.icono;;
 
-            this.emit_event('edit_elegirnos', data);
+            this.emit_event('edit_categoria', data);
         },
     },
     created(){
-        this.descripcion = this.elegirnos_edit.descripcion;
-        this.orden = this.elegirnos_edit.orden;
-    }
+        this.nombre = this.categoria_edit.nombre;
+        this.orden = this.categoria_edit.orden;
+    },
 };
 </script>

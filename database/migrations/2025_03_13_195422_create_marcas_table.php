@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('marcas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('marca');
-            $table->decimal('precio', 10, 2); 
-            $table->string('orden');
-            $table->boolean('destacado')->default(0);
-            $table->string('ficha_tecnica')->nullable();
-            $table->foreignId('subcategoria_id')->constrained('subcategorias')->onDelete('cascade');
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productos');
+        Schema::dropIfExists('marcas');
     }
 };

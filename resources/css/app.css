@@ -63,7 +63,7 @@
 .spinner-border {
     border-width: 0.25em;
     border-color: transparent;
-    border-top-color: #3490dc; /* Color del spinner */
+    border-top-color: #225536; /* Color del spinner */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }

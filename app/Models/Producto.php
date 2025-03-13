@@ -12,8 +12,10 @@ class Producto extends Model
         'nombre',
         'marca',
         'precio',
-        'subcategoria_id',
+        'orden',
+        'destacado',
         'ficha_tecnica',
+        'subcategoria_id',
     ];
 
     public function subcategoria()

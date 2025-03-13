@@ -51,7 +51,7 @@
 
     <!-- Spinner de carga -->
     <div v-if="isLoading" class="fixed inset-0 bg-opacity-50 bg-gray-600 flex justify-center items-center" style="z-index: 1000;">
-        <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-blue-500"></div>
+        <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-theme-400"></div>
     </div>
 
 
@@ -100,13 +100,14 @@ export default {
 
             const response = await this.send_http_request(API_ADMIN.set_slider, method, headers, {}, data);
 
-            this.isLoading = false; 
 
             if(response.data.error){
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.slider_modal = false;
                 await this.get_sliders();
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })
             }
         },
@@ -132,13 +133,14 @@ export default {
                 formData
             );
 
-            this.isLoading = false; 
 
             if (response.data.error) {
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             } else {
                 this.edit_slider_modal = !this.edit_slider_modal;
                 await this.get_sliders();
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })
             }
         },
@@ -150,20 +152,22 @@ export default {
             const data = {slider_id: slider_id};
             const response = await this.send_http_request(API_ADMIN.delete_slider, method, {}, {}, data);
 
-            this.isLoading = false;
-
             if(response.data.error){
+                this.isLoading = false;
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.delete_slider_modal = !this.delete_slider_modal;
                 await this.get_sliders();
+                this.isLoading = false;
                 this.toast_notification({ message: response.data.message })
             }
         }
 
     },
     async created(){
+        this.isLoading = true;
         await this.get_sliders();
+        this.isLoading = false;
     },
     computed:{
         ...mapGetters([

@@ -7,7 +7,6 @@
       <!-- Main content -->
       <div class="flex mt-10 p-2">
         <div class="sm:w-[90%] ml-auto">
-          <!-- Renderiza el contenido del router -->
           <router-view />
         </div>
       </div>

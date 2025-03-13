@@ -1,7 +1,8 @@
 <template>
     <div class="w-full flex justify-between items-center border-b border-neutral-200 mb-4">
-        <div class="">
+        <div class="flex items-center gap-2">
             <h1 class="text-4xl font-semibold text-neutral-800">CATEGORIAS</h1>
+            <span class="text-sm text-white bg-theme-400 rounded-full px-2 py-1">{{ categorias.length }}</span>
         </div>
     
         <div class="mb-4">
@@ -34,7 +35,7 @@
                     <td class="px-4 py-2">{{ categoria.nombre }}</td>
                     <td class="px-4 py-2">{{ categoria.orden }}</td>
                     <td class="px-4 py-2">
-                        <button @click="edit_elegirnos_modal = !edit_elegirnos_modal; elegirnos_selected=elg" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button @click="edit_categoria_modal = !edit_categoria_modal; categoria_selected=categoria" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button @click="delete_categoria_modal = !delete_categoria_modal; categoria_selected=categoria" class="text-red-500 px-2 py-1 border border-red-500 rounded-lg hover:text-white hover:bg-red-500 duration-300 cursor-pointer ml-4"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>
@@ -47,11 +48,11 @@
 
     <!-- Spinner de carga -->
     <div v-if="isLoading" class="fixed inset-0 bg-opacity-50 bg-gray-600 flex justify-center items-center" style="z-index: 1000;">
-        <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-blue-500"></div>
+        <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-theme-400"></div>
     </div>
     
     <create-categoria v-if="categoria_modal" @close_modal="categoria_modal = !categoria_modal" @crear_categoria="crear_categoria" />
-    <!-- <edit-elegirnos v-if="edit_elegirnos_modal"  :elegirnos_edit="elegirnos_selected" @close_modal="edit_elegirnos_modal = !edit_elegirnos_modal" @edit_elegirnos="edit_elegirnos"/> -->
+    <edit-categoria v-if="edit_categoria_modal"  :categoria_edit="categoria_selected" @close_modal="edit_categoria_modal = !edit_categoria_modal" @edit_categoria="edit_categoria"/>
     <confirmation-modal v-if="delete_categoria_modal" :message="'Estas seguro de eliminar la categoria? ' + categoria_selected.nombre" @cancel="delete_categoria_modal = !delete_categoria_modal" @confirm="delete_categoria(categoria_selected.id)"/>
 </template>
 
@@ -59,10 +60,11 @@
 import API_ADMIN from '@admin/API';
 import { mapGetters, mapActions } from "vuex";
 import CreateCategoria from './CreateCategoria.vue';
+import EditCategorias from './EditCategorias.vue';
 export default {
     components:{
         'create-categoria': CreateCategoria,
-        // 'edit-elegirnos': EditElegirnos,
+        'edit-categoria': EditCategorias,
     },
     data() {
         return {
@@ -93,6 +95,7 @@ export default {
 
 
             if(response.data.error){
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.categoria_modal = false;
@@ -102,35 +105,35 @@ export default {
             }
         },
 
-        async edit_elegirnos(data) {
-            // this.isLoading = true; 
+        async edit_categoria(data) {
+            this.isLoading = true; 
 
-            // let formData = new FormData();
-            // formData.append('elegirnos_id', data.elegirnos_id);
-            // formData.append('descripcion', data.descripcion);
-            // formData.append('orden', data.orden);
+            let formData = new FormData();
+            formData.append('categoria_id', data.categoria_id);
+            formData.append('nombre', data.nombre);
+            formData.append('orden', data.orden);
             
-            // if (data.path) {
-            //     formData.append('path', data.path);
-            // }
+            if (data.path) formData.append('path', data.path);
+            if (data.icono) formData.append('icono', data.icono);
 
-            // let response = await this.send_http_request(
-            //     API_ADMIN.edit_elegirnos,
-            //     "POST",
-            //     {},
-            //     {},
-            //     formData
-            // );
+            let response = await this.send_http_request(
+                API_ADMIN.edit_categoria,
+                "POST",
+                {},
+                {},
+                formData
+            );
 
-            // this.isLoading = false; 
 
-            // if (response.data.error) {
-            //     this.toast_notification({ message: response.data.error, type: 'error' })
-            // } else {
-            //     this.edit_elegirnos_modal = !this.edit_elegirnos_modal;
-            //     await this.get_nosotros_elegirnos();
-            //     this.toast_notification({ message: response.data.message })
-            // }
+            if (response.data.error) {
+                this.isLoading = false; 
+                this.toast_notification({ message: response.data.error, type: 'error' })
+            } else {
+                this.edit_categoria_modal = !this.edit_categoria_modal;
+                await this.get_categorias();
+                this.isLoading = false; 
+                this.toast_notification({ message: response.data.message })
+            }
         },
 
         async delete_categoria(categoria_id) {
@@ -147,6 +150,7 @@ export default {
 
 
             if(response.data.error){
+                this.isLoading = false; 
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.delete_categoria_modal = !this.delete_categoria_modal;
@@ -158,7 +162,9 @@ export default {
 
     },
     async created(){
+        this.isLoading = true;
         await this.get_categorias();
+        this.isLoading = false;
     },
     computed:{
         ...mapGetters([

@@ -9,7 +9,7 @@ use App\Models\Categoria;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
-class CategoriaController extends Controller
+class CategoriasController extends Controller
 {
     // NOSOTROS
     public function get_categorias(Request $request)
@@ -95,8 +95,8 @@ class CategoriaController extends Controller
         
         
         $icono_name = null;
-        if (!is_null($request->path)) {
-            if($categoria_path){
+        if (!is_null($request->icono)) {
+            if($categoria_icono){
                 $image_path = public_path('img/' . $categoria_icono);
                 
                 if (file_exists($image_path)) {
@@ -114,7 +114,7 @@ class CategoriaController extends Controller
         $categoria->update([
             'nombre' => $request->nombre,
             'orden' => $request->orden,
-            'path' => $image_name ?? $categoria->path,
+            'path' => $path_name ?? $categoria->path,
             'icono' => $icono_name ?? $categoria->icono,
         ]);
 

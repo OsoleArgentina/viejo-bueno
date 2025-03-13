@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('marca');
             $table->decimal('precio', 10, 2); 
+            $table->string('ficha_tecnica')->nullable();
             $table->foreignId('subcategoria_id')->constrained('subcategorias')->onDelete('cascade');
             $table->timestamps();
         });

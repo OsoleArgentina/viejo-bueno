@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -125,7 +125,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), [
             'titulo' => 'required|string',
             'descripcion' => 'required|string',
-            'path' => 'sometimes|required|image|mimes:jpeg,png,jpg,svg|max:20480',
+            'path' => 'sometimes|required|mimes:jpeg,png,jpg,svg|max:20480',
         ]);
 
         if ($validator->fails()) {

@@ -19,6 +19,11 @@ const API_ADMIN = {
     edit_elegirnos: '/edit_elegirnos',
     delete_elegirnos: '/delete_elegirnos',
 
+    // CATEGORIAS
+    get_categorias: '/get_categorias',
+    create_categoria: '/create_categoria',
+    edit_categoria: '/edit_categoria',
+    delete_categoria: '/delete_categoria',
 };
 
 export default API_ADMIN;

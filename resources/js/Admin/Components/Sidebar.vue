@@ -113,7 +113,7 @@ export default {
             icon: 'fa-solid fa-house', 
             isOpen: false,
             items: [
-              { name: 'Slider', path: 'slider' },
+              { name: 'Slider', path: 'sliders' },
               { name: 'Nosotros', path: 'home-nosotros' },
             ]
           },
@@ -131,7 +131,7 @@ export default {
             icon: 'fa-solid fa-layer-group',
             isOpen: false,
             items: [
-              { name: 'Categorias', path: 'nosotros' },
+              { name: 'Categorias', path: 'categorias' },
               { name: 'Productos', path: 'elegirnos' },
             ]
           },

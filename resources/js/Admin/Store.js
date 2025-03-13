@@ -4,6 +4,7 @@ import { createStore } from 'vuex'
 import AuthModule from '@admin/Store/AuthModule';
 import HomeModule from '@admin/Store/HomeModule';
 import NosotrosModule from '@admin/Store/NosotrosModule';
+import CategoriaModule from '@admin/Store/CategoriaModule';
 
 // Create a new Store instance.
 const store = createStore({
@@ -11,6 +12,7 @@ const store = createStore({
         AuthModule,
         HomeModule,
         NosotrosModule,
+        CategoriaModule,
     }
 });
 

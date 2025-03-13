@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\NosotrosController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NosotrosController;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -42,5 +43,11 @@ Route::middleware('auth_admin')->group(function () {
     Route::post('/create_elegirnos', [NosotrosController::class, 'create_elegirnos'])->name('create_elegirnos');
     Route::post('/edit_elegirnos', [NosotrosController::class, 'edit_elegirnos'])->name('edit_elegirnos');
     Route::delete('/delete_elegirnos', [NosotrosController::class, 'delete_elegirnos'])->name('delete_elegirnos');
+
+    // CATEGORIAS
+    Route::get('/get_categorias', [CategoriaController::class, 'get_categorias'])->name('get_categorias');
+    Route::post('/create_categoria', [CategoriaController::class, 'create_categoria'])->name('create_categoria');
+    Route::post('/edit_categoria', [CategoriaController::class, 'edit_categoria'])->name('edit_categoria');
+    Route::delete('/delete_categoria', [CategoriaController::class, 'delete_categoria'])->name('delete_categoria');
 
 });

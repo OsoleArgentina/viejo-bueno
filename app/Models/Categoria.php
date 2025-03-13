@@ -10,6 +10,9 @@ class Categoria extends Model
 
     protected $fillable = [
         'nombre',
+        'orden',
+        'icono',
+        'path',
     ];
 
     public function subcategorias()

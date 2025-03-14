@@ -1,85 +1,85 @@
 <template>
-    <div id="toolbar-container">
-        <span class="ql-formats">
-            <!-- <select class="ql-font"></select> -->
-            <select class="ql-size"></select>
-        </span>
-    
-        <span class="ql-formats">
-            <button class="ql-bold"></button>
-            <button class="ql-italic"></button>
-            <button class="ql-underline"></button>
-            <button class="ql-strike"></button>
-        </span>
-    
-        <span class="ql-formats">
-            <select class="ql-align"></select>
-            <button class="ql-list" value="ordered"></button>
-            <button class="ql-list" value="bullet"></button>
-    <!--        <button class="ql-direction" value="rtl"></button>-->
-    <!--        <button class="ql-indent" value="-1"></button>-->
-    <!--        <button class="ql-indent" value="+1"></button>-->
-        </span>
-    
-    <!--    <span class="ql-formats">-->
-    <!--        <select class="ql-color"></select>-->
-    <!--        <select class="ql-background"></select>-->
-    <!--    </span>-->
-    
-    <!--    <span class="ql-formats">-->
-    <!--        <button class="ql-script" value="sub"></button>-->
-    <!--        <button class="ql-script" value="super"></button>-->
-    <!--    </span>-->
-    
-        <span class="ql-formats">
-            <button class="ql-link"></button>
-    <!--        <button class="ql-image"></button>-->
-    <!--        <button class="ql-video"></button>-->
-    <!--        <button class="ql-formula"></button>-->
-        </span>
+    <div>
+        <div :id="'toolbar-container-' + unique_ref">
+            <span class="ql-formats">
+                <select class="ql-size"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-align"></select>
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+            </span>
+        </div>
+        <div :ref="unique_ref" class="text-editor"></div>
     </div>
-    <div :ref="unique_ref"  class="text-editor">
-    </div>
-    </template>
-    
-    <script>
-    import Quill from 'quill';
-    
-    export default {
-        props: ['unique_ref', 'placeholder', 'initial_content'],
-        mounted() {
+</template>
+
+<script>
+import Quill from 'quill';
+
+export default {
+    props: ['unique_ref', 'placeholder', 'initial_content'],
+    mounted() {
+        this.initializeEditor();
+    },
+    destroyed() {
+        if (this.editor) {
+            this.editor.destroy();
+        }
+    },
+    data() {
+        return {
+            editor: null,
+            content: ''
+        }
+    },
+    watch: {
+        content() {
+            this.$emit('text_changed', this.content);
+        },
+    },
+    methods: {
+        initializeEditor() {
+            const toolbarId = '#toolbar-container-' + this.unique_ref;
+            
             this.editor = new Quill(this.$refs[this.unique_ref], {
                 theme: 'snow',
                 debug: false,
                 modules: {
-                    // syntax: true,
-                    toolbar: '#toolbar-container',
+                    toolbar: toolbarId,
                 },
                 placeholder: this.placeholder
-            })
-    
-            this.editor.on('text-change', this.handleTextEditorContentChange);
-    
+            });
+
             if (this.initial_content) {
-                this.editor.root.innerHTML = this.initial_content
+                this.editor.root.innerHTML = this.initial_content;
             }
+
+            this.editor.on('text-change', this.handleTextEditorContentChange);
         },
-        data() {
-            return {
-                editor: null,
-                content: ''
-            }
+        handleTextEditorContentChange() {
+            this.content = this.editor.root.innerHTML;
         },
-        watch: {
-            content() {
-                this.$emit('text_changed', this.content)
-            },
-        },
-        methods: {
-            handleTextEditorContentChange() {
-                this.content = this.editor.root.innerHTML;
-            },
-        },
-    }
-    </script>
-    
+    },
+}
+</script>
+
+<style scoped>
+.text-editor {
+    min-height: 200px; /* Ajusta el tamaño mínimo según tus necesidades */
+    max-height: 400px; /* Limita la altura máxima */
+    overflow-y: auto; /* Muestra el scroll si el contenido excede el máximo */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+</style>

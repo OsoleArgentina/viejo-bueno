@@ -14,7 +14,7 @@ class CategoriasController extends Controller
     // NOSOTROS
     public function get_categorias(Request $request)
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('orden', 'asc')->get();
         return $this->success_response('', $categorias);
     }
 

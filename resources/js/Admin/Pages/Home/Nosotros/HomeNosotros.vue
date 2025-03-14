@@ -13,6 +13,7 @@
                 </div>
                 <div class="w-1/2">
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen <span>{{ home_nosotros ? '' : '*' }}</span></label>
+                    <span class="text-xs text-neutral-400">Resolucion sugerida 1,920 x 1800</span>
                     <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
             </div>

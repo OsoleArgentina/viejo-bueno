@@ -149,8 +149,10 @@ export default {
 
     },
     async created(){
+        this.isLoading = true; 
         await this.get_subcategorias();
         await this.get_categorias()
+        this.isLoading = false; 
     },
     computed:{
         ...mapGetters([

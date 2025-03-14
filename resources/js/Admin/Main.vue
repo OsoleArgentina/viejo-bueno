@@ -6,8 +6,8 @@
 
       <!-- Main content -->
       <div class="flex mt-10 p-2">
-        <div class="sm:w-[90%] ml-auto">
-          <router-view />
+        <div class="w-full ml-30">
+            <router-view />
         </div>
       </div>
     </div>

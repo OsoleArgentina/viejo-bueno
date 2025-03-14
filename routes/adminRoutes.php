@@ -8,6 +8,11 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\SubcategoriasController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\MarcasController;
+use App\Http\Controllers\NovedadesController;
+use App\Http\Controllers\CapacitacionesController;
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MetadatosController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -74,4 +79,32 @@ Route::middleware('auth_admin')->group(function () {
     Route::post('/create_marca', [MarcasController::class, 'create_marca'])->name('create_marca');
     Route::post('/edit_marca', [MarcasController::class, 'edit_marca'])->name('edit_marca');
     Route::delete('/delete_marca', [MarcasController::class, 'delete_marca'])->name('delete_marca');
+
+    // NOVEDADES
+    Route::get('/get_novedades', [NovedadesController::class, 'get_novedades'])->name('get_novedades');
+    Route::post('/create_novedad', [NovedadesController::class, 'create_novedad'])->name('create_novedad');
+    Route::post('/edit_novedad', [NovedadesController::class, 'edit_novedad'])->name('edit_novedad');
+    Route::delete('/delete_novedad', [NovedadesController::class, 'delete_novedad'])->name('delete_novedad');
+
+    // CAPACITACIONES
+    Route::get('/get_capacitaciones', [CapacitacionesController::class, 'get_capacitaciones'])->name('get_capacitaciones');
+    Route::post('/create_capacitacion', [CapacitacionesController::class, 'create_capacitacion'])->name('create_capacitacion');
+    Route::post('/edit_capacitacion', [CapacitacionesController::class, 'edit_capacitacion'])->name('edit_capacitacion');
+    Route::delete('/delete_capacitacion', [CapacitacionesController::class, 'delete_capacitacion'])->name('delete_capacitacion');
+
+    // CONTACTO
+    Route::get('/get_contacto', [ContactoController::class, 'get_contacto'])->name('get_contacto');
+    Route::post('/set_contacto', [ContactoController::class, 'set_contacto'])->name('set_contacto');
+
+    // ADMINS
+    Route::get('/get_admins', [AdminController::class, 'get_admins'])->name('get_admins');
+    Route::post('/create_admin', [AdminController::class, 'create_admin'])->name('create_admin');
+    Route::post('/edit_super_admin', [AdminController::class, 'edit_super_admin'])->name('edit_super_admin');
+    Route::post('/edit_admin', [AdminController::class, 'edit_admin'])->name('edit_admin');
+    Route::delete('/delete_admin', [AdminController::class, 'delete_admin'])->name('delete_admin');
+
+    // METADATOS
+    Route::get('/get_metadatos', [MetadatosController::class, 'get_metadatos'])->name('get_metadatos');
+    Route::post('/edit_metadato', [MetadatosController::class, 'edit_metadato'])->name('edit_metadato');
 });
+

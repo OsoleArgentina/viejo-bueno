@@ -27,7 +27,7 @@
                 <tr v-for="(marca, index) in marcas" :key="marca.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
                     <td class="px-4 py-2">{{ marca.orden }}</td>
                     <td class="px-4 py-2">{{ marca.nombre }}</td><td class="px-4 py-2">
-                        <img v-if="marca.path" :src="`/img/${marca.path}`" alt="Slider Image" class="w-20 h-20 object-cover">
+                        <img v-if="marca.path" :src="`/img/${marca.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
                     </td>
                     <td class="px-4 py-2">
                         <button @click="edit_marca_modal = !edit_marca_modal; marca_selected=marca" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></button>

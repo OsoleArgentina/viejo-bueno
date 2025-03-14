@@ -75,7 +75,7 @@ class NosotrosController extends Controller
     // NOSOTROS ELEGIRNOS
     public function get_nosotros_elegirnos(Request $request)
     {
-        $elegirnos = Elegirnos::all();
+        $elegirnos = Elegirnos::orderBy('orden', 'asc')->get();
         return $this->success_response('', $elegirnos);
     }
 

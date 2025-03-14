@@ -6,7 +6,7 @@
         </div>
     
         <div class="mb-4">
-            <button @click="slider_modal" class="px-6 py-2 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
+            <button @click="slider_modal = !slider_modal" class="px-6 py-2 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
                 Crear slider
             </button>
         </div>
@@ -81,8 +81,6 @@ export default {
             delete_slider_modal: false, 
             slider_selected: null,
             isLoading: false,
-            descripcion: '',
-
         };
     },
     methods: {

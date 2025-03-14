@@ -4,7 +4,6 @@
         <div class="bg-white rounded-lg p-6 w-96 modal-animation">
             <h2 class="text-2xl font-semibold mb-4">Crear Slider</h2>
 
-            <!-- Formulario de carga del Slider -->
             <div>
                 <div class="mb-4">
                     <label for="titulo" class="block text-sm font-medium text-gray-700">Título</label>
@@ -19,7 +18,9 @@
                     <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
                 <div class="mb-4">
+                    <!-- TODO: agregar sugerencia de resolucion -->
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
+                    <span class="text-xs text-neutral-400">Resolucion sugerida 1,024 x 712</span>
                     <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
 

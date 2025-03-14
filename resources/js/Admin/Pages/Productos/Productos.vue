@@ -23,6 +23,7 @@
                     <th class="px-4 py-2">Precio</th>
                     <th class="px-4 py-2">Destacado</th>
                     <th class="px-4 py-2">Subcategoría</th>
+                    <th class="px-4 py-2">Ficha tecnica</th>
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
@@ -40,6 +41,11 @@
                             v-on:turn_off="toggle_switch_destacado(false, producto.id)"/>
                     </td>
                     <td class="px-4 py-2">{{ producto.subcategoria.nombre }}</td>
+                    <td v-if="producto.ficha_tecnica" class="px-4 py-2">
+                        <span  @click="openPDF(producto.ficha_tecnica)" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </span>
+                    </td>
                     <td class="px-4 py-2">
                         <button @click="edit_producto_imagenes_modal = !edit_producto_imagenes_modal; producto_selected=producto" class="text-blue-300 px-2 py-1 border border-blue-300 rounded-lg hover:text-white hover:bg-blue-300 duration-300 cursor-pointer"><i class="fa-solid fa-images"></i></button>
                         <button @click="edit_producto_modal = !edit_producto_modal; producto_selected=producto" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer ml-4"><i class="fa-regular fa-pen-to-square"></i></button>
@@ -94,6 +100,22 @@ export default {
             'get_productos',
             'get_marcas',
         ]),
+        openPDF(fichaTecnicaUrl) {
+            if (fichaTecnicaUrl) {
+                let width = 1080;
+                let height = 2048;
+                let left = (window.screen.width - width) / 2;
+                let top = (window.screen.height - height) / 2;
+
+                window.open(
+                    `/fichas/${fichaTecnicaUrl}`,
+                    "",
+                    `width=${width},height=${height},left=${left},top=${top}` 
+                )
+            } else {
+                this.toast_notification({ message: 'No hay ficha técnica disponible', type: 'error' });
+            }
+        },
         open_producto_modal(){
             if(this.subcategorias.length <= 0){
                 this.toast_notification({ message: 'Primero debes crear una subcategoria.', type: 'error' })

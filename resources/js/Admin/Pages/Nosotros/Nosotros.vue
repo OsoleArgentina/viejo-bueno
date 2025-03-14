@@ -13,6 +13,7 @@
                 </div>
                 <div class="w-1/2">
                     <label for="banner_principal" class="block text-sm font-medium text-gray-700">Imagen banner principal *</label>
+                    <span class="text-xs text-neutral-400">Resolucion sugerida 1,600 x 637</span>
                     <input type="file" id="banner_principal" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
             </div>
@@ -26,6 +27,7 @@
                 </div>
                 <div class="w-1/2">
                     <label for="banner_secundario" class="block text-sm font-medium text-gray-700">Imagen banner secundario *</label>
+                    <span class="text-xs text-neutral-400">Resolucion sugerida 2,718 x 1,812</span>
                     <input type="file" id="banner_secundario" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
             </div>

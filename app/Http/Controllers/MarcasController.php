@@ -13,7 +13,7 @@ class MarcasController extends Controller
 {
     public function get_marcas(Request $request)
     {
-        $marcas = Marca::all();
+        $marcas = Marca::orderBy('orden', 'asc')->get();
         return $this->success_response('', $marcas);
     }
 

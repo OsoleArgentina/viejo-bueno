@@ -4,7 +4,6 @@
         <div class="bg-white rounded-lg p-6 w-96 modal-animation">
             <h2 class="text-2xl font-semibold mb-4">Crear categoria</h2>
 
-            <!-- Formulario de carga del Slider -->
             <div>
                 <div class="mb-4">
                     <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre *</label>
@@ -16,6 +15,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
+                    <span class="text-xs text-neutral-400">Resolucion sugerida 576 x 586</span>
                     <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">

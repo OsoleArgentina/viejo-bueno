@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="">
       <!-- Mobile overlay -->
       <div 
         v-if="isOpen" 
@@ -10,7 +10,7 @@
       <!-- Sidebar -->
       <aside 
         class="fixed top-0 left-0 z-30 h-screen transition-all duration-300 ease-in-out bg-theme-400 text-white shadow-lg"
-        :class="[isOpen ? 'w-[5%]' : 'w-16', 'lg:w-[15%] lg:translate-x-0', !isOpen && '-translate-x-full lg:translate-x-0 lg:w-[5%]']"
+        :class="[isOpen ? 'w-[5%]' : 'w-16', 'lg:w-60 lg:translate-x-0', !isOpen && '-translate-x-full lg:translate-x-0 lg:w-[5%]']"
       >
         <!-- Toggle button (visible on mobile) -->
         <!-- <button 
@@ -127,7 +127,7 @@ export default {
             ]
           },
           { 
-            name: 'Catalogo', 
+            name: 'Productos', 
             icon: 'fa-solid fa-layer-group',
             isOpen: false,
             items: [
@@ -137,26 +137,11 @@ export default {
             ]
           },
           { name: 'Marcas', icon: 'fa-solid fa-list', path: 'marcas' },
-        //   { 
-        //     name: 'Team', 
-        //     icon: 'UsersIcon', 
-        //     isOpen: false,
-        //     items: [
-        //       { name: 'Members', path: '/team/members' },
-        //       { name: 'Invitations', path: '/team/invitations' },
-        //       { name: 'Roles', path: '/team/roles' }
-        //     ]
-        //   },
-        //   { 
-        //     name: 'Reports', 
-        //     icon: 'DocumentReportIcon', 
-        //     isOpen: false,
-        //     items: [
-        //       { name: 'Monthly', path: '/reports/monthly' },
-        //       { name: 'Quarterly', path: '/reports/quarterly' },
-        //       { name: 'Annual', path: '/reports/annual' }
-        //     ]
-        //   }
+          { name: 'Novedades', icon: 'fa-solid fa-newspaper', path: 'novedades' },
+          { name: 'Capacitaciones', icon: 'fa-solid fa-book', path: 'capacitaciones' },
+          { name: 'Contacto', icon: 'fa-solid fa-address-book', path: 'contacto' },
+          { name: 'Administradores', icon: 'fa-solid fa-users', path: 'admins' },
+          { name: 'Metadatos', icon: 'fa-solid fa-database', path: 'metadatos' },
         ]
       };
     },

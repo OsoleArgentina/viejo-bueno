@@ -47,6 +47,33 @@ const API_ADMIN = {
     edit_marca: '/edit_marca',
     delete_marca: '/delete_marca',
 
+    // NOVEDADES
+    get_novedades: '/get_novedades',
+    create_novedad: '/create_novedad',
+    edit_novedad: '/edit_novedad',
+    delete_novedad: '/delete_novedad',
+
+    // CAPACITACIONES
+    get_capacitaciones: '/get_capacitaciones',
+    create_capacitacion: '/create_capacitacion',
+    edit_capacitacion: '/edit_capacitacion',
+    delete_capacitacion: '/delete_capacitacion',
+
+    // CONTACTO
+    get_contacto: '/get_contacto',
+    set_contacto: '/set_contacto',
+
+    // ADMINS
+    get_admins: '/get_admins',
+    create_admin: '/create_admin',
+    edit_super_admin: '/edit_super_admin',
+    edit_admin: '/edit_admin',
+    delete_admin: '/delete_admin',
+
+    // METADATOS
+    get_metadatos: '/get_metadatos',
+    edit_metadato: '/edit_metadato',
+
 };
 
 export default API_ADMIN;

@@ -23,7 +23,7 @@ class ProductosController extends Controller
 
     public function get_productos(Request $request)
     {
-        $productos = Producto::with(['subcategoria', 'imagenes', 'marca'])->get();
+        $productos = Producto::with(['subcategoria', 'imagenes', 'marca'])->orderBy('orden', 'asc')->get();
         return $this->success_response('', $productos);
     }
 
@@ -45,13 +45,19 @@ class ProductosController extends Controller
             return $this->error_response($validator->messages()->first());
         }
 
+        $ficha_tecnica_name = null;
+        if(!is_null($request->ficha_tecnica)){
+            $ficha_tecnica_name =  uniqid() . '.' . $request->ficha_tecnica->extension();
+            $request->ficha_tecnica->move(public_path('fichas'), $ficha_tecnica_name);
+        }
+
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'marca_id' => $request->marca_id,
             'precio' => $request->precio,
             'orden' => $request->orden,
             'destacado' => $request->destacado,
-            'ficha_tecnica' => $request->ficha_tecnica ?? null,
+            'ficha_tecnica' => $ficha_tecnica_name,
             'subcategoria_id' => $request->subcategoria_id,
         ]);
 
@@ -139,7 +145,12 @@ class ProductosController extends Controller
                 File::delete($imagen);
             }
         }
-        
+
+        $pdf = public_path('fichas/' . $producto->ficha_tecnica);  
+        if (File::exists($pdf)) {
+            File::delete($pdf);
+        }
+    
         $producto->delete();
 
         return $this->success_response('Producto eliminado correctamente.');

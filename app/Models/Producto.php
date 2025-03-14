@@ -10,7 +10,7 @@ class Producto extends Model
 
     protected $fillable = [
         'nombre',
-        'marca',
+        'marca_id',
         'precio',
         'orden',
         'destacado',
@@ -21,6 +21,11 @@ class Producto extends Model
     public function subcategoria()
     {
         return $this->belongsTo(Subcategoria::class);
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class);
     }
 
     public function imagenes()

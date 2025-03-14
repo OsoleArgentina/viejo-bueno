@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('marca');
             $table->decimal('precio', 10, 2); 
             $table->string('orden');
             $table->boolean('destacado')->default(0);
             $table->string('ficha_tecnica')->nullable();
             $table->foreignId('subcategoria_id')->constrained('subcategorias')->onDelete('cascade');
+            $table->foreignId('marca_id')->constrained('marcas')->onDelete('cascade');
             $table->timestamps();
         });
     }

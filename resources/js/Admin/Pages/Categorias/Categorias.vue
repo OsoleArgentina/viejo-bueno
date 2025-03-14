@@ -21,6 +21,7 @@
                     <th class="px-4 py-2">Icono</th>
                     <th class="px-4 py-2">Nombre</th>
                     <th class="px-4 py-2">Orden</th>
+                    <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>

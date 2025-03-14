@@ -2,12 +2,12 @@
     <!-- Modal -->
     <div  class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div class="bg-white rounded-lg p-6 w-96 modal-animation">
-            <h2 class="text-2xl font-semibold mb-4">Editar tarjeta</h2>
+            <h2 class="text-2xl font-semibold mb-4">Editar marca</h2>
 
             <div>
                 <div class="mb-4">
-                    <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripcion *</label>
-                    <input type="text" id="descripcion" v-model="descripcion" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Descripcion">
+                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre *</label>
+                    <input type="text" id="nombre" v-model="nombre" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Nombre">
                 </div>
                 <div class="mb-4">
                     <label for="orden" class="block text-sm font-medium text-gray-700">Orden *</label>
@@ -20,7 +20,7 @@
 
                 <div class="flex justify-end space-x-2">
                     <button @click="emit_event('close_modal')" type="button" class="px-4 py-2 bg-gray-300 duration-300 hover:bg-gray-400 text-black rounded-md cursor-pointer">Cancelar</button>
-                    <button @click="edit_elegirnos" class="px-4 py-2 bg-theme-400 text-white rounded-md duration-300 hover:bg-theme-600 cursor-pointer">Actualizar</button>
+                    <button @click="edit_marca" class="px-4 py-2 bg-theme-400 text-white rounded-md duration-300 hover:bg-theme-600 cursor-pointer">Actualizar</button>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
 
 export default {
     props: [
-      'elegirnos_edit',
+      'marca_edit',
     ],
     data() {
         return {
@@ -46,10 +46,10 @@ export default {
                 this.path = event.target.files[0]; 
             }
         },
-        edit_elegirnos() {
+        edit_marca() {
             const data = {
-                'elegirnos_id': this.elegirnos_edit.id,
-                'descripcion': this.descripcion,
+                'marca_id': this.marca_edit.id,
+                'nombre': this.nombre,
                 'orden': this.orden,
             }
 
@@ -57,12 +57,12 @@ export default {
                 data.path = this.path;
             }
 
-            this.emit_event('edit_elegirnos', data);
+            this.emit_event('edit_marca', data);
         },
     },
     created(){
-        this.descripcion = this.elegirnos_edit.descripcion;
-        this.orden = this.elegirnos_edit.orden;
+        this.nombre = this.marca_edit.nombre;
+        this.orden = this.marca_edit.orden;
     }
 };
 </script>

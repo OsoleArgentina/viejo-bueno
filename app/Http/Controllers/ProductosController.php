@@ -23,7 +23,7 @@ class ProductosController extends Controller
 
     public function get_productos(Request $request)
     {
-        $productos = Producto::with(['subcategoria', 'imagenes'])->get();
+        $productos = Producto::with(['subcategoria', 'imagenes', 'marca'])->get();
         return $this->success_response('', $productos);
     }
 
@@ -31,7 +31,7 @@ class ProductosController extends Controller
     {   
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
-            'marca' => 'required|string',
+            'marca_id' => 'required',
             'precio' => 'required|numeric',
             'orden' => 'required|string|max:2',
             'destacado' => 'nullable|boolean',
@@ -47,7 +47,7 @@ class ProductosController extends Controller
 
         $producto = Producto::create([
             'nombre' => $request->nombre,
-            'marca' => $request->marca,
+            'marca_id' => $request->marca_id,
             'precio' => $request->precio,
             'orden' => $request->orden,
             'destacado' => $request->destacado,
@@ -74,7 +74,7 @@ class ProductosController extends Controller
         $validator = Validator::make($request->all(), [
             'producto_id' => 'required',
             'nombre' => 'required|string',
-            'marca' => 'required|string',
+            'marca_id' => 'required',
             'precio' => 'required|numeric',
             'orden' => 'required|string|max:2',
             'ficha_tecnica' => 'sometimes|required|mimes:pdf|max:20480',
@@ -89,7 +89,7 @@ class ProductosController extends Controller
 
         $producto->update([
             'nombre' => $request->nombre,
-            'marca' => $request->marca,
+            'marca_id' => $request->marca_id,
             'precio' => $request->precio,
             'orden' => $request->orden,
             'ficha_tecnica' => $request->ficha_tecnica ?? null,

@@ -1,12 +1,15 @@
 <template>
-    <div class="w-full border-b border-neutral-200">
-        <h1 class="text-4xl font-semibold text-neutral-800 mb-4">¿POR QUÉ ELEGIRNOS?</h1>
-    </div>
-
-    <div class="mb-4">
-        <button @click="elegirnos_modal = true" class="px-6 py-2 mt-5 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
-            Crear tarjeta
-        </button>
+    <div class="w-full flex justify-between items-center border-b border-neutral-200 mb-4">
+        <div class="flex items-center gap-2">
+            <h1 class="text-4xl font-semibold text-neutral-800">¿POR QUÉ ELEGIRNOS?</h1>
+            <span class="text-sm text-white bg-theme-400 rounded-full px-2 py-1">{{ nosotros_elegirnos.length }}</span>
+        </div>
+    
+        <div class="mb-4">
+            <button @click="elegirnos_modal" class="px-6 py-2 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
+                Crear tarjeta
+            </button>
+        </div>
     </div>
 
     <!-- DataTable -->

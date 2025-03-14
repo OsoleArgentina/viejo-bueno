@@ -11,8 +11,13 @@
                         <input type="text" id="nombre" v-model="nombre" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Nombre">
                     </div>
                     <div class="w-1/2">
-                        <label for="marca" class="block text-sm font-medium text-gray-700">Marca *</label>
-                        <input type="text" id="marca" v-model="marca" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Marca">
+                        <label for="marca_id" class="block text-sm font-medium text-gray-700">Marca *</label>
+                        <select id="marca_id" class="mt-1 p-2 w-full border border-gray-300 rounded-md" v-model="marca_id">
+                            <option value="" disabled selected>Selecciona una marca</option>
+                            <option v-for="marca in marcas" :key="marca.id" :value="marca.id">
+                                {{ marca.nombre }}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="w-full flex gap-5 mb-4">
@@ -72,7 +77,7 @@ export default {
     data() {
         return {
             nombre: '',
-            marca: '',
+            marca_id: '',
             precio: '',
             orden: '',
             ficha_tecnica: '',
@@ -106,12 +111,14 @@ export default {
         this.precio = this.producto_edit.precio;
         this.orden = this.producto_edit.orden;
         this.subcategoria_id = this.producto_edit.subcategoria_id;
+        this.marca_id = this.producto_edit.marca_id;
         this.categoria_id = this.producto_edit.subcategoria.categoria_id;
     },
     computed: {
         ...mapGetters([
             'categorias',
             'subcategorias',
+            'marcas',
         ]),
 
         filteredSubcategorias() {

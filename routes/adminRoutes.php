@@ -7,6 +7,7 @@ use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\SubcategoriasController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\MarcasController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -68,4 +69,9 @@ Route::middleware('auth_admin')->group(function () {
     Route::post('/add_imagenes_producto', [ProductosController::class, 'add_imagenes_producto'])->name('add_imagenes_producto');
     Route::delete('/delete_imagen_producto', [ProductosController::class, 'delete_imagen_producto'])->name('delete_imagen_producto');
 
+    // MARCAS
+    Route::get('/get_marcas', [MarcasController::class, 'get_marcas'])->name('get_marcas');
+    Route::post('/create_marca', [MarcasController::class, 'create_marca'])->name('create_marca');
+    Route::post('/edit_marca', [MarcasController::class, 'edit_marca'])->name('edit_marca');
+    Route::delete('/delete_marca', [MarcasController::class, 'delete_marca'])->name('delete_marca');
 });

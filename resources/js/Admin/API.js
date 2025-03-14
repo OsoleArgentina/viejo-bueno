@@ -40,6 +40,13 @@ const API_ADMIN = {
     add_imagenes_producto: '/add_imagenes_producto',
     delete_imagen_producto: '/delete_imagen_producto',
     delete_producto: '/delete_producto',
+
+    // MARCAS
+    get_marcas: '/get_marcas',
+    create_marca: '/create_marca',
+    edit_marca: '/edit_marca',
+    delete_marca: '/delete_marca',
+
 };
 
 export default API_ADMIN;

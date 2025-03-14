@@ -11,6 +11,7 @@ import Elegirnos from '@admin/Pages/Nosotros/Elegirnos.vue';
 import Categorias from '@admin/Pages/Categorias/Categorias.vue';
 import Subcategorias from '@admin/Pages/Subcategorias/Subcategorias.vue';
 import Productos from '@admin/Pages/Productos/Productos.vue';
+import Marcas from '@admin/Pages/Marcas/Marcas.vue';
 
 const Routes = [
     {
@@ -56,6 +57,11 @@ const Routes = [
                 path: "/productos",
                 name: "productos",
                 component: Productos,
+            },
+            {
+                path: "/marcas",
+                name: "marcas",
+                component: Marcas,
             },
         ]
     },

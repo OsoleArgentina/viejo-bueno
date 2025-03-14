@@ -136,7 +136,7 @@ export default {
               { name: 'Productos', path: 'productos' },
             ]
           },
-          // { name: 'Nosotros', icon: 'fa-solid fa-users', path: 'nosotros' },
+          { name: 'Marcas', icon: 'fa-solid fa-list', path: 'marcas' },
         //   { 
         //     name: 'Team', 
         //     icon: 'UsersIcon', 

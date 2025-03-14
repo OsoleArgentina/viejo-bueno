@@ -19,6 +19,7 @@
                 <tr class="text-left">
                     <th class="px-4 py-2">Nombre</th>
                     <th class="px-4 py-2">Categoria</th>
+                    <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>

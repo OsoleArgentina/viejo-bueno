@@ -23,13 +23,14 @@
                     <th class="px-4 py-2">Precio</th>
                     <th class="px-4 py-2">Destacado</th>
                     <th class="px-4 py-2">Subcategoría</th>
+                    <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(producto, index) in productos" :key="producto.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
                     <td class="px-4 py-2">{{ producto.orden }}</td>
                     <td class="px-4 py-2">{{ producto.nombre }}</td>
-                    <td class="px-4 py-2">{{ producto.marca }}</td>
+                    <td class="px-4 py-2">{{ producto.marca.nombre }}</td>
                     <td class="px-4 py-2">${{ producto.precio }}</td>
                     <td class="px-4 py-2">
                         <switch-input
@@ -91,10 +92,15 @@ export default {
             'get_subcategorias',
             'get_categorias',
             'get_productos',
+            'get_marcas',
         ]),
         open_producto_modal(){
             if(this.subcategorias.length <= 0){
                 this.toast_notification({ message: 'Primero debes crear una subcategoria.', type: 'error' })
+                return;
+            }
+            if(this.marcas.length <= 0){
+                this.toast_notification({ message: 'Primero debes crear una marca.', type: 'error' })
                 return;
             }
             this.producto_modal = !this.producto_modal;
@@ -201,6 +207,7 @@ export default {
         await this.get_subcategorias();
         await this.get_categorias();
         await this.get_productos();
+        await this.get_marcas();
         this.isLoading = false;
     },
     computed:{
@@ -208,6 +215,7 @@ export default {
             'subcategorias',
             'categorias',
             'productos',
+            'marcas',
         ]),
     }
 };

@@ -94,7 +94,7 @@ export default {
             const data = {
                 'producto_id': this.producto_edit.id,
                 'nombre': this.nombre,
-                'marca': this.marca,
+                'marca_id': this.marca,
                 'precio': this.precio,
                 'orden': this.orden,
                 'subcategoria_id': this.subcategoria_id,
@@ -107,7 +107,7 @@ export default {
     },
     created(){
         this.nombre = this.producto_edit.nombre;
-        this.marca = this.producto_edit.marca;
+        this.marca = this.producto_edit.marca.id;
         this.precio = this.producto_edit.precio;
         this.orden = this.producto_edit.orden;
         this.subcategoria_id = this.producto_edit.subcategoria_id;

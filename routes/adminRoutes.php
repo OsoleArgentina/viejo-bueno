@@ -26,6 +26,14 @@ Route::get('/login/admin', function () {
 
 Route::post('/login', [AdminAuthController::class, 'login'])->name('login');
 
+// PUBLIC
+Route::get('/get_sliders', [HomeController::class, 'get_sliders'])->name('get_sliders');
+Route::get('/get_home_nosotros', [HomeController::class, 'get_home_nosotros'])->name('get_home_nosotros');
+Route::get('/get_categorias_destacadas', [CategoriasController::class, 'get_categorias_destacadas'])->name('get_categorias_destacadas');
+Route::get('/get_marcas_destacadas', [MarcasController::class, 'get_marcas_destacadas'])->name('get_marcas_destacadas');
+Route::get('/get_productos_destacadas', [ProductosController::class, 'get_productos_destacadas'])->name('get_productos_destacadas');
+Route::get('/get_productos', [ProductosController::class, 'get_productos'])->name('get_productos');
+
 
 Route::middleware('auth_admin')->group(function () {
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
@@ -35,12 +43,10 @@ Route::middleware('auth_admin')->group(function () {
     })->name('dashboard');
 
     // slider - HOME
-    Route::get('/get_sliders', [HomeController::class, 'get_sliders'])->name('get_sliders');
     Route::post('/set_slider', [HomeController::class, 'set_slider'])->name('set_slider');
     Route::post('/edit_slider', [HomeController::class, 'edit_slider'])->name('edit_slider');
     Route::delete('/delete_slider', [HomeController::class, 'delete_slider'])->name('delete_slider');
     // nosotros - HOME
-    Route::get('/get_home_nosotros', [HomeController::class, 'get_home_nosotros'])->name('get_home_nosotros');
     Route::post('/set_home_nosotros', [HomeController::class, 'set_home_nosotros'])->name('set_home_nosotros');
 
     // NOSOTROS
@@ -56,6 +62,7 @@ Route::middleware('auth_admin')->group(function () {
     Route::get('/get_categorias', [CategoriasController::class, 'get_categorias'])->name('get_categorias');
     Route::post('/create_categoria', [CategoriasController::class, 'create_categoria'])->name('create_categoria');
     Route::post('/edit_categoria', [CategoriasController::class, 'edit_categoria'])->name('edit_categoria');
+    Route::post('/edit_categoria_destacado', [CategoriasController::class, 'edit_categoria_destacado'])->name('edit_categoria_destacado');
     Route::delete('/delete_categoria', [CategoriasController::class, 'delete_categoria'])->name('delete_categoria');
 
     // SUBCATEGORIAS
@@ -65,7 +72,6 @@ Route::middleware('auth_admin')->group(function () {
     Route::delete('/delete_subcategoria', [SubcategoriasController::class, 'delete_subcategoria'])->name('delete_subcategoria');
 
     // PRODUCTOS
-    Route::get('/get_productos', [ProductosController::class, 'get_productos'])->name('get_productos');
     Route::get('/get_producto_by_id/{id}', [ProductosController::class, 'get_producto_by_id'])->name('get_producto_by_id');
     Route::post('/create_producto', [ProductosController::class, 'create_producto'])->name('create_producto');
     Route::post('/edit_producto', [ProductosController::class, 'edit_producto'])->name('edit_producto');
@@ -78,6 +84,7 @@ Route::middleware('auth_admin')->group(function () {
     Route::get('/get_marcas', [MarcasController::class, 'get_marcas'])->name('get_marcas');
     Route::post('/create_marca', [MarcasController::class, 'create_marca'])->name('create_marca');
     Route::post('/edit_marca', [MarcasController::class, 'edit_marca'])->name('edit_marca');
+    Route::post('/edit_marca_destacado', [MarcasController::class, 'edit_marca_destacado'])->name('edit_marca_destacado');
     Route::delete('/delete_marca', [MarcasController::class, 'delete_marca'])->name('delete_marca');
 
     // NOVEDADES

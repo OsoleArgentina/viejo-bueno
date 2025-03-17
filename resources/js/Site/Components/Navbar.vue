@@ -1,13 +1,15 @@
 <template>
-    <nav class="bg-white shadow-md fixed w-full z-10 top-0">
+    <nav class="bg-white shadow-md fixed w-full z-30 top-0">
         <div class="px-20 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <img :src="'img/logo-viejo-bueno.png'" alt="Logo" class="h-20 w-20 object-contain" />
+                <router-link :to="{ name: 'home' }">
+                  <img :src="'img/logo-viejo-bueno.png'" alt="Logo" class="h-20 w-20 object-contain" />
+                </router-link>
                 
             </div>
             <div class="flex flex-col gap-y-3">
                 <div class="flex justify-end">
-                    <button class="hidden md:block border border-theme-600 text-theme-600 px-4 py-2 rounded-4xl hover:bg-theme-400">
+                    <button class="hidden md:block border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
                         Solicitud de presupuesto
                     </button>
                     <button @click="toggleMenu" class="md:hidden text-gray-600">
@@ -48,16 +50,6 @@ export default {
         { text: "Marcas", href: "#" },
         { text: "Novedades", href: "#" },
         { text: "Capacitaciones", href: "#" },
-        { text: "Contacto", href: "#" },
-      ],
-      footerLinks: [
-        { text: "Inicio", href: "#" },
-        { text: "Nosotros", href: "#" },
-        { text: "Productos", href: "#" },
-        { text: "Marcas", href: "#" },
-        { text: "Novedades", href: "#" },
-        { text: "Galería", href: "#" },
-        { text: "Solicitud de presupuesto", href: "#" },
         { text: "Contacto", href: "#" },
       ],
     };

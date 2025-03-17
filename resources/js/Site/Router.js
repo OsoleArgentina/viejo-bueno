@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 // HOME PAGE
-import Home from '@site/Pages/Home/Home.vue'
+import Home from '@site/Pages/Home.vue'
 import Nosotros from '@site/Pages/Nosotros.vue'
 import Main from '@site/Main.vue'
 

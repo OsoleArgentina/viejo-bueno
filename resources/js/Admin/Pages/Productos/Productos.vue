@@ -41,10 +41,13 @@
                             v-on:turn_off="toggle_switch_destacado(false, producto.id)"/>
                     </td>
                     <td class="px-4 py-2">{{ producto.subcategoria.nombre }}</td>
-                    <td v-if="producto.ficha_tecnica" class="px-4 py-2">
-                        <span  @click="openPDF(producto.ficha_tecnica)" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer">
+                    <td class="px-4 py-2">
+                        <span v-if="producto.ficha_tecnica" @click="openPDF(producto.ficha_tecnica)" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer">
                             <i class="fa-solid fa-file-pdf"></i>
                         </span>
+                        <span v-else class="text-neutral-400">
+                            No existe
+                        </span>     
                     </td>
                     <td class="px-4 py-2">
                         <button @click="edit_producto_imagenes_modal = !edit_producto_imagenes_modal; producto_selected=producto" class="text-blue-300 px-2 py-1 border border-blue-300 rounded-lg hover:text-white hover:bg-blue-300 duration-300 cursor-pointer"><i class="fa-solid fa-images"></i></button>

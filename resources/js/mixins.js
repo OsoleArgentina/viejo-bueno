@@ -29,6 +29,10 @@ const mixins = {
             )
         },
 
+        format_price(price) {
+            return new Intl.NumberFormat('es-ES').format(price);
+        },
+
         send_http_request(endpoint, method, headers, params, data = null) {
             return new Promise((resolve, reject) => {
                 axios({

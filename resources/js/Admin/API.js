@@ -21,6 +21,7 @@ const API_ADMIN = {
 
     // CATEGORIAS
     get_categorias: '/get_categorias',
+    get_categorias_destacadas: '/get_categorias_destacadas',
     create_categoria: '/create_categoria',
     edit_categoria: '/edit_categoria',
     delete_categoria: '/delete_categoria',
@@ -29,11 +30,13 @@ const API_ADMIN = {
     get_subcategorias: '/get_subcategorias',
     create_subcategoria: '/create_subcategoria',
     edit_subcategoria: '/edit_subcategoria',
+    edit_categoria_destacado: '/edit_categoria_destacado',
     delete_subcategoria: '/delete_subcategoria',
 
     // PRODUCTOS
     get_producto_by_id: '/get_producto_by_id',
     get_productos: '/get_productos',
+    get_productos_destacadas: '/get_productos_destacadas',
     create_producto: '/create_producto',
     edit_producto: '/edit_producto',
     edit_producto_destacado: '/edit_producto_destacado',
@@ -43,8 +46,10 @@ const API_ADMIN = {
 
     // MARCAS
     get_marcas: '/get_marcas',
+    get_marcas_destacadas: '/get_marcas_destacadas',
     create_marca: '/create_marca',
     edit_marca: '/edit_marca',
+    edit_marca_destacado: '/edit_marca_destacado',
     delete_marca: '/delete_marca',
 
     // NOVEDADES

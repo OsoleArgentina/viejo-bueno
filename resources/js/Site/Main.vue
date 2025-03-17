@@ -1,16 +1,17 @@
 <template>
-    <div class="relative min-h-screen" style="background-color: #eff3f8;">
+    <div class="relative min-h-screen bg-white">
         
         <navbar/>
-        <div v-if="render_app" class="mt-20">
+
+        <div  class="mt-28">
 
 
-            <router-view ></router-view>
+            <router-view/>
         </div>
+        <!-- <footer-site></footer-site> -->
     </div>
 </template>
 <script>
-
 export  default {
     created() {
         this.render_app = true

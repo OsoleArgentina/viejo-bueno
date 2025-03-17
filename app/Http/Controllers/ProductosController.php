@@ -27,6 +27,13 @@ class ProductosController extends Controller
         return $this->success_response('', $productos);
     }
 
+    public function get_productos_destacadas(Request $request)
+    {
+        $productos = Producto::where('destacado', true)->orderBy('orden', 'asc')->with(['imagenes', 'marca'])->get();
+
+        return $this->success_response('', $productos);
+    }
+
     public function create_producto(Request $request)
     {   
         $validator = Validator::make($request->all(), [

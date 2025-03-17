@@ -14,6 +14,14 @@
                     <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
                 <div class="mb-4">
+                    <label for="destacado" class="block text-sm font-medium text-gray-700">Destacado</label>
+                    <switch-input
+                        id="destacado"
+                        :default_value="destacado"
+                        v-on:turn_on="destacado = true"
+                        v-on:turn_off="destacado = false"/>
+                </div>
+                <div class="mb-4">
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
                     <span class="text-xs text-neutral-400">Resolucion sugerida 576 x 586</span>
                     <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
@@ -41,6 +49,7 @@ export default {
             orden: '',
             path: '',
             icono: '',
+            destacado: false,
         };
     },
     methods: {
@@ -55,6 +64,7 @@ export default {
                 'nombre': this.nombre,
                 'orden': this.orden,
                 'path': this.path,
+                'destacado': this.destacado ? 1 : 0,
             }
 
             if(this.icono) data.icono = this.icono;

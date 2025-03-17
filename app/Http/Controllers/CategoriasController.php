@@ -18,11 +18,19 @@ class CategoriasController extends Controller
         return $this->success_response('', $categorias);
     }
 
+    public function get_categorias_destacadas(Request $request)
+    {
+        $categorias = Categoria::where('destacado', true)->orderBy('orden', 'asc')->get();
+
+        return $this->success_response('', $categorias);
+    }
+
     public function create_categoria(Request $request)
     {   
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
             'orden' => 'required|string|max:2',
+            'destacado' => 'nullable|boolean',
             'path' => 'required|mimes:jpeg,png,jpg,svg|max:20480',
             'icono' => 'sometimes|required|mimes:jpeg,png,jpg,svg|max:20480',
         ]);
@@ -45,6 +53,7 @@ class CategoriasController extends Controller
         $categoria = Categoria::create([
             'nombre' => $request->nombre,
             'orden' => $request->orden,
+            'destacado' => $request->destacado,
             'path' => $path_name,
             'icono' => $icono_name,
         ]);
@@ -56,6 +65,27 @@ class CategoriasController extends Controller
         }
 
         return $this->success_response('Categoria creada correctamente.', $categoria);
+    }
+
+    public function edit_categoria_destacado(Request $request)
+    {   
+        $validator = Validator::make($request->all(), [
+            'categoria_id' => 'required',
+            'destacado' => 'required|boolean',
+        
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error_response($validator->messages()->first());
+        }
+
+        $categoria = Categoria::findOrFail($request->categoria_id);
+
+        $categoria->update([
+            'destacado' => $request->destacado,
+        ]);
+
+        return $this->success_response('Categoria actualizada correctamente.', $categoria);
     }
 
     public function edit_categoria(Request $request)

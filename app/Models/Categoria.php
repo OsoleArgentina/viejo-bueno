@@ -13,6 +13,7 @@ class Categoria extends Model
         'orden',
         'icono',
         'path',
+        'destacado',
     ];
 
     public function subcategorias()

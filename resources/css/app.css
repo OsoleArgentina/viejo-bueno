@@ -26,7 +26,7 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     /* color base */
-    /* --color-theme-400: #225536; */
+    --color-site-theme: #DAE5DB;
     --color-theme-100: #4E7A6E;
     --color-theme-200: #3F6C59;
     --color-theme-300: #355C4A;

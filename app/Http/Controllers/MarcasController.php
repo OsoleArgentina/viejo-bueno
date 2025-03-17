@@ -17,11 +17,19 @@ class MarcasController extends Controller
         return $this->success_response('', $marcas);
     }
 
+    public function get_marcas_destacadas(Request $request)
+    {
+        $marcas = Marca::where('destacado', true)->get();
+
+        return $this->success_response('', $marcas);
+    }
+
     public function create_marca(Request $request)
     {   
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
             'orden' => 'required|string|max:2',
+            'destacado' => 'nullable|boolean',
             'path' => 'required|image|mimes:jpeg,png,jpg,svg|max:20480',
         ]);
 
@@ -37,7 +45,8 @@ class MarcasController extends Controller
         $marca = Marca::create(
             [
                 'nombre' => $request->nombre,     
-                'orden' => $request->orden,     
+                'orden' => $request->orden,    
+                'destacado' => $request->destacado,
                 'path' => $path_name,     
             ]
         );
@@ -45,6 +54,26 @@ class MarcasController extends Controller
         return $this->success_response('Marca creada correctamente.', $marca);
     }
     
+    public function edit_marca_destacado(Request $request)
+    {   
+        $validator = Validator::make($request->all(), [
+            'marca_id' => 'required',
+            'destacado' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error_response($validator->messages()->first());
+        }
+
+        $marca = Marca::findOrFail($request->marca_id);
+
+        $marca->update([
+            'destacado' => $request->destacado,
+        ]);
+
+        return $this->success_response('Marca actualizada correctamente.', $marca);
+    }
+
     public function edit_marca(Request $request)
     {   
         $validator = Validator::make($request->all(), [

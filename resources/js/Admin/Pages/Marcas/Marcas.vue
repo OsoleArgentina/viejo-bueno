@@ -19,6 +19,7 @@
                 <tr class="text-left">
                     <th class="px-4 py-2">Orden</th>
                     <th class="px-4 py-2">Nombre</th>
+                    <th class="px-4 py-2">Destacado</th>
                     <th class="px-4 py-2">Imagen</th>
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
@@ -26,9 +27,18 @@
             <tbody>
                 <tr v-for="(marca, index) in marcas" :key="marca.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
                     <td class="px-4 py-2">{{ marca.orden }}</td>
-                    <td class="px-4 py-2">{{ marca.nombre }}</td><td class="px-4 py-2">
+                    <td class="px-4 py-2">{{ marca.nombre }}</td>
+                    <td class="px-4 py-2">
+                        <switch-input
+                            :id="marca.id"
+                            :default_value="!!marca.destacado"
+                            v-on:turn_on="toggle_switch_destacado(true, marca.id)"
+                            v-on:turn_off="toggle_switch_destacado(false, marca.id)"/>
+                    </td>
+                    <td class="px-4 py-2">
                         <img v-if="marca.path" :src="`/img/${marca.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
                     </td>
+                    
                     <td class="px-4 py-2">
                         <button @click="edit_marca_modal = !edit_marca_modal; marca_selected=marca" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button @click="delete_marca_modal = !delete_marca_modal; marca_selected=marca" class="text-red-500 px-2 py-1 border border-red-500 rounded-lg hover:text-white hover:bg-red-500 duration-300 cursor-pointer ml-4"><i class="fa-solid fa-trash"></i></button>
@@ -93,6 +103,32 @@ export default {
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.marca_modal = false;
+                await this.get_marcas();
+                this.isLoading = false; 
+                this.toast_notification({ message: response.data.message })
+            }
+        },
+
+        async toggle_switch_destacado(value, marca_id){
+            this.isLoading = true; 
+        
+            const data = {
+                'marca_id': marca_id,
+                'destacado': value,
+            };
+
+            const response = await this.send_http_request(
+                API_ADMIN.edit_marca_destacado, 
+                'POST', 
+                {}, 
+                {}, 
+                data
+            );
+
+            if(response.data.error){
+                this.isLoading = false; 
+                this.toast_notification({ message: response.data.error, type: 'error' })
+            }else{
                 await this.get_marcas();
                 this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })

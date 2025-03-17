@@ -21,6 +21,7 @@
                     <th class="px-4 py-2">Icono</th>
                     <th class="px-4 py-2">Nombre</th>
                     <th class="px-4 py-2">Orden</th>
+                    <th class="px-4 py-2">Destacado</th>
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
@@ -31,10 +32,17 @@
                     </td>
                     <!-- TODO: no se ven los svg -->
                     <td class="px-4 py-2">
-                        <img v-if="categoria.icono" :src="`/img/${categoria.icono}`" alt="categoria Image" class="w-20 h-20 object-cover">
+                        <img v-if="categoria.icono" :src="`/img/${categoria.icono}`" alt="categoria Image" class="w-20 h-20 object-cover bg-neutral-100">
                     </td>
                     <td class="px-4 py-2">{{ categoria.nombre }}</td>
                     <td class="px-4 py-2">{{ categoria.orden }}</td>
+                    <td class="px-4 py-2">
+                        <switch-input
+                            :id="categoria.id"
+                            :default_value="!!categoria.destacado"
+                            v-on:turn_on="toggle_switch_destacado(true, categoria.id)"
+                            v-on:turn_off="toggle_switch_destacado(false, categoria.id)"/>
+                    </td>
                     <td class="px-4 py-2">
                         <button @click="edit_categoria_modal = !edit_categoria_modal; categoria_selected=categoria" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button @click="delete_categoria_modal = !delete_categoria_modal; categoria_selected=categoria" class="text-red-500 px-2 py-1 border border-red-500 rounded-lg hover:text-white hover:bg-red-500 duration-300 cursor-pointer ml-4"><i class="fa-solid fa-trash"></i></button>
@@ -100,6 +108,32 @@ export default {
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 this.categoria_modal = false;
+                await this.get_categorias();
+                this.isLoading = false; 
+                this.toast_notification({ message: response.data.message })
+            }
+        },
+
+        async toggle_switch_destacado(value, categoria_id){
+            this.isLoading = true; 
+        
+            const data = {
+                'categoria_id': categoria_id,
+                'destacado': value,
+            };
+
+            const response = await this.send_http_request(
+                API_ADMIN.edit_categoria_destacado, 
+                'POST', 
+                {}, 
+                {}, 
+                data
+            );
+
+            if(response.data.error){
+                this.isLoading = false; 
+                this.toast_notification({ message: response.data.error, type: 'error' })
+            }else{
                 await this.get_categorias();
                 this.isLoading = false; 
                 this.toast_notification({ message: response.data.message })

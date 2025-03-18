@@ -46,7 +46,7 @@ export default {
       menuOpen: false,
       navLinks: [
         { text: "Nosotros", path: "nosotros" },
-        { text: "Productos", href: "#" },
+        { text: "Productos", path: "productos" },
         { text: "Marcas", href: "#" },
         { text: "Novedades", href: "#" },
         { text: "Capacitaciones", href: "#" },

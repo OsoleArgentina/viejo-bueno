@@ -6,7 +6,7 @@
         <div  class="mt-28">
 
 
-            <router-view/>
+            <router-view v-if="render_app" />
         </div>
         <!-- <footer-site></footer-site> -->
     </div>

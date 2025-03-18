@@ -14,7 +14,7 @@ class CategoriasController extends Controller
     // NOSOTROS
     public function get_categorias(Request $request)
     {
-        $categorias = Categoria::orderBy('orden', 'asc')->get();
+        $categorias = Categoria::orderBy('orden', 'asc')->with('subcategorias.productos.imagenes', 'subcategorias.productos.marca')->get();
         return $this->success_response('', $categorias);
     }
 

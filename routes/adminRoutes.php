@@ -13,6 +13,8 @@ use App\Http\Controllers\CapacitacionesController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MetadatosController;
+use App\Http\Controllers\MercadoPagoController;
+use App\Http\Controllers\CarritoController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -33,7 +35,11 @@ Route::get('/get_categorias_destacadas', [CategoriasController::class, 'get_cate
 Route::get('/get_marcas_destacadas', [MarcasController::class, 'get_marcas_destacadas'])->name('get_marcas_destacadas');
 Route::get('/get_productos_destacadas', [ProductosController::class, 'get_productos_destacadas'])->name('get_productos_destacadas');
 Route::get('/get_productos', [ProductosController::class, 'get_productos'])->name('get_productos');
+Route::get('/get_productos_relacionados/{id}', [ProductosController::class, 'get_productos_relacionados'])->name('get_productos_relacionados');
+Route::post('/create_pedido', [CarritoController::class, 'create_pedido'])->name('create_pedido');
 
+// MERCADO PAGO
+Route::post('/createPreference', [MercadoPagoController::class, 'createPreference'])->name('createPreference');
 
 Route::middleware('auth_admin')->group(function () {
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');

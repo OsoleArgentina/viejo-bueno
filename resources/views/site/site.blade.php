@@ -16,6 +16,8 @@
 
         @vite(['resources/css/app.css', 'resources/js/site.js'])
 
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
+
     </head>
     <body>
         <div id="site">

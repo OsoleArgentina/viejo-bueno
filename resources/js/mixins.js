@@ -7,7 +7,6 @@ const mixins = {
             { message = "", type = "success" }
         ) {
             const toast = useToast();
-
             toast(
                 message,
                 {

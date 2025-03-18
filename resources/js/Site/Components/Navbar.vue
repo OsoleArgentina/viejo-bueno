@@ -17,14 +17,25 @@
                     </button>
                 </div>
                 
-                <div>
+                <div class="flex gap-5">
                     <ul class="hidden md:flex space-x-6">
-                    <li v-for="link in navLinks" :key="link.text" class="hover:text-theme-600">
-                        <router-link  :to="{ name: link.path}">
-                            {{link.text}}
-                        </router-link>
-                    </li>
-                </ul>
+                      <li v-for="link in navLinks" :key="link.text" class="hover:text-theme-600">
+                          <router-link  :to="{ name: link.path}">
+                              {{link.text}}
+                          </router-link>
+                      </li>
+                    </ul>
+                    <span>|</span>
+                    <router-link  :to="{ name: 'carrito'}">
+                      <div class="relative inline-block cursor-pointer">
+                        <img :src="'img/carrito.svg'" class="object-contain" alt="carrito">
+                        <span class="absolute bottom-0 left-3 text-xs text-center h-4 px-1 bg-site-theme border border-theme-400 text-theme-400 rounded-full">
+                          {{ cartCount }}
+                        </span>
+                      </div>
+                    </router-link>
+
+
                 </div>
             </div>
             <!-- Mobile Menu -->
@@ -52,6 +63,7 @@ export default {
         { text: "Capacitaciones", href: "#" },
         { text: "Contacto", href: "#" },
       ],
+      cartCount: 0,
     };
   },
   methods: {
@@ -59,6 +71,11 @@ export default {
       this.menuOpen = !this.menuOpen;
     },
   },
+  created(){
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    this.cartCount = carrito.length;
+  }
+
 };
 </script>
      

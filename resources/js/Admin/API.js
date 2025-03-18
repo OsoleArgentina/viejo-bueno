@@ -35,6 +35,7 @@ const API_ADMIN = {
 
     // PRODUCTOS
     get_producto_by_id: '/get_producto_by_id',
+    get_productos_relacionados: '/get_productos_relacionados',
     get_productos: '/get_productos',
     get_productos_destacadas: '/get_productos_destacadas',
     create_producto: '/create_producto',
@@ -78,6 +79,12 @@ const API_ADMIN = {
     // METADATOS
     get_metadatos: '/get_metadatos',
     edit_metadato: '/edit_metadato',
+
+    // MERCADO PAGO
+    createPreference: '/createPreference',
+
+    // CARRITO
+    create_pedido: '/create_pedido',
 
 };
 

@@ -118,7 +118,7 @@
                 </div>
                 
                 <div class="absolute inset-0 flex items-center justify-center z-10">
-                    <img :src="`/img/${categoria.icono}`" alt="Icono" class="w-20 h-20 object-contain" />
+                    <img v-if="categoria.icono" :src="`/img/${categoria.icono}`" alt="Icono" class="w-20 h-20 object-contain" />
                 </div>
             </div>
         </div>
@@ -263,6 +263,7 @@ export default {
     await this.get_categorias();
     await this.get_marcas();
     await this.get_productos();
+
     this.startSlider();
   },
   destroyed() {

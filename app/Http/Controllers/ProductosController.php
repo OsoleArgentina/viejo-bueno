@@ -34,6 +34,23 @@ class ProductosController extends Controller
         return $this->success_response('', $productos);
     }
 
+    public function get_productos_relacionados($id)
+    {
+        $producto = Producto::findOrFail($id);
+
+        $productos_relacionados = Producto::where(function ($query) use ($producto) {
+            $query->where('marca_id', $producto->marca_id)
+                ->orWhere('subcategoria_id', $producto->subcategoria_id);
+        })
+        ->where('id', '!=', $producto->id) 
+        ->with(['imagenes', 'marca'])
+        ->take(3)  
+        ->get();
+
+        return $this->success_response('', $productos_relacionados);
+    }
+
+
     public function create_producto(Request $request)
     {   
         $validator = Validator::make($request->all(), [

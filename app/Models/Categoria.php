@@ -20,4 +20,9 @@ class Categoria extends Model
     {
         return $this->hasMany(Subcategoria::class);
     }
+
+    public function marcas()
+    {
+        return $this->hasMany(Marca::class);
+    }
 }

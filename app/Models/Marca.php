@@ -13,10 +13,16 @@ class Marca extends Model
         'orden',
         'destacado',
         'path',
+        'categoria_id',
     ];
 
     public function productos()
     {
         return $this->hasMany(Producto::class);
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
     }
 }

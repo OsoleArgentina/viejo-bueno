@@ -18,10 +18,10 @@ import Contacto from '@admin/Pages/Contacto/Contacto.vue';
 import Admins from '@admin/Pages/Admins/Admins.vue';
 import Metadatos from '@admin/Pages/Metadatos/Metadatos.vue';
 const Routes = [
-    {
-        path: "/",
-        component: Main,
-        children: [
+    // {
+    //     path: "/",
+    //     component: Main,
+    //     children: [
             {
                 path: "/",
                 name: "dashboard",
@@ -92,8 +92,8 @@ const Routes = [
                 name: "metadatos",
                 component: Metadatos,
             },
-        ]
-    },
+    //     ]
+    // },
 ];
 
 const router = createRouter({

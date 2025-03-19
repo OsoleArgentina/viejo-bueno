@@ -9,9 +9,12 @@
             </div>
             <div class="flex flex-col gap-y-3">
                 <div class="flex justify-end">
-                    <button class="hidden md:block border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
-                        Solicitud de presupuesto
-                    </button>
+                    <router-link :to="{ name: 'presupuesto' }">
+                        <button class="hidden md:block border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
+                            Solicitud de presupuesto
+                        </button>
+                    </router-link>
+
                     <button @click="toggleMenu" class="md:hidden text-gray-600">
                         ☰
                     </button>
@@ -25,7 +28,7 @@
                           </router-link>
                       </li>
                     </ul>
-                    <span>|</span>
+                    <!-- <span>|</span>
                     <router-link  :to="{ name: 'carrito'}">
                       <div class="relative inline-block cursor-pointer">
                         <img :src="'img/carrito.svg'" class="object-contain" alt="carrito">
@@ -33,7 +36,7 @@
                           {{ cartCount }}
                         </span>
                       </div>
-                    </router-link>
+                    </router-link> -->
 
 
                 </div>

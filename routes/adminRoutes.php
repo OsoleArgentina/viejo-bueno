@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MetadatosController;
 use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\PresupuestoController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -37,6 +38,8 @@ Route::get('/get_productos_destacadas', [ProductosController::class, 'get_produc
 Route::get('/get_productos', [ProductosController::class, 'get_productos'])->name('get_productos');
 Route::get('/get_productos_relacionados/{id}', [ProductosController::class, 'get_productos_relacionados'])->name('get_productos_relacionados');
 Route::post('/create_pedido', [CarritoController::class, 'create_pedido'])->name('create_pedido');
+Route::post('/enviar_informacion_contacto', [ContactoController::class, 'enviar_informacion_contacto'])->name('enviar_informacion_contacto');
+Route::post('/solicitar_presupuesto', [PresupuestoController::class, 'solicitar_presupuesto'])->name('solicitar_presupuesto');
 
 // MERCADO PAGO
 Route::post('/createPreference', [MercadoPagoController::class, 'createPreference'])->name('createPreference');

@@ -94,7 +94,6 @@
   </template>
   
 <script>
-import { ref, onMounted } from 'vue';
   
 export default {
     data() {
@@ -132,11 +131,12 @@ export default {
             isOpen: false,
             items: [
               { name: 'Categorias', path: 'categorias' },
-              { name: 'Subcategorias', path: 'subcategorias' },
-              { name: 'Productos', path: 'productos' },
+              // { name: 'Subcategorias', path: 'subcategorias' },
+              // { name: 'Productos', path: 'productos' },
+              { name: 'Productos', path: 'marcas' },
             ]
           },
-          { name: 'Marcas', icon: 'fa-solid fa-list', path: 'marcas' },
+          // { name: 'Marcas', icon: 'fa-solid fa-list', path: 'marcas' },
           { name: 'Novedades', icon: 'fa-solid fa-newspaper', path: 'novedades' },
           { name: 'Capacitaciones', icon: 'fa-solid fa-book', path: 'capacitaciones' },
           { name: 'Contacto', icon: 'fa-solid fa-address-book', path: 'contacto' },

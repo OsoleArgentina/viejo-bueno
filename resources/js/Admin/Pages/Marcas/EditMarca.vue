@@ -14,6 +14,15 @@
                     <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
                 <div class="mb-4">
+                    <label for="categoria_id" class="block text-sm font-medium text-gray-700">Categoría *</label>
+                    <select v-model="categoria_id" id="categoria_id" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">
+                            {{ categoria.nombre }}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-4">
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
                     <span class="text-xs text-neutral-400">Resolucion sugerida 500 x 241</span>
                     <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
@@ -29,6 +38,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     props: [
@@ -39,6 +49,7 @@ export default {
             descripcion: '',
             orden: '',
             path: '',
+            categoria_id: '',
         };
     },
     methods: {
@@ -52,6 +63,7 @@ export default {
                 'marca_id': this.marca_edit.id,
                 'nombre': this.nombre,
                 'orden': this.orden,
+                'categoria_id': this.categoria_id,
             }
 
             if(this.path){
@@ -64,6 +76,12 @@ export default {
     created(){
         this.nombre = this.marca_edit.nombre;
         this.orden = this.marca_edit.orden;
-    }
+        this.categoria_id = this.marca_edit.categoria_id;
+    },
+    computed:{
+        ...mapGetters([
+            'categorias',
+        ]),
+    },
 };
 </script>

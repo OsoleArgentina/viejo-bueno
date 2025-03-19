@@ -13,7 +13,7 @@
                     <label for="orden" class="block text-sm font-medium text-gray-700">Orden *</label>
                     <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 flex justify-between">
                     <label for="destacado" class="block text-sm font-medium text-gray-700">Destacado</label>
                     <switch-input
                         id="destacado"

@@ -6,7 +6,7 @@
         </div>
     
         <div class="mb-4">
-            <button @click="marca_modal = !marca_modal" class="px-6 py-2 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
+            <button @click="open_modal" class="px-6 py-2 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
                 Crear marca
             </button>
         </div>
@@ -20,6 +20,7 @@
                     <th class="px-4 py-2">Orden</th>
                     <th class="px-4 py-2">Nombre</th>
                     <th class="px-4 py-2">Destacado</th>
+                    <th class="px-4 py-2">Categoria</th>
                     <th class="px-4 py-2">Imagen</th>
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
@@ -35,6 +36,7 @@
                             v-on:turn_on="toggle_switch_destacado(true, marca.id)"
                             v-on:turn_off="toggle_switch_destacado(false, marca.id)"/>
                     </td>
+                    <td class="px-4 py-2">{{ marca.categoria.nombre }}</td>
                     <td class="px-4 py-2">
                         <img v-if="marca.path" :src="`/img/${marca.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
                     </td>
@@ -84,7 +86,15 @@ export default {
     methods: {
         ...mapActions([
             'get_marcas',
+            'get_categorias',
         ]),
+        open_modal(){
+            if(this.categorias.length <= 0){
+                this.toast_notification({ message: 'Primero debes crear una categoria.', type: 'error' })
+                return;
+            }
+            this.marca_modal = !this.marca_modal;
+        },
         async crear_marca(data) {
             this.isLoading = true; 
             const headers = {
@@ -186,11 +196,13 @@ export default {
     async created(){
         this.isLoading = true; 
         await this.get_marcas();
+        await this.get_categorias();
         this.isLoading = false; 
     },
     computed:{
         ...mapGetters([
             'marcas',
+            'categorias',
         ]),
     }
 };

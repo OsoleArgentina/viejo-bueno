@@ -11,6 +11,12 @@
 @import "quill/dist/quill.snow.css";
 @import "quill/dist/quill.core.css";
 
+@layer base {
+  body {
+      font-family: "Montserrat", sans-serif;
+  }
+}
+
 /* QUILL TEXT EDITOR CUSTOM STYLES */
 .ql-toolbar {
     border-radius: 15px !important;

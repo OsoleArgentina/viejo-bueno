@@ -1,5 +1,5 @@
 <template>
-    <div v-if="render_novedad" class="w-full px-20 mt-40">
+    <div v-if="render_novedad" class="w-full px-20 mt-20">
         <div class="flex gap-16">
             <div class="w-1/2">
                 <img :src="`/img/${novedad.path}`" alt="novedad Image" class="w-full h-[700px] object-cover rounded-lg" />

@@ -47,8 +47,9 @@
             @click="goToSlide(index)"
             class="w-3 h-3 mx-2 rounded-full cursor-pointer transition-all"></button>
         </div>
+        
     </div>
-
+   
     <!-- MARCAS -->
     <div class="w-full px-20 mt-10">
         <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-6">
@@ -60,39 +61,39 @@
     </div>
 
     <!-- FILTROS -->
-    <div class="w-full px-20 mt-10">
+    <div class="w-full px-2 sm:px-20 mt-10">
         <div class="w-full mt-10">
-            <div class="flex items-center gap-10">
-                <select v-model="categoria_seleccionada" class="px-4 py-2 border rounded-full w-1/4">
+            <div class="flex sm:flex-row flex-col justify-between items-center gap-10">
+                <select v-model="categoria_seleccionada" class="px-4 py-2 border rounded-full w-full sm:w-1/4">
                     <option disabled value="">Seleccione una categoría</option>
                     <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">{{ categoria.nombre }}</option>
                 </select>
 
-                <select v-model="marca_seleccionada" class="px-4 py-2 border rounded-full w-1/4">
+                <select v-model="marca_seleccionada" class="px-4 py-2 border rounded-full w-full sm:w-1/4">
                     <option disabled value="">Seleccione una marca</option>
                     <option v-for="marca in marcas" :key="marca.id" :value="marca.id">{{ marca.nombre }}</option>
                 </select>
 
-                <input v-model="producto_input" type="text" placeholder="Producto" class="px-4 py-2 border rounded-full w-1/4" />
+                <!-- <input v-model="producto_input" type="text" placeholder="Producto" class="px-4 py-2 border rounded-full w-1/4" /> -->
 
-                <button class="w-1/4 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
+                <button class="w-full sm:w-1/4 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
                     Buscar
                 </button>
             </div>
         </div>
     </div>
 
-    <div v-if="productos_filtrados.length > 0 && filtrado_modal" class="w-full px-20">
+    <div v-if="productos_filtrados.length > 0 && filtrado_modal" class="w-full px-2 sm:px-20">
         <span @click="cerrar_filtrado" class="w-full flex justify-end p-4 text-xl hover:text-theme-400 duration-300 cursor-pointer">
             <i class="fa-solid fa-xmark"></i>
         </span>
         <div class="bg-white shadow-xl rounded-lg p-6  max-h-[80vh] overflow-auto">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <div v-for="(producto, index) in productos_filtrados" :key="index" class="flex hover:bg-site-theme rounded-md p-2 duration-300 cursor-pointer mb-2">
+                <div v-for="(producto, index) in productos_filtrados" :key="index" class="flex p-2 mb-2">
                     <div class="">
-                        <img :src="`/img/${producto.imagenes[0].path}`" alt="producto Image" class="w-40 h-40 object-contain" />
+                        <img :src="`/img/${producto.path}`" alt="producto Image" class="w-40 h-40 object-contain" />
                     </div>
-                    <div class="">
+                    <!-- <div class="">
                         <div class="w-full flex justify-between items-center text-theme-400 font-semibold text-lg mb-2">
                             <span>{{ producto.marca.nombre }}</span>
                             <span>${{ this.format_price(producto.precio) }}</span>
@@ -100,16 +101,16 @@
                         <div>
                             <h2 class="text-lg">{{ producto.nombre }}</h2>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 
     <!-- CATEGORIAS -->
-    <div class="w-full px-20 mt-10">
+    <div class="w-full px-2 sm:px-20 mt-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-            <div v-for="(categoria, index) in categorias_destacadas" :key="index" class="relative flex justify-center">
+            <div v-for="(categoria, index) in categorias_destacadas" :key="index" class="relative flex justify-center cursor-pointer" @click="go_to_producto(categoria.id)">
                 <div class="absolute inset-0 bg-black opacity-20 rounded-md"></div>
                 <img :src="`/img/${categoria.path}`" alt="categoria Image" class="w-full h-96 object-cover rounded-md" />
                 
@@ -127,19 +128,19 @@
     <!-- NOSOTROS -->
     <div class="mt-20">
         <div class="relative w-full h-[700px]">
-            <img v-if="home_nosotros.path" :src="`/img/${home_nosotros.path}`" alt="nosotros Image" class="w-full h-full object-cover" />
+            <img v-if="home_nosotros?.path" :src="`/img/${home_nosotros?.path}`" alt="nosotros Image" class="w-full h-full object-cover" />
 
 
             <div class="absolute inset-0 bg-black opacity-40"></div>
 
-            <div class="absolute inset-0 flex items-end justify-center text-white px-4 z-10">
-            <div class="flex w-full items-center px-20">
+            <div class="absolute inset-0 flex items-start sm:items-end justify-center text-white px-4 z-10">
+            <div class="flex sm:flex-row flex-col w-full items-center sm:px-20">
                 <div class="w-3/4">
                     <div class="w-16 border-t-2 border-white mb-5"></div>
-                    <h2 class="text-5xl font-bold mb-10">{{ home_nosotros.titulo }}</h2>
-                    <p v-html="home_nosotros.descripcion" class="text-xl mb-14"></p>
+                    <h2 class="text-5xl font-bold mb-10">{{ home_nosotros?.titulo }}</h2>
+                    <p v-html="home_nosotros?.descripcion" class="text-xl mb-14"></p>
                 </div>
-                <div class="w-1/4 h-12 text-end">
+                <div class="w-full sm:w-1/4 h-12 text-center sm:text-end">
                     <button class="w-1/2 py-2 text-theme-400 border border-white rounded-full hover:text-black bg-white duration-300 cursor-pointer">Más info</button>
                 </div>
             </div>
@@ -149,7 +150,7 @@
 
 
     <!-- PRODUCTOS -->
-    <div class="w-full px-20 py-20 bg-site-theme">
+    <!-- <div class="w-full px-20 py-20 bg-site-theme">
          <div class="mb-5">
              <div class="border-t-3 w-12 mb-5"></div>
              <h1 class="font-semibold text-4xl">Productos destacados</h1>
@@ -171,10 +172,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- NOVEDADES -->
-    <div class="w-full px-20 py-20">
+    <div class="w-full px-2 sm:px-20 py-20">
          <div class="mb-5">
              <div class="border-t-3 w-12 mb-5"></div>
              <h1 class="font-semibold text-4xl">Novedades</h1>
@@ -263,7 +264,6 @@ export default {
     await this.get_categorias();
     await this.get_marcas();
     await this.get_productos();
-
     this.startSlider();
   },
   destroyed() {
@@ -296,10 +296,10 @@ export default {
         clearInterval(this.sliderInterval);
 
         this.currentSlide = (this.currentSlide + 1) % this.sliders.length;
-        const videoRefName = `video-${this.sliders[this.currentSlide].path}`;
+        const videoRefName = `video-${this.sliders[this.currentSlide]?.path}`;
         const videoElement = this.$refs[videoRefName];
         if(videoElement){
-            this.duration_video = videoElement[0].duration * 1000 ?? 5000;
+            this.duration_video = videoElement[0]?.duration * 1000 ?? 5000;
         }
         else{
             this.duration_video = 5000;
@@ -328,6 +328,12 @@ export default {
         this.categoria_seleccionada = '';
         this.marca_seleccionada = '';
         this.producto_input = '';
+    },
+    go_to_producto(producto_id){
+        this.go_to_route(
+            'producto',
+            { 'producto_id': producto_id }
+        )
     }
   },
   computed: {
@@ -343,33 +349,33 @@ export default {
         'productos',
     ]),
     productos_filtrados(){
-        let productosFiltrados = this.productos;
+        let productosFiltrados = this.marcas;
         // Filtrar por categoría
         if (this.categoria_seleccionada) {
             this.filtrado_modal = true;
 
             productosFiltrados = productosFiltrados.filter(producto =>
-                producto.subcategoria.categoria_id === this.categoria_seleccionada
+                producto.categoria_id === this.categoria_seleccionada
             );
         }
 
-            // Filtrar por marca
+        // Filtrar por marca
         if (this.marca_seleccionada) {
             this.filtrado_modal = true;
 
             productosFiltrados = productosFiltrados.filter(producto =>
-                producto.marca_id === this.marca_seleccionada
+                producto.id === this.marca_seleccionada
             );
         }
 
-            // Filtrar por texto de búsqueda
-        if (this.producto_input) {
-            this.filtrado_modal = true;
+        // Filtrar por texto de búsqueda
+        // if (this.producto_input) {
+        //     this.filtrado_modal = true;
 
-            productosFiltrados = productosFiltrados.filter(producto =>
-            producto.nombre.toLowerCase().includes(this.producto_input.toLowerCase())
-            );
-        }
+        //     productosFiltrados = productosFiltrados.filter(producto =>
+        //     producto.nombre.toLowerCase().includes(this.producto_input.toLowerCase())
+        //     );
+        // }
 
         return productosFiltrados;
     },

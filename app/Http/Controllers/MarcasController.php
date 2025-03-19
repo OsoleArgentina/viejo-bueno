@@ -13,7 +13,7 @@ class MarcasController extends Controller
 {
     public function get_marcas(Request $request)
     {
-        $marcas = Marca::orderBy('orden', 'asc')->get();
+        $marcas = Marca::orderBy('orden', 'asc')->with('categoria')->get();
         return $this->success_response('', $marcas);
     }
 
@@ -30,6 +30,7 @@ class MarcasController extends Controller
             'nombre' => 'required|string',
             'orden' => 'required|string|max:2',
             'destacado' => 'nullable|boolean',
+            'categoria_id' => 'required',
             'path' => 'required|image|mimes:jpeg,png,jpg,svg|max:20480',
         ]);
 
@@ -41,12 +42,12 @@ class MarcasController extends Controller
         $path_name = uniqid() . '.' . $imagen->extension();
         $imagen->move(public_path('img'), $path_name);
 
-       
         $marca = Marca::create(
             [
                 'nombre' => $request->nombre,     
                 'orden' => $request->orden,    
                 'destacado' => $request->destacado,
+                'categoria_id' => $request->categoria_id,     
                 'path' => $path_name,     
             ]
         );
@@ -80,6 +81,7 @@ class MarcasController extends Controller
             'marca_id' => 'required',
             'nombre' => 'required|string',
             'orden' => 'required|string|max:2',
+            'categoria_id' => 'required',
             'path' => 'sometimes|required|image|mimes:jpeg,png,jpg,svg|max:20480',
         ]);
 
@@ -108,6 +110,7 @@ class MarcasController extends Controller
         $marca->update([
             'nombre' => $request->nombre,
             'orden' => $request->orden,
+            'categoria_id' => $request->categoria_id,
             'path' => $image_name ?? $marca->path,
         ]);
 

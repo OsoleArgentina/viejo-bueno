@@ -5,8 +5,8 @@
       <navbar></navbar>
 
       <!-- Main content -->
-      <div class="flex mt-10 p-2">
-        <div class="w-full ml-30">
+      <div class="flex mt-20 p-2">
+        <div class="w-full ml-64">
             <router-view />
         </div>
       </div>

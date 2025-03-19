@@ -1,6 +1,6 @@
 
 <template>
-    <div class="w-full px-20 mt-40">
+    <div class="w-full px-20 mt-20">
         <div class="mb-10">
             <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
             <h2 class="text-3xl font-semibold">Nuestras marcas</h2>

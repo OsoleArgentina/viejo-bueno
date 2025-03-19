@@ -13,13 +13,22 @@
                     <label for="orden" class="block text-sm font-medium text-gray-700">Orden *</label>
                     <input type="text" id="orden" v-model="orden" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Orden">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 flex justify-between">
                     <label for="destacado" class="block text-sm font-medium text-gray-700">Destacado</label>
                     <switch-input
                         id="destacado"
                         :default_value="destacado"
                         v-on:turn_on="destacado = true"
                         v-on:turn_off="destacado = false"/>
+                </div>
+                <div class="mb-4">
+                    <label for="categoria_id" class="block text-sm font-medium text-gray-700">Categoría *</label>
+                    <select v-model="categoria_id" id="categoria_id" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">
+                            {{ categoria.nombre }}
+                        </option>
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
@@ -37,6 +46,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     data() {
@@ -45,6 +55,7 @@ export default {
             orden: '',
             path: '',
             destacado: false,
+            categoria_id: '',
         };
     },
     methods: {
@@ -59,10 +70,16 @@ export default {
                 'orden': this.orden,
                 'path': this.path,
                 'destacado': this.destacado ? 1 : 0,
+                'categoria_id': this.categoria_id,
             }
 
             this.emit_event('crear_marca', data);
         },
     },
+    computed:{
+        ...mapGetters([
+            'categorias',
+        ]),
+    }
 };
 </script>

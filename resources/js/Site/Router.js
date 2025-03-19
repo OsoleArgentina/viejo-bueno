@@ -14,11 +14,12 @@ import ListNovedades from '@site/Pages/Novedades/ListNovedades.vue';
 import Novedad from '@site/Pages/Novedades/Novedad.vue';
 import Capacitaciones from '@site/Pages/Capacitaciones.vue';
 import Contacto from '@site/Pages/Contacto.vue';
+import Presupuesto from '@site/Pages/Presupuesto.vue';
 const Routes = [
-    {
-        path: "/",
-        component: Main,
-        children: [
+    // {
+        // path: "/",
+        // component: Main,
+        // children: [
             {
                 path: "",
                 name: "home",
@@ -60,10 +61,15 @@ const Routes = [
                 name: "contacto",
                 component: Contacto,
             },
+            // {
+            //     path: "/carrito",
+            //     name: "carrito",
+            //     component: Carrito,
+            // },
             {
-                path: "/carrito",
-                name: "carrito",
-                component: Carrito,
+                path: "/presupuesto",
+                name: "presupuesto",
+                component: Presupuesto,
             },
             {
                 path: "/novedades",
@@ -81,8 +87,8 @@ const Routes = [
                     },
                 ]
             },
-        ]
-    },
+        // ]
+    // },
 ];
 
 const router = createRouter({

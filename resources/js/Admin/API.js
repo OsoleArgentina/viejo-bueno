@@ -68,6 +68,7 @@ const API_ADMIN = {
     // CONTACTO
     get_contacto: '/get_contacto',
     set_contacto: '/set_contacto',
+    enviar_informacion_contacto: '/enviar_informacion_contacto',
 
     // ADMINS
     get_admins: '/get_admins',
@@ -85,6 +86,9 @@ const API_ADMIN = {
 
     // CARRITO
     create_pedido: '/create_pedido',
+
+    // PRESUPUESTO
+    solicitar_presupuesto: '/solicitar_presupuesto',
 
 };
 

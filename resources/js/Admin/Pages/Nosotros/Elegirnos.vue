@@ -26,7 +26,7 @@
             <tbody>
                 <tr v-for="(elg, index) in nosotros_elegirnos" :key="elg.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
                     <td class="px-4 py-2">
-                        <img v-if="elg.path" :src="`/img/${elg.path}`" alt="Slider Image" class="w-20 h-20 object-cover">
+                        <img v-if="elg.path" :src="`/img/${elg.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
                     </td>
                     <td class="px-4 py-2">{{ elg.descripcion }}</td>
                     <td class="px-4 py-2">{{ elg.orden }}</td>

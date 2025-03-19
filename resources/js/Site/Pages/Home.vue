@@ -247,12 +247,12 @@ export default {
     };
   },
   async created() {
-    const modalShown = sessionStorage.getItem("modalShown");
+    const modalShown = localStorage.getItem("modalShown");
     if (!modalShown) {
       this.show_modal = true;
     }
     
-    sessionStorage.setItem("modalShown", "false");  
+    localStorage.setItem("modalShown", "false");  
 
     await this.get_sliders();
     await this.get_marcas_destacadas();

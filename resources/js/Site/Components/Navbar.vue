@@ -58,10 +58,10 @@ export default {
       navLinks: [
         { text: "Nosotros", path: "nosotros" },
         { text: "Productos", path: "productos" },
-        { text: "Marcas", href: "#" },
-        { text: "Novedades", href: "#" },
-        { text: "Capacitaciones", href: "#" },
-        { text: "Contacto", href: "#" },
+        { text: "Marcas", path: "marcas" },
+        { text: "Novedades", path: "novedades" },
+        { text: "Capacitaciones", path: "capacitaciones" },
+        { text: "Contacto", path: "contacto" },
       ],
       cartCount: 0,
     };

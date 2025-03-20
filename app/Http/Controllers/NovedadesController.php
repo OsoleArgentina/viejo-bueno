@@ -44,7 +44,7 @@ class NovedadesController extends Controller
             'path' => $image_name,     
         ]);
         
-        $imagen->move(public_path('img'), $image_name);
+        $imagen->move('img', $image_name);
 
         return $this->success_response('Novedad creada correctamente.', $novedad);
     }
@@ -79,7 +79,7 @@ class NovedadesController extends Controller
     
             $image_name = time() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $image_name);
+            $imagen->move('img', $image_name);
         }
 
         $novedad->update([

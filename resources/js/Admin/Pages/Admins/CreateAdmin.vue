@@ -14,6 +14,10 @@
                     <input type="password" id="password" v-model="password" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="xxxxxxx">
                 </div>
                 <div class="mb-4">
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirmar contraseña *</label>
+                    <input type="password" id="confirm_password" v-model="confirm_password" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Confirmar contraseña">
+                </div>
+                <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Correo *</label>
                     <input type="text" id="email" v-model="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Correo">
                 </div>
@@ -41,6 +45,7 @@ export default {
     data() {
         return {
             username: '',
+            confirm_password: '',
             password: '',
             email: '',
             is_admin: '',
@@ -48,9 +53,16 @@ export default {
     },
     methods: {
         create_admin() {
+            // if (this.password !== this.confirm_password) {
+            //     this.toast_notification({ message: 'Las contraseñas no coinciden.', type: 'error' })
+
+            //     return;
+            // }
+            
             const data = {
                 'username': this.username,
                 'password': this.password,
+                'password_confirmation': this.confirm_password,
                 'email': this.email,
                 'is_admin': this.is_admin ? 1 : 0,
             }

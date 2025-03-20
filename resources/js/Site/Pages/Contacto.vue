@@ -1,11 +1,11 @@
 <template>
-    <div class="w-full px-20 mt-20 mb-20">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-20 mb-20">
         <div class="mb-20">
             <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
             <h2 class="text-4xl font-semibold mb-4">Contacto</h2>
 
-            <div class="flex gap-16">
-                <div class="w-1/4">
+            <div class="flex flex-col sm:flex-row gap-16">
+                <div class="w-full sm:w-1/4">
                     <p class=" text-xl mb-16">Para mayor información, no dude en contactarse mediante el siguiente formulario, o a través de nuestras vías de comunicación.</p>
                     <div class="flex flex-col gap-5">
                         <div class="flex gap-5">
@@ -36,7 +36,7 @@
 
                 </div>
 
-                <div class="w-3/4">
+                <div class="w-full sm:w-3/4">
                     <div class="flex gap-5 mb-4">
                         <div class="w-1/2">
                             <label for="nombre" class="block text-sm font-medium mb-1">Nombre y Apellido*</label>
@@ -64,7 +64,7 @@
 
                     <div class="w-full flex justify-end items-center gap-10 mt-20">
                         <span>*campos obligatorios</span>
-                        <button @click="enviar_informacion_contacto" class="w-1/3 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
+                        <button @click="enviar_informacion_contacto" class="w-full sm:w-1/3 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
                             Enviar mensaje
                         </button>
                     </div>
@@ -86,6 +86,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import API_ADMIN from '@admin/API';
+import { useHead } from '@vueuse/head'
 
 export default{
     data() {
@@ -135,6 +136,12 @@ export default{
         }
     },
     async created(){
+        useHead({
+            meta: [
+                { name: 'description', content: this.metadatos[4].descripcion },
+                { name: 'keywords', content: this.metadatos[4].keyword },
+            ],
+        })
         await this.get_contacto();
         const iframe = this.$refs.mapIframeContainer.querySelector('iframe');
         if (iframe) {
@@ -144,6 +151,7 @@ export default{
     computed: {
         ...mapGetters([
             'contacto',
+            'metadatos',
         ]),
     },
 }

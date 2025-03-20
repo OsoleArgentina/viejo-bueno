@@ -39,7 +39,7 @@
         <!-- Navigation -->
         <nav class="mt-5 px-2">
           <!-- Collapsible sections -->
-          <div v-for="(section, sectionIndex) in collapsibleSections" :key="`section-${sectionIndex}`" class="mt-2">
+          <div v-for="(section, sectionIndex) in secciones" :key="`section-${sectionIndex}`" class="mt-2">
                 <button 
                   @click="toggleSection(sectionIndex)"
                   class="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:bg-theme-300 rounded-md transition-colors cursor-pointer"
@@ -53,7 +53,7 @@
                       {{ section.name }}
                     </span>
                     <span class="ml-3" v-else>
-                      <router-link  :to="{ name: section.path }">
+                      <router-link :to="{ name: section.path }">
                         {{ section.name }}
                       </router-link>
                     </span>
@@ -73,7 +73,7 @@
             <!-- Submenu -->
             <div 
               v-if="section.items && section.isOpen && (isOpen || window.innerWidth >= 1024)" 
-              class="mt-1 ml-4 pl-4 border-l border-white space-y-1 transition-all duration-300 ease-in-out"
+              class="mt-1 ml-6 pl-4 border-l border-white space-y-1 transition-all duration-300 ease-in-out"
             >
                 <span 
                     v-for="(subItem, subIndex) in section.items" 
@@ -94,19 +94,16 @@
   </template>
   
 <script>
-  
+import { mapGetters, mapActions } from "vuex";
+
 export default {
     data() {
       return {
-        // State for sidebar open/closed
         isOpen: true,
-        // State for window width
         window: {
           innerWidth: 0
         },
-        // Regular menu items
-        // Collapsible sections
-        collapsibleSections: [
+        secciones: [
           { 
             name: 'Home', 
             icon: 'fa-solid fa-house', 
@@ -152,7 +149,7 @@ export default {
       },
       // Toggle section open/closed
       toggleSection(index) {
-        this.collapsibleSections[index].isOpen = !this.collapsibleSections[index].isOpen;
+        this.secciones[index].isOpen = !this.secciones[index].isOpen;
       }
     },
     mounted() {
@@ -167,7 +164,7 @@ export default {
       window.addEventListener('resize', () => {
         this.window.innerWidth = window.innerWidth;
       });
-    }
+    },
   };
 </script>
  

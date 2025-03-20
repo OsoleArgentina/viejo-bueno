@@ -32,7 +32,9 @@
                     <div>
                         <h2 class="text-6xl font-bold mb-10">{{ slider.titulo }}</h2>
                         <p class="text-2xl mb-14">{{ slider.subtitulo }}</p>
-                        <button class="mt-4 px-6 py-3 text-white border border-white rounded-full hover:text-black hover:bg-neutral-50 duration-300 cursor-pointer">Ver productos</button>
+                        <router-link  :to="{name: 'productos'}">
+                            <button class="mt-4 px-6 py-3 text-white border border-white rounded-full hover:text-black hover:bg-neutral-50 duration-300 cursor-pointer">Ver productos</button>
+                        </router-link>
                     </div>
                     </div>
                 </div>
@@ -51,9 +53,9 @@
     </div>
    
     <!-- MARCAS -->
-    <div class="w-full px-20 mt-10">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-10">
         <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-6">
-            <div v-for="(marca, index) in marcas_destacadas" 
+            <div v-for="(marca, index) in marcasUnicas" 
             :key="index" class="mx-auto border border-gray-200 rounded-full p-5">
                 <img :src="`/img/${marca.path}`" alt="marca Image" class="w-40 h-40 object-contain" />
             </div>
@@ -61,7 +63,7 @@
     </div>
 
     <!-- FILTROS -->
-    <div class="w-full px-2 sm:px-20 mt-10">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-10">
         <div class="w-full mt-10">
             <div class="flex sm:flex-row flex-col justify-between items-center gap-10">
                 <select v-model="categoria_seleccionada" class="px-4 py-2 border rounded-full w-full sm:w-1/4">
@@ -83,7 +85,7 @@
         </div>
     </div>
 
-    <div v-if="productos_filtrados.length > 0 && filtrado_modal" class="w-full px-2 sm:px-20">
+    <div v-if="productos_filtrados.length > 0 && filtrado_modal" class="w-full container mx-auto px-2 sm:px-0">
         <span @click="cerrar_filtrado" class="w-full flex justify-end p-4 text-xl hover:text-theme-400 duration-300 cursor-pointer">
             <i class="fa-solid fa-xmark"></i>
         </span>
@@ -108,7 +110,7 @@
     </div>
 
     <!-- CATEGORIAS -->
-    <div class="w-full px-2 sm:px-20 mt-10">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             <div v-for="(categoria, index) in categorias_destacadas" :key="index" class="relative flex justify-center cursor-pointer" @click="go_to_producto(categoria.id)">
                 <div class="absolute inset-0 bg-black opacity-20 rounded-md"></div>
@@ -175,7 +177,7 @@
     </div> -->
 
     <!-- NOVEDADES -->
-    <div class="w-full px-2 sm:px-20 py-20">
+    <div class="w-full container mx-auto px-2 sm:px-0 py-20">
          <div class="mb-5">
              <div class="border-t-3 w-12 mb-5"></div>
              <h1 class="font-semibold text-4xl">Novedades</h1>
@@ -233,6 +235,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { useHead } from '@vueuse/head'
 
 export default {
   data() {
@@ -248,6 +251,13 @@ export default {
     };
   },
   async created() {
+    useHead({
+      meta: [
+        { name: 'description', content: this.metadatos[0].descripcion },
+        { name: 'keywords', content: this.metadatos[0].keyword },
+      ],
+    })
+    
     const modalShown = localStorage.getItem("modalShown");
     if (!modalShown) {
       this.show_modal = true;
@@ -264,6 +274,11 @@ export default {
     await this.get_categorias();
     await this.get_marcas();
     await this.get_productos();
+    const videoRefName = `video-${this.sliders[0]?.path}`;
+    const videoElement = this.$refs[videoRefName];
+    if(videoElement){
+        this.duration_video = videoElement[0]?.duration * 1000 ?? 5000;
+    }
     this.startSlider();
   },
   destroyed() {
@@ -299,6 +314,7 @@ export default {
         const videoRefName = `video-${this.sliders[this.currentSlide]?.path}`;
         const videoElement = this.$refs[videoRefName];
         if(videoElement){
+            
             this.duration_video = videoElement[0]?.duration * 1000 ?? 5000;
         }
         else{
@@ -314,8 +330,12 @@ export default {
         const videoRefName = `video-${this.sliders[this.currentSlide].path}`;
         const videoElement = this.$refs[videoRefName];
         if(videoElement){
-            this.duration_video = videoElement[0].duration * 1000 ?? 5000;
-            videoElement[0].play();
+            // this.duration_video = videoElement[0].duration * 1000 ?? 5000;
+            // videoElement[0].play();
+            const video = videoElement[0];
+            video.currentTime = 0;  // Reinicia el video
+            this.duration_video = video.duration * 1000 ?? 5000;  // Calculamos la duración
+            video.play(); 
         }
         else{
             this.duration_video = 5000;
@@ -347,6 +367,7 @@ export default {
         'categorias',
         'marcas',
         'productos',
+        'metadatos',
     ]),
     productos_filtrados(){
         let productosFiltrados = this.marcas;
@@ -379,6 +400,13 @@ export default {
 
         return productosFiltrados;
     },
+    marcasUnicas() {
+        return this.marcas_destacadas.filter((value, index, self) => 
+            index === self.findIndex((t) => (
+                t.nombre === value.nombre // Cambia 'name' por el campo que identifique a las marcas
+            ))
+        );
+    }
   },
 };
 </script>

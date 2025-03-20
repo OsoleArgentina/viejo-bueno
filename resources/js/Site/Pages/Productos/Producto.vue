@@ -1,5 +1,5 @@
 <template>
-    <div v-if="render_productos" class="w-full px-20 mt-10 flex sm:flex-row flex-col">
+    <div v-if="render_productos" class="w-full container mx-auto px-2 sm:px-0 mt-10 flex sm:flex-row flex-col">
       <!-- Sidebar -->
       <div class="w-full sm:w-1/4 bg-white p-4">
         <ul class="list-none p-0 m-0 border-t border-neutral-200">
@@ -34,7 +34,7 @@
       </div>
   
       <!-- Contenido principal -->
-        <div  class="w-full sm:w-3/4 sm:ml-10 ">
+        <div  class="w-full sm:w-3/4 sm:ml-10">
             <div v-if="marcas" class="grid grid-cols-1 sm:grid-cols-4">
                 <div v-for="(marca, index) in marcas" :key="index">
                     <div class="">

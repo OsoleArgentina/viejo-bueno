@@ -30,7 +30,6 @@
                     <td class="px-4 py-2">
                         <img v-if="categoria.path" :src="`/img/${categoria.path}`" alt="categoria Image" class="w-20 h-20 object-cover">
                     </td>
-                    <!-- TODO: no se ven los svg -->
                     <td class="px-4 py-2">
                         <img v-if="categoria.icono" :src="`/img/${categoria.icono}`" alt="categoria Image" class="w-20 h-20 object-cover bg-neutral-100">
                     </td>

@@ -42,7 +42,7 @@ class HomeController extends Controller
             'path' => $image_name,     
         ]);
         
-        $imagen->move(public_path('img'), $image_name);
+        $imagen->move('img', $image_name);
 
         return $this->success_response('Slider creado correctamente.', $slider);
     }
@@ -78,7 +78,7 @@ class HomeController extends Controller
     
             $image_name = time() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $image_name);
+            $imagen->move('img', $image_name);
         }
 
         $slider->update([
@@ -154,7 +154,7 @@ class HomeController extends Controller
         );
         
         if (!is_null($request->path)) {
-            $imagen->move(public_path('img'), $image_name);
+            $imagen->move('img', $image_name);
         }
 
         return $this->success_response('Nosotros guardado correctamente.', $home_nosotros);

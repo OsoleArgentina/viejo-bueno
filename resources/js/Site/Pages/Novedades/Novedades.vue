@@ -3,6 +3,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { useHead } from '@vueuse/head'
 
 export default {
 
@@ -11,6 +12,12 @@ export default {
         }
     },
     async created() {
+        useHead({
+            meta: [
+                { name: 'description', content: this.metadatos[3].descripcion },
+                { name: 'keywords', content: this.metadatos[3].keyword },
+            ],
+        })
         await this.get_novedades();
     },
 
@@ -21,6 +28,7 @@ export default {
     },
     computed: {
         ...mapGetters([
+            'metadatos',
         ]),
     },
 }

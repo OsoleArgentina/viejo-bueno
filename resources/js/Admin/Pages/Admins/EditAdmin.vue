@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirmar contraseña *</label>
-                    <input type="password" id="confirm_password" v-model="confirm_password" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Confirmar contraseña">
+                    <input type="password" id="confirm_password" v-model="confirm_password" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="xxxxxxx">
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Correo *</label>
@@ -64,12 +64,12 @@ export default {
             const data = {
                 'admin_id': this.admin_edit.id,
                 'username': this.username,
-                'password': this.password,
                 'email': this.email,
                 'is_admin': this.is_admin ? 1 : 0,
             }
 
             if(this.password) data.password = this.password;
+            if(this.confirm_password) data.password_confirmation = this.confirm_password;
 
             this.emit_event('edit_admin', data);
         },

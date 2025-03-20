@@ -23,7 +23,8 @@ class AdminController extends Controller
     {   
         $validator = Validator::make($request->all(), [
             'username' => 'required|string',
-            'password' => 'sometimes|required|string|confirmed',
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required|string',
             'email' => 'required|string|email',
             'is_admin' => 'required|boolean',
         ]);
@@ -68,7 +69,8 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'admin_id' => 'required',
             'username' => 'required|string',
-            'password' => 'sometimes|required|string',
+            'password' => 'sometimes|required|string|confirmed',
+            'password_confirmation' => 'sometimes|required|string',
             'email' => 'required|string|email',
             'is_admin' => 'required|boolean',
         ]);

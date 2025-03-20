@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full px-20 mt-20">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-20">
         <div class="">
             <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
             <h2 class="text-4xl font-semibold mb-10">Solicitud de presupuesto</h2>
@@ -57,12 +57,12 @@
 
                 <div class="w-full">
                     <h2 class="text-xl text-theme-400 font-semibold mb-5">Aclaraciones</h2>
-                    <div class="flex gap-5 mb-4">
-                        <div class="w-1/2">
+                    <div class="flex flex-col sm:flex-row gap-5 mb-4">
+                        <div class="w-full sm:w-1/2">
                             <label for="aclaraciones" class="block text-sm font-medium mb-1">Aclaraciones / Observaciones</label>
                             <textarea name="aclaraciones" id="aclaraciones" v-model="aclaraciones" class="w-full h-60 border border-neutral-200 rounded-md resize-none"></textarea>
                         </div>
-                        <div class="flex flex-col justify-between w-1/2">
+                        <div class="flex flex-col justify-between w-full sm:w-1/2">
                             <div>
                                 <label for="archivo" class="block text-sm font-medium mb-1">Adjuntar archivos</label>
                                 <label for="archivo" class="w-full flex items-center justify-between px-4 py-2 bg-white border border-neutral-200 text-gray-500 cursor-pointer">
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex justify-end items-center gap-10 mt-20">
-                                <button @click="solicitar_presupuesto" class="w-1/2 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
+                                <button @click="solicitar_presupuesto" class="w-full sm:w-1/2 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
                                     Solicitar presupuesto
                                 </button>
                             </div>

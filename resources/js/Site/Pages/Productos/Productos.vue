@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full container mx-auto px-2 sm:px-0 mt-20">
+    <!-- <div class="w-full container mx-auto px-2 sm:px-0 mt-20"> -->
         <!-- FILTROS -->
-        <div class="w-full px-2 sm:px-0 mt-10">
+        <!-- <div class="w-full px-2 sm:px-0 mt-10">
             <div class="w-full mt-10">
                 <div class="flex sm:flex-row flex-col justify-between items-center gap-10">
                     <select v-model="categoria_seleccionada" class="px-4 py-2 border rounded-full w-full sm:w-1/4">
@@ -12,18 +12,18 @@
                     <select v-model="marca_seleccionada" class="px-4 py-2 border rounded-full w-full sm:w-1/4">
                         <option disabled value="">Seleccione una marca</option>
                         <option v-for="marca in marcas" :key="marca.id" :value="marca.id">{{ marca.nombre }}</option>
-                    </select>
+                    </select> -->
 
                     <!-- <input v-model="producto_input" type="text" placeholder="Producto" class="px-4 py-2 border rounded-full w-1/4" /> -->
 
-                    <button class="w-full sm:w-1/4 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
+                    <!-- <button class="w-full sm:w-1/4 border border-theme-600 text-theme-400 px-4 py-2 rounded-4xl bg-site-theme duration-300 hover:text-white hover:bg-theme-400 cursor-pointer">
                         Buscar
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div v-if="productos_filtrados.length > 0 && filtrado_modal" class="w-full ">
+        <!-- <div v-if="productos_filtrados.length > 0 && filtrado_modal" class="w-full ">
             <span @click="cerrar_filtrado" class="w-full flex justify-end p-4 text-xl hover:text-theme-400 duration-300 cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
             </span>
@@ -32,7 +32,7 @@
                     <div v-for="(producto, index) in productos_filtrados" :key="index" class="flex p-2 mb-2">
                         <div class="">
                             <img :src="`/img/${producto.path}`" alt="producto Image" class="w-full sm:w-40 h-40 object-contain" />
-                        </div>
+                        </div> -->
                         <!-- <div class="">
                             <div class="w-full flex justify-between items-center text-theme-400 font-semibold text-lg mb-2">
                                 <span>{{ producto.marca.nombre }}</span>
@@ -42,11 +42,11 @@
                                 <h2 class="text-lg">{{ producto.nombre }}</h2>
                             </div>
                         </div> -->
-                    </div>
+                    <!-- </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
     <router-view></router-view>
 </template>
 <script>

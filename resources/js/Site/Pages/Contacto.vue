@@ -37,12 +37,12 @@
                 </div>
 
                 <div class="w-full sm:w-3/4">
-                    <div class="flex gap-5 mb-4">
-                        <div class="w-1/2">
+                    <div class="flex flex-col sm:flex-row gap-5 mb-4">
+                        <div class="w-full sm:w-1/2">
                             <label for="nombre" class="block text-sm font-medium mb-1">Nombre y Apellido*</label>
                             <input type="text" id="nombre" v-model="nombre" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                         </div>
-                        <div class="w-1/2">
+                        <div class="w-full sm:w-1/2">
                             <label for="correo" class="block text-sm font-medium mb-1">E-mail *</label>
                             <input type="text" id="correo" v-model="correo" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                         </div>

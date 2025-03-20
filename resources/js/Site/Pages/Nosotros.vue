@@ -40,18 +40,18 @@
     </div>
 
     <div class="w-full container mx-auto px-2 sm:px-0 mb-10">
-        <div class="mb-10">
-            <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
-            <h2 class="text-4xl font-semibold">¿Por qué elegirnos?</h2>
-        </div>
-        <div  class="grid grid-cols-1 sm:grid-cols-4">
-            <div v-for="elg in nosotros_elegirnos" class="flex flex-col justify-center items-center gap-10">
-                <img v-if="elg.path" :src="`/img/${elg.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
-                <p class="text-center">{{ elg.descripcion }}</p>
-            </div>
-            
+    <div class="mb-10">
+        <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
+        <h2 class="text-4xl font-semibold">¿Por qué elegirnos?</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-10">
+        <div v-for="elg in nosotros_elegirnos" class="flex flex-col justify-start items-center h-full">
+            <img v-if="elg.path" :src="`/img/${elg.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
+            <p class="text-center mt-6">{{ elg.descripcion }}</p>
         </div>
     </div>
+</div>
+
 
 </template>
 

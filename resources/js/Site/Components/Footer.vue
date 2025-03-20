@@ -73,7 +73,7 @@
       <div class="container mx-auto px-2 sm:px-0 w-full mt-10">
         <div class="border-t border-neutral-300"></div>
         <div class="flex sm:flex-row flex-col justify-between items-center">
-          <p class="text-center text-gray-600 mt-6">2024 Sanitarios Viejo Bueno. Todos los derechos reservados.</p>
+          <p class="text-center text-gray-600 mt-6">2025 Sanitarios Viejo Bueno. Todos los derechos reservados.</p>
           <span>by <span class="font-medium">Osole</span></span>
         </div>
       </div>

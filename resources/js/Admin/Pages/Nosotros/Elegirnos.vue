@@ -7,7 +7,7 @@
     
         <div class="mb-4">
             <button @click="elegirnos_modal = !elegirnos_modal" class="px-6 py-2 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
-                Crear tarjeta
+                Crear
             </button>
         </div>
     </div>
@@ -17,19 +17,19 @@
         <table class="min-w-full table-auto">
             <thead class="border-b border-gray-100">
                 <tr class="text-left">
+                    <th class="px-4 py-2">Orden</th>
                     <th class="px-4 py-2">Imagen</th>
                     <th class="px-4 py-2">Descripcion</th>
-                    <th class="px-4 py-2">Orden</th>
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(elg, index) in nosotros_elegirnos" :key="elg.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+                    <td class="px-4 py-2">{{ elg.orden }}</td>
                     <td class="px-4 py-2">
                         <img v-if="elg.path" :src="`/img/${elg.path}`" alt="Slider Image" class="w-20 h-20 object-contain">
                     </td>
                     <td class="px-4 py-2">{{ elg.descripcion }}</td>
-                    <td class="px-4 py-2">{{ elg.orden }}</td>
                     <td class="px-4 py-2">
                         <button @click="edit_elegirnos_modal = !edit_elegirnos_modal; elegirnos_selected=elg" class="text-theme-500 px-2 py-1 border border-theme-400 rounded-lg hover:text-white hover:bg-theme-400 duration-300 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button @click="delete_elegirnos_modal = !delete_elegirnos_modal; elegirnos_selected=elg" class="text-red-500 px-2 py-1 border border-red-500 rounded-lg hover:text-white hover:bg-red-500 duration-300 cursor-pointer ml-4"><i class="fa-solid fa-trash"></i></button>

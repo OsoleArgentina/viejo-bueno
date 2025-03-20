@@ -48,13 +48,14 @@
                     <i :class="section.icon"></i>
                     <span v-if="section.items"
                       class="ml-3 transition-opacity duration-300"
-                      :class="[isOpen || window.innerWidth >= 1024 ? 'opacity-100' : 'opacity-0 hidden lg:inline-block lg:opacity-0']"
                     >
                       {{ section.name }}
                     </span>
                     <span class="ml-3" v-else>
-                      <router-link :to="{ name: section.path }">
-                        {{ section.name }}
+                      <router-link :to="{ name: section.path }" class="">
+                        <span class="">
+                          {{ section.name }}
+                        </span>
                       </router-link>
                     </span>
                   </div>
@@ -75,17 +76,18 @@
               v-if="section.items && section.isOpen && (isOpen || window.innerWidth >= 1024)" 
               class="mt-1 ml-6 pl-4 border-l border-white space-y-1 transition-all duration-300 ease-in-out"
             >
-                <span 
+                <div 
                     v-for="(subItem, subIndex) in section.items" 
                     :key="`sub-${sectionIndex}-${subIndex}`"
-                    href="#" 
-                    class="flex items-center px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-theme-300 rounded-md transition-colors cursor-pointer"
+                    class=""
                 >
-                  <router-link  :to="{ name: subItem.path }">
+                <router-link  :to="{ name: subItem.path }" class="flex items-center text-sm text-gray-400">
+                  <span class="px-4 py-2 w-full hover:text-white hover:bg-theme-300 rounded-md cursor-pointer duration-300">
 
                     {{ subItem.name }}
+                  </span>
                   </router-link>
-                </span>
+                </div>
             </div>
           </div>
         </nav>
@@ -118,7 +120,7 @@ export default {
             icon: 'fa-solid fa-users', 
             isOpen: false,
             items: [
-              { name: 'Principal', path: 'nosotros' },
+              { name: 'Contenido', path: 'nosotros' },
               { name: '¿Por qué elegirnos?', path: 'elegirnos' },
             ]
           },

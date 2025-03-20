@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full container mx-auto px-2 sm:px-0 mt-10">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-20">
         <div class="w-full mt-10">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
                 <div v-for="(categoria, index) in categorias" :key="index" class="relative flex justify-center cursor-pointer hover:shadow-xl duration-300" @click="go_to_producto(categoria.id)">

@@ -17,16 +17,17 @@
         <table class="min-w-full table-auto">
             <thead class="border-b border-gray-100">
                 <tr class="text-left">
+                    <th class="px-4 py-2">Orden</th>
                     <th class="px-4 py-2">Imagen</th>
                     <th class="px-4 py-2">Icono</th>
                     <th class="px-4 py-2">Nombre</th>
-                    <th class="px-4 py-2">Orden</th>
                     <th class="px-4 py-2">Destacado</th>
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(categoria, index) in categorias" :key="categoria.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+                    <td class="px-4 py-2">{{ categoria.orden }}</td>
                     <td class="px-4 py-2">
                         <img v-if="categoria.path" :src="`/img/${categoria.path}`" alt="categoria Image" class="w-20 h-20 object-cover">
                     </td>
@@ -34,7 +35,6 @@
                         <img v-if="categoria.icono" :src="`/img/${categoria.icono}`" alt="categoria Image" class="w-20 h-20 object-cover bg-neutral-100">
                     </td>
                     <td class="px-4 py-2">{{ categoria.nombre }}</td>
-                    <td class="px-4 py-2">{{ categoria.orden }}</td>
                     <td class="px-4 py-2">
                         <switch-input
                             :id="categoria.id"

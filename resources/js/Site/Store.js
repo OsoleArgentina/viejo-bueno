@@ -9,6 +9,7 @@ import NovedadesModule from '@site/Store/NovedadesModules';
 import NosotrosModule from '@site/Store/NosotrosModule';
 import CapacitacionesModule from '@site/Store/CapacitacionesModule';
 import ContactoModule from '@site/Store/ContactoModule';
+import MetadatosModule from '@site/Store/MetadatosModule';
 // Create a new Store instance.
 const store = createStore({
     modules: {
@@ -20,6 +21,7 @@ const store = createStore({
         NosotrosModule,
         CapacitacionesModule,
         ContactoModule,
+        MetadatosModule,
     }
 });
 

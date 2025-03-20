@@ -1,17 +1,10 @@
 
 <template>
-    <div class="relative w-full h-96 sm:h-[400px] overflow-hidden">
-        <div class="relative w-full h-full">
-            <div 
-                class="absolute inset-0 w-full h-full flex items-center justify-center">
-                <div class="relative w-full h-full">
-                    <img v-if="nosotros?.banner_principal" :src="`/img/${nosotros?.banner_principal}`" alt="nosotros Image" class="w-full object-contain" />
-                </div>
-            </div>
-        </div>
+    <div class="w-full h-[200px] sm:h-[500px] mt-8">
+            <img v-if="nosotros?.banner_principal" :src="`/img/${nosotros?.banner_principal}`" alt="nosotros Image" class="w-full h-full object-cover" />
     </div>
 
-    <div class="w-full px-20 my-10">
+    <div class="w-full container mx-auto px-2 sm:px-0 my-10">
         <div class="mb-4">
             <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
             <h2 class="text-3xl font-semibold">{{ nosotros?.titulo }}</h2>
@@ -46,7 +39,7 @@
         </div>
     </div>
 
-    <div class="w-full px-2 sm:px-20 mb-10">
+    <div class="w-full container mx-auto px-2 sm:px-0 mb-10">
         <div class="mb-10">
             <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
             <h2 class="text-4xl font-semibold">¿Por qué elegirnos?</h2>
@@ -64,6 +57,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { useHead } from '@vueuse/head'
+
 export default {
     data() {
         return {
@@ -72,6 +67,12 @@ export default {
         };
     },
     async created() {
+        useHead({
+            meta: [
+                { name: 'description', content: this.metadatos[1].descripcion },
+                { name: 'keywords', content: this.metadatos[1].keyword },
+            ],
+        })
         await this.get_nosotros();
         await this.get_nosotros_elegirnos();
         this.splitDescription();
@@ -93,6 +94,7 @@ export default {
         ...mapGetters([
             'nosotros',
             'nosotros_elegirnos',
+            'metadatos',
         ]),
     },
 };

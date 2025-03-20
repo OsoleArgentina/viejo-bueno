@@ -1,7 +1,6 @@
 <template>
     <div class="bg-white flex flex-col min-h-screen">
         <navbar/>
-        <!-- TODO: container mx-auto -->
         <div class=" flex-grow mt-20">
             <router-view v-if="render_app" />
         </div>
@@ -10,8 +9,11 @@
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export  default {
-    created() {
+    async created() {
+        await this.get_metadatos();
         this.render_app = true
     },
     data() {
@@ -19,6 +21,11 @@ export  default {
             render_app: false
         }
     },
+    methods:{
+        ...mapActions([
+            'get_metadatos',
+        ]),
+    }
 }
 </script>
     

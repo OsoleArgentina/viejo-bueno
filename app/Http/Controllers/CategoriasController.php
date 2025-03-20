@@ -58,10 +58,10 @@ class CategoriasController extends Controller
             'icono' => $icono_name,
         ]);
         
-        $path_imagen->move(public_path('img'), $path_name);
+        $path_imagen->move('img', $path_name);
 
         if (!is_null($request->icono)) {
-            $icono_imagen->move(public_path('img'), $icono_name);
+            $icono_imagen->move('img', $icono_name);
         }
 
         return $this->success_response('Categoria creada correctamente.', $categoria);
@@ -120,7 +120,7 @@ class CategoriasController extends Controller
     
             $path_name = uniqid() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $path_name);
+            $imagen->move('img', $path_name);
         }
         
         
@@ -138,7 +138,7 @@ class CategoriasController extends Controller
     
             $icono_name = uniqid() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $icono_name);
+            $imagen->move('img', $icono_name);
         }
 
         $categoria->update([

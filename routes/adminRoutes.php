@@ -40,6 +40,13 @@ Route::get('/get_productos_relacionados/{id}', [ProductosController::class, 'get
 Route::post('/create_pedido', [CarritoController::class, 'create_pedido'])->name('create_pedido');
 Route::post('/enviar_informacion_contacto', [ContactoController::class, 'enviar_informacion_contacto'])->name('enviar_informacion_contacto');
 Route::post('/solicitar_presupuesto', [PresupuestoController::class, 'solicitar_presupuesto'])->name('solicitar_presupuesto');
+Route::get('/get_metadatos', [MetadatosController::class, 'get_metadatos'])->name('get_metadatos');
+Route::get('/get_contacto', [ContactoController::class, 'get_contacto'])->name('get_contacto');
+Route::get('/get_nosotros', [NosotrosController::class, 'get_nosotros'])->name('get_nosotros');
+Route::get('/get_marcas', [MarcasController::class, 'get_marcas'])->name('get_marcas');
+Route::get('/get_novedades', [NovedadesController::class, 'get_novedades'])->name('get_novedades');
+Route::get('/get_capacitaciones', [CapacitacionesController::class, 'get_capacitaciones'])->name('get_capacitaciones');
+Route::get('/get_categorias', [CategoriasController::class, 'get_categorias'])->name('get_categorias');
 
 // MERCADO PAGO
 Route::post('/createPreference', [MercadoPagoController::class, 'createPreference'])->name('createPreference');
@@ -59,7 +66,6 @@ Route::middleware('auth_admin')->group(function () {
     Route::post('/set_home_nosotros', [HomeController::class, 'set_home_nosotros'])->name('set_home_nosotros');
 
     // NOSOTROS
-    Route::get('/get_nosotros', [NosotrosController::class, 'get_nosotros'])->name('get_nosotros');
     Route::post('/set_nosotros', [NosotrosController::class, 'set_nosotros'])->name('set_nosotros');
     //ELEGIRNOS
     Route::get('/get_nosotros_elegirnos', [NosotrosController::class, 'get_nosotros_elegirnos'])->name('get_nosotros_elegirnos');
@@ -68,7 +74,6 @@ Route::middleware('auth_admin')->group(function () {
     Route::delete('/delete_elegirnos', [NosotrosController::class, 'delete_elegirnos'])->name('delete_elegirnos');
 
     // CATEGORIAS
-    Route::get('/get_categorias', [CategoriasController::class, 'get_categorias'])->name('get_categorias');
     Route::post('/create_categoria', [CategoriasController::class, 'create_categoria'])->name('create_categoria');
     Route::post('/edit_categoria', [CategoriasController::class, 'edit_categoria'])->name('edit_categoria');
     Route::post('/edit_categoria_destacado', [CategoriasController::class, 'edit_categoria_destacado'])->name('edit_categoria_destacado');
@@ -90,37 +95,32 @@ Route::middleware('auth_admin')->group(function () {
     Route::delete('/delete_imagen_producto', [ProductosController::class, 'delete_imagen_producto'])->name('delete_imagen_producto');
 
     // MARCAS
-    Route::get('/get_marcas', [MarcasController::class, 'get_marcas'])->name('get_marcas');
     Route::post('/create_marca', [MarcasController::class, 'create_marca'])->name('create_marca');
     Route::post('/edit_marca', [MarcasController::class, 'edit_marca'])->name('edit_marca');
     Route::post('/edit_marca_destacado', [MarcasController::class, 'edit_marca_destacado'])->name('edit_marca_destacado');
     Route::delete('/delete_marca', [MarcasController::class, 'delete_marca'])->name('delete_marca');
 
     // NOVEDADES
-    Route::get('/get_novedades', [NovedadesController::class, 'get_novedades'])->name('get_novedades');
     Route::post('/create_novedad', [NovedadesController::class, 'create_novedad'])->name('create_novedad');
     Route::post('/edit_novedad', [NovedadesController::class, 'edit_novedad'])->name('edit_novedad');
     Route::delete('/delete_novedad', [NovedadesController::class, 'delete_novedad'])->name('delete_novedad');
 
     // CAPACITACIONES
-    Route::get('/get_capacitaciones', [CapacitacionesController::class, 'get_capacitaciones'])->name('get_capacitaciones');
     Route::post('/create_capacitacion', [CapacitacionesController::class, 'create_capacitacion'])->name('create_capacitacion');
     Route::post('/edit_capacitacion', [CapacitacionesController::class, 'edit_capacitacion'])->name('edit_capacitacion');
     Route::delete('/delete_capacitacion', [CapacitacionesController::class, 'delete_capacitacion'])->name('delete_capacitacion');
 
     // CONTACTO
-    Route::get('/get_contacto', [ContactoController::class, 'get_contacto'])->name('get_contacto');
     Route::post('/set_contacto', [ContactoController::class, 'set_contacto'])->name('set_contacto');
 
     // ADMINS
-    Route::get('/get_admins', [AdminController::class, 'get_admins'])->name('get_admins');
-    Route::post('/create_admin', [AdminController::class, 'create_admin'])->name('create_admin');
-    Route::post('/edit_super_admin', [AdminController::class, 'edit_super_admin'])->name('edit_super_admin');
-    Route::post('/edit_admin', [AdminController::class, 'edit_admin'])->name('edit_admin');
-    Route::delete('/delete_admin', [AdminController::class, 'delete_admin'])->name('delete_admin');
+    Route::get('/get_admins', [AdminController::class, 'get_admins'])->name('get_admins')->middleware('manage_admin');
+    Route::post('/create_admin', [AdminController::class, 'create_admin'])->name('create_admin')->middleware('manage_admin');
+    Route::post('/edit_super_admin', [AdminController::class, 'edit_super_admin'])->name('edit_super_admin')->middleware('manage_admin');
+    Route::post('/edit_admin', [AdminController::class, 'edit_admin'])->name('edit_admin')->middleware('manage_admin');
+    Route::delete('/delete_admin', [AdminController::class, 'delete_admin'])->name('delete_admin')->middleware('manage_admin');
 
     // METADATOS
-    Route::get('/get_metadatos', [MetadatosController::class, 'get_metadatos'])->name('get_metadatos');
     Route::post('/edit_metadato', [MetadatosController::class, 'edit_metadato'])->name('edit_metadato');
 });
 

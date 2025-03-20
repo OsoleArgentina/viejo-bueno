@@ -63,10 +63,10 @@ class NosotrosController extends Controller
         );
         
         if (!is_null($request->banner_principal)) {
-            $banner_principal_imagen->move(public_path('img'), $banner_principal_name);
+            $banner_principal_imagen->move('img', $banner_principal_name);
         }
         if (!is_null($request->banner_secundario)) {
-            $banner_secundario_imagen->move(public_path('img'), $banner_secundario_name);
+            $banner_secundario_imagen->move('img', $banner_secundario_name);
         }
 
         return $this->success_response('Nosotros guardado correctamente.', $nosotros);
@@ -101,7 +101,7 @@ class NosotrosController extends Controller
             'path' => $image_name,     
         ]);
         
-        $imagen->move(public_path('img'), $image_name);
+        $imagen->move('img', $image_name);
 
         return $this->success_response('Tarjeta creada correctamente.', $elegirnos);
     }
@@ -136,7 +136,7 @@ class NosotrosController extends Controller
     
             $image_name = uniqid() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $image_name);
+            $imagen->move('img', $image_name);
         }
 
         $elegirnos->update([

@@ -126,6 +126,7 @@ export default {
                 this.toast_notification({ message: response.data.error, type: 'error' })
             }else{
                 await this.get_producto_by_id(this.producto_id);
+                this.imagenes = [];
                 this.isLoading = false;
                 this.toast_notification({ message: response.data.message })
             }

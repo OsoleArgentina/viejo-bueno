@@ -40,7 +40,7 @@ class MarcasController extends Controller
 
         $imagen = $request->file('path');
         $path_name = uniqid() . '.' . $imagen->extension();
-        $imagen->move(public_path('img'), $path_name);
+        $imagen->move('img', $path_name);
 
         $marca = Marca::create(
             [
@@ -104,7 +104,7 @@ class MarcasController extends Controller
     
             $image_name = time() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $image_name);
+            $imagen->move('img', $image_name);
         }
 
         $marca->update([

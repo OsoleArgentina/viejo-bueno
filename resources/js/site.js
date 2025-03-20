@@ -7,17 +7,16 @@ import register_site_components from "@site/Components";
 import mixins from './mixins'
 import store from '@site/Store'
 import Toast from 'vue-toastification';
-
+import { createHead } from '@vueuse/head'
 // Crear la aplicación
 const site = createApp(Main);
+const head = createHead()
 
-// Usar el router
+site.use(head)
 site.use(router);
 site.use(store);
 site.mixin(mixins);
-
-// Registrar componentes antes de montar
 register_site_components(site);
 site.use(Toast)
-// Montar la aplicación
+
 site.mount('#site');

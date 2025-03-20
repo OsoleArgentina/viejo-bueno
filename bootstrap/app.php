@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'auth_admin' => \App\Http\Middleware\AuthAdmin::class,
+            'manage_admin' => \App\Http\Middleware\ManageAdmins::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

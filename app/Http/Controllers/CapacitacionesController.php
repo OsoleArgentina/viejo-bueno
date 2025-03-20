@@ -40,7 +40,7 @@ class CapacitacionesController extends Controller
             'path' => $image_name,     
         ]);
         
-        $imagen->move(public_path('img'), $image_name);
+        $imagen->move('img', $image_name);
 
         return $this->success_response('Capacitacion creada correctamente.', $capacitacion);
     }
@@ -73,7 +73,7 @@ class CapacitacionesController extends Controller
     
             $image_name = time() . '.' . $imagen->extension();
         
-            $imagen->move(public_path('img'), $image_name);
+            $imagen->move('img', $image_name);
         }
 
         $capacitacion->update([

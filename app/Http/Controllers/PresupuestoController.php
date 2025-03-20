@@ -25,7 +25,7 @@ class PresupuestoController extends Controller
             'categoria_id' => 'required',
             'marca_id' => 'required',
             'aclaraciones' => 'nullable|string|max:500',
-            'archivos' => 'required|array|min:1',
+            'archivos' => 'nullable|array|min:1',
             'archivos.*' => 'mimes:jpeg,png,jpg,svg,pdf,xlsx,xls|max:20480'
         ]);
         
@@ -49,13 +49,15 @@ class PresupuestoController extends Controller
         ];
 
         $archivosGuardados = [];
-        foreach ($request->archivos as $archivo) {
-            $archivoPath = $archivo->store('presupuestos', 'public');
-            $archivosGuardados[] = $archivoPath;
+        if(!is_null($request->archivos)){
+            foreach ($request->archivos as $archivo) {
+                $archivoPath = $archivo->store('presupuestos', 'public');
+                $archivosGuardados[] = $archivoPath;
+            }
+        
+            // Añadir los archivos al array de datos
+            $data['archivos'] = $archivosGuardados;
         }
-    
-        // Añadir los archivos al array de datos
-        $data['archivos'] = $archivosGuardados;
 
         $contacto = Contacto::first();
 

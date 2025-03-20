@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full px-20 mt-20">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-20">
         <div class="mb-10">
             <div class="w-12 border-t-2 bg-neutral-800 mb-4"></div>
             <h2 class="text-3xl font-semibold">Capacitaciones</h2>
@@ -29,6 +29,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { useHead } from '@vueuse/head'
 
     export default{
         data() {
@@ -48,9 +49,16 @@ import { mapGetters, mapActions } from "vuex";
         computed: {
             ...mapGetters([
                 'capacitaciones',
+                'metadatos',
             ]),
         },
         async created(){
+            useHead({
+                meta: [
+                    { name: 'description', content: this.metadatos[5].descripcion },
+                    { name: 'keywords', content: this.metadatos[5].keyword },
+                ],
+            })
             await this.get_capacitaciones();
         }
     }

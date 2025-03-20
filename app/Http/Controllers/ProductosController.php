@@ -72,7 +72,7 @@ class ProductosController extends Controller
         $ficha_tecnica_name = null;
         if(!is_null($request->ficha_tecnica)){
             $ficha_tecnica_name =  uniqid() . '.' . $request->ficha_tecnica->extension();
-            $request->ficha_tecnica->move(public_path('fichas'), $ficha_tecnica_name);
+            $request->ficha_tecnica->move('fichas', $ficha_tecnica_name);
         }
 
         $producto = Producto::create([
@@ -88,7 +88,7 @@ class ProductosController extends Controller
         foreach ($request->imagenes as $imagen) {
             $path_name = uniqid() . '.' . $imagen->extension();
     
-            $imagen->move(public_path('img'), $path_name);
+            $imagen->move('img', $path_name);
 
             ProductosImagenes::create([
                 'producto_id' => $producto->id,
@@ -197,7 +197,7 @@ class ProductosController extends Controller
         foreach ($request->imagenes as $imagen) {
             $path_name = uniqid() . '.' . $imagen->extension();
     
-            $imagen->move(public_path('img'), $path_name);
+            $imagen->move('img', $path_name);
 
             ProductosImagenes::create([
                 'producto_id' => $producto->id,

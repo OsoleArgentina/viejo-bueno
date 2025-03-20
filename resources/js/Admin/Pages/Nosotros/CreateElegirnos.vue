@@ -5,7 +5,6 @@
             <h2 class="text-2xl font-semibold mb-4">Crear tarjeta</h2>
 
             <div>
-                <!-- TODO: usar text editor, cambiar a tipo text en ves de string. -->
                 <div class="mb-4">
                     <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripcion *</label>
                     <input type="text" id="descripcion" v-model="descripcion" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Descripcion">

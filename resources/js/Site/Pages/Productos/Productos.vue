@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full px-0 sm:px-20 mt-20">
+    <div class="w-full container mx-auto px-2 sm:px-0 mt-20">
         <!-- FILTROS -->
         <div class="w-full px-2 sm:px-0 mt-10">
             <div class="w-full mt-10">
@@ -51,6 +51,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { useHead } from '@vueuse/head'
 
 export default {
 
@@ -62,6 +63,12 @@ export default {
         }
     },
     async created() {
+        useHead({
+            meta: [
+                { name: 'description', content: this.metadatos[6].descripcion },
+                { name: 'keywords', content: this.metadatos[6].keyword },
+            ],
+        })
         await this.get_categorias();
         await this.get_marcas();
     },
@@ -81,6 +88,7 @@ export default {
         ...mapGetters([
             'categorias',
             'marcas',
+            'metadatos',
         ]),
         productos_filtrados(){
             let productosFiltrados = this.marcas;

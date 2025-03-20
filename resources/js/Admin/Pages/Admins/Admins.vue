@@ -175,6 +175,12 @@ export default {
 
     },
     async created(){
+        if(!this.admin.is_admin){
+            this.toast_notification({ message: 'No tenes permisos.', type: 'error' })
+            this.go_to_route('nosotros')
+            return;
+        }
+        
         this.isLoading = true; 
         await this.get_admins();
         this.isLoading = false; 
@@ -182,6 +188,7 @@ export default {
     computed:{
         ...mapGetters([
             'all_admins',
+            'admin',
         ]),
     }
 };

@@ -1,7 +1,7 @@
 <template>
     <div v-if="render_app" class="relative min-h-screen">
       <!-- Sidebar -->
-      <sidebar v-if="isOpen"></sidebar>
+      <sidebar></sidebar>
       <navbar></navbar>
 
       <!-- Main content -->

@@ -17,6 +17,7 @@
                     <template v-else>
                         <img v-if="capacitacion.path" :src="`/img/${capacitacion.path}`" alt="capacitacion Image" class="w-full h-96 object-cover rounded-md">
                     </template>
+                    <div v-html="capacitacion?.youtube_iframe" v-resizeyoutube></div>
                 </div>
                 <div class="w-full flex flex-col gap-y-2">
                     <span class="font-semibold text-xl">{{ capacitacion.titulo }}</span>
@@ -30,8 +31,20 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { useHead } from '@vueuse/head'
-
+    const resizeyoutube = {
+        mounted: (el) => {
+            const iframe = el.querySelector('iframe');
+            if (iframe) {
+                window.screen.width < 400 ? iframe.style.width = '360px' : iframe.style.width = '480px';
+                iframe.style.height = '380px';
+                iframe.style.borderRadius = '10px'; 
+            }
+        }
+    }
     export default{
+        directives: {
+            resizeyoutube
+        },
         data() {
             return {
             }
@@ -42,7 +55,7 @@ import { useHead } from '@vueuse/head'
             ]),
             isVideo(path) {
                 const videoExtensions = ['mp4', 'avi', 'mov', 'wmv', 'webm'];
-                const fileExtension = path.split('.').pop().toLowerCase();
+                const fileExtension = path?.split('.').pop().toLowerCase();
                 return videoExtensions.includes(fileExtension);
             },
         },
@@ -60,6 +73,15 @@ import { useHead } from '@vueuse/head'
                 ],
             })
             await this.get_capacitaciones();
+        },
+        updated(){
+            // console.log(window.screen.width );
+            // const iframe = this.$refs.youtubeIframeContainer[1]?.querySelector('iframe');
+            // if (iframe) {
+            //     window.screen.width < 400 ? iframe.style.width = '350px' : iframe.style.width = '400px';
+            //     iframe.style.height = '380px';
+            //     iframe.style.borderRadius = '10px'; 
+            // }
         }
     }
 </script>

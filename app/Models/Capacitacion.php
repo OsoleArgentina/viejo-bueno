@@ -12,6 +12,7 @@ class Capacitacion extends Model
         'orden',
         'titulo',
         'descripcion',
+        'youtube_iframe',
         'path',
     ];
 }

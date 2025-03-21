@@ -6,7 +6,7 @@
 
             <div class="w-full">
                 <div class="mb-4">
-                    <label for="titulo" class="block text-sm font-medium text-gray-700">Título</label>
+                    <label for="titulo" class="block text-sm font-medium text-gray-700">Título *</label>
                     <input type="text" id="titulo" v-model="titulo" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Título">
                 </div>
 
@@ -16,17 +16,38 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripcion</label>
+                    <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripcion *</label>
 
                     <text-editor unique_ref="descripcion" placeholder="Descripcion"
                         :initial_content="descripcion" v-on:text_changed="descripcion = $event">
                     </text-editor>
                 </div>
 
+                <div class="mb-4 border-b border-neutral-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <label for="youtube_iframe" class="block text-sm font-medium text-gray-700">Youtube iframe *</label>
+                        <switch-input
+                            id="show_youtube_iframe"
+                            :default_value="show_youtube_iframe"
+                            v-on:turn_on="show_youtube_iframe = true"
+                            v-on:turn_off="show_youtube_iframe = false"/>
+                    </div>
+                    <input v-if="show_youtube_iframe" type="text" id="youtube_iframe" v-model="youtube_iframe" class="mt-1 mb-4 p-2 w-full border border-gray-300 rounded-md" placeholder="<iframe></iframe>">
+                </div>
+
                 <div class="mb-4">
-                    <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
-                    <span class="text-xs text-neutral-400">Resolucion sugerida 1,304 x 1,116</span>
-                    <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
+                        <switch-input
+                            id="show_imagen"
+                            :default_value="show_imagen"
+                            v-on:turn_on="show_imagen = true"
+                            v-on:turn_off="show_imagen = false"/>
+                    </div>
+                    <div v-if="show_imagen">
+                        <span class="text-xs text-neutral-400">Resolucion sugerida 1,304 x 1,116</span>
+                        <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
                 </div>
 
                 <div class="flex justify-end space-x-2">
@@ -46,7 +67,11 @@ export default {
             orden: '',
             titulo: '',
             descripcion: '',
-            path: '',
+            youtube_iframe: null,
+            path: null,
+
+            show_youtube_iframe: false,
+            show_imagen: false,
         };
     },
     methods: {
@@ -60,11 +85,27 @@ export default {
                 'orden': this.orden,
                 'titulo': this.titulo,
                 'descripcion': this.descripcion,
-                'path': this.path,
             }
+
+            if(this.youtube_iframe) data.youtube_iframe = this.youtube_iframe;
+            if(this.path) data.path = this.path;
 
             this.emit_event('create_capacitacion', data);
         },
+    },
+    watch:{
+        show_youtube_iframe(value){
+            if(value){
+                this.show_imagen = false;
+                this.path = '';
+            }
+        },
+        show_imagen(value){
+            if(value){
+                this.show_youtube_iframe = false;
+                this.youtube_iframe = '';
+            }
+        }
     },
 };
 </script>

@@ -208,22 +208,17 @@
         <span @click="show_modal = !show_modal" class="w-full flex justify-end p-4 text-xl hover:text-theme-400 duration-300 cursor-pointer">
             <i class="fa-solid fa-xmark"></i>
         </span>
-        <div class="px-20 py-10">
+        <div class="px-2 sm:px-20 py-10">
             
             <div class="mb-5">
-              <h1 class="font-semibold text-5xl text-center">¡Pedí tu presupuesto por WhatsApp!</h1>
+              <h1 class="font-semibold text-lg sm:text-5xl text-center">{{ popup.titulo }}</h1>
             </div>
-            <div class="w-3/4 mx-auto flex flex-col justify-center items-center">
-                <p class="text-md mb-5 text-center">Escribinos ahora y recibí tu cotización al instante.
-                    Nuestro equipo está listo para asesorarte. 
-                </p>
-                <p class="text-md text-center mb-10">
-                    Hacé clic en el botón y chateá directamente con nosotros.
-                </p>
-                <button  class="py-2 px-6 bg-theme-400 text-white rounded-full flex gap-2">
-                    <img :src="`/img/wpp.svg`" alt="">
-                    <span>Solicitar presupuesto</span>
-                </button>
+            <div class="w-full sm:w-3/4 mx-auto flex flex-col justify-center items-center">
+                <div v-html="popup.descripcion" class="text-md text-center mb-10">
+                </div>
+                <a :href="'https://wa.me/' + formatWhatsApp(contacto.whatsapp)" target="_blank" class="py-2 px-6 bg-theme-400 text-white rounded-full flex gap-2">
+                    <span>{{ popup.desc_boton }}</span>
+                </a>
             </div>
         </div>
       </div>
@@ -265,6 +260,7 @@ export default {
     
     localStorage.setItem("modalShown", "false");  
 
+    await this.get_popup();
     await this.get_sliders();
     await this.get_marcas_destacadas();
     await this.get_categorias_destacadas();
@@ -295,6 +291,7 @@ export default {
         'get_categorias',
         'get_marcas',
         'get_productos',
+        'get_popup',
     ]),
     isVideo(path) {
         const videoExtensions = ['mp4', 'avi', 'mov', 'wmv', 'webm'];
@@ -354,6 +351,9 @@ export default {
             'producto',
             { 'producto_id': producto_id }
         )
+    },
+    formatWhatsApp(whatsapp) {
+        return whatsapp?.replace(/\D/g, ''); 
     }
   },
   computed: {
@@ -368,6 +368,8 @@ export default {
         'marcas',
         'productos',
         'metadatos',
+        'popup',
+        'contacto',
     ]),
     productos_filtrados(){
         let productosFiltrados = this.marcas;

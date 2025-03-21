@@ -28,6 +28,8 @@ class ContactoController extends Controller
             'telefono' => 'required|string',
             'correo' => 'required|email|max:255',
             'whatsapp' => 'required|string',
+            'instagram' => 'required|string',
+            'facebook' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -42,6 +44,8 @@ class ContactoController extends Controller
                 'telefono' => $request->telefono,
                 'correo' => $request->correo,
                 'whatsapp' => $request->whatsapp,
+                'instagram' => $request->instagram,
+                'facebook' => $request->facebook,
             ]
         );
 

@@ -10,7 +10,7 @@
       <!-- Botón de WhatsApp -->
        <div class="container mx-auto">
            <a :href="'https://wa.me/' + formatWhatsApp(contacto.whatsapp)" target="_blank"
-             class=" fixed bottom-16 right-45 bg-green-500 rounded-full p-4 shadow-lg cursor-pointer hover:bg-green-600 duration-300"
+             class=" fixed bottom-16 right-10 sm:right-45 bg-green-500 rounded-full p-4 shadow-lg cursor-pointer hover:bg-green-600 duration-300"
              @click="openWhatsApp"
            >
              <svg
@@ -40,7 +40,6 @@
     async created() {
       await this.get_metadatos();
       await this.get_contacto();
-      console.log(this.contacto);
       this.render_app = true;
     },
     data() {
@@ -51,8 +50,8 @@
     methods: {
       ...mapActions(["get_metadatos", 'get_contacto']),
       formatWhatsApp(whatsapp) {
-        return whatsapp.replace(/\D/g, '');  // Elimina todo lo que no sea un número
-    }
+          return whatsapp?.replace(/\D/g, ''); 
+      }
     },
     computed:{
         ...mapGetters(['contacto']),

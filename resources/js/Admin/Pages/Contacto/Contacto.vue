@@ -30,6 +30,16 @@
                     <input type="text" id="whatsapp" v-model="whatsapp" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="xxxxxxxx">
                 </div>
             </div>
+            <div class="mt-4 flex w-full gap-5">
+                <div class="w-1/2">
+                    <label for="instagram" class="block text-sm font-medium text-gray-700">Instagram *</label>
+                    <input type="text" id="instagram" v-model="instagram" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Instagram">
+                </div>
+                <div class="w-1/2">
+                    <label for="facebook" class="block text-sm font-medium text-gray-700">Facebook *</label>
+                    <input type="text" id="facebook" v-model="facebook" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="facebook">
+                </div>
+            </div>
             <div class="w-full flex justify-end">
                 <button @click="set_contacto" class="px-6 py-2 mt-5 bg-theme-400 text-white rounded-md hover:bg-theme-500 duration-300 focus:outline-none focus:ring-2 cursor-pointer">
                     Guardar
@@ -59,6 +69,8 @@ export default {
             telefono: '',
             correo: '',
             whatsapp: '',
+            instagram: '',
+            facebook: '',
             render_contacto: false,
         };
     },
@@ -76,6 +88,8 @@ export default {
                 'telefono': this.telefono,
                 'correo': this.correo,
                 'whatsapp': this.whatsapp,
+                'instagram': this.instagram,
+                'facebook': this.facebook,
             };
 
             const response = await this.send_http_request(
@@ -105,6 +119,8 @@ export default {
         this.telefono = this.contacto?.telefono
         this.correo = this.contacto?.correo
         this.whatsapp = this.contacto?.whatsapp
+        this.instagram = this.contacto?.instagram
+        this.facebook = this.contacto?.facebook
 
         this.render_contacto = true;
         this.isLoading = false;

@@ -90,6 +90,9 @@ const API_ADMIN = {
     // PRESUPUESTO
     solicitar_presupuesto: '/solicitar_presupuesto',
 
+    // POPUP
+    get_popup: '/get_popup',
+    set_popup: '/set_popup',
 };
 
 export default API_ADMIN;

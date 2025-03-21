@@ -11,8 +11,8 @@ import MarcasModule from '@admin/Store/MarcasModule';
 import NovedadesModule from '@admin/Store/NovedadesModule';
 import CapacitacionesModule from '@admin/Store/CapacitacionesModule';
 import ContactoModule from '@admin/Store/ContactoModule';
-import MetadatosModule from './Store/MetadatosModule';
-
+import MetadatosModule from '@admin/Store/MetadatosModule';
+import PopUpModule from '@admin/Store/PopUpModule';
 // Create a new Store instance.
 const store = createStore({
     modules: {
@@ -27,6 +27,7 @@ const store = createStore({
         CapacitacionesModule,
         ContactoModule,
         MetadatosModule,
+        PopUpModule,
     }
 });
 

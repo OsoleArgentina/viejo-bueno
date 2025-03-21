@@ -6,11 +6,11 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
             <div v-for="(novedad, index) in novedades" 
-            :key="index" @click="go_to_novedad(novedad.id)" class="flex flex-col justify-center cursor-pointer hover:shadow-sm">
-                <div class="mb-2">
-                    <img :src="`/img/${novedad.path}`" alt="novedad Image" class="w-full h-96 object-cover rounded-lg" />
+            :key="index" @click="go_to_novedad(novedad.id)" class="flex flex-col justify-center cursor-pointer hover:bg-neutral-100 duration-500">
+                <div class="">
+                    <img :src="`/img/${novedad.path}`" alt="novedad Image" class="w-full h-96 object-cover rounded-t-lg" />
                 </div>
-                <div class="w-full flex flex-col gap-y-2">
+                <div class="w-full flex flex-col gap-y-2 p-4">
                     <span class="text-theme-400 font-semibold text-lg">{{ novedad.titulo }}</span>
                     <h2 class="font-semibold">{{ novedad.subtitulo }}</h2>
                     <div class="text-sm" v-html="novedad.descripcion_corta"></div>

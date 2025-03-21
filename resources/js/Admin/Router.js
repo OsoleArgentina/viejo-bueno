@@ -17,6 +17,7 @@ import Capacitaciones from '@admin/Pages/Capacitaciones/Capacitaciones.vue';
 import Contacto from '@admin/Pages/Contacto/Contacto.vue';
 import Admins from '@admin/Pages/Admins/Admins.vue';
 import Metadatos from '@admin/Pages/Metadatos/Metadatos.vue';
+import PopUp from '@admin/Pages/PopUp/PopUp.vue';
 const Routes = [
     // {
     //     path: "/",
@@ -91,6 +92,11 @@ const Routes = [
                 path: "/metadatos",
                 name: "metadatos",
                 component: Metadatos,
+            },
+            {
+                path: "/popup",
+                name: "popup",
+                component: PopUp,
             },
     //     ]
     // },

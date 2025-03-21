@@ -141,6 +141,7 @@ export default {
           { name: 'Contacto', icon: 'fa-solid fa-address-book', path: 'contacto' },
           { name: 'Administradores', icon: 'fa-solid fa-users', path: 'admins' },
           { name: 'Metadatos', icon: 'fa-solid fa-database', path: 'metadatos' },
+          { name: 'Pop-up', icon: 'fa-solid fa-database', path: 'popup' },
         ]
       };
     },

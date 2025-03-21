@@ -14,7 +14,6 @@ const admin = createApp(Main);
 admin.use(router);
 admin.use(store);
 admin.mixin(mixins);
-
 // Registrar componentes antes de montar
 register_admin_components(admin);
 

@@ -1,3 +1,13 @@
+<!-- Vue.directive('resize-youtube', {
+    inserted: function (el) {
+      const iframe = el.querySelector('iframe');
+      if (iframe) {
+        iframe.style.width = '80px';
+        iframe.style.height = '80px';
+      }
+    }
+  }); -->
+
 <template>
     <div class="w-full flex justify-between items-center border-b border-neutral-200 mb-4">
         <div class="flex items-center gap-2">
@@ -28,15 +38,18 @@
                 <tr v-for="(capacitacion, index) in capacitaciones" :key="capacitacion.id" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
                     <td class="px-4 py-2">{{ capacitacion.orden }}</td>
                     <td class="px-4 py-2">
-                        <template v-if="isVideo(capacitacion.path)">
-                            <video :src="`/img/${capacitacion.path}`" autoplay muted controls class="w-20 h-20 object-cover
+                        <template v-if="isVideo(capacitacion?.path)">
+                            <video :src="`/img/${capacitacion?.path}`" autoplay muted controls class="w-20 h-20 object-cover
                             ">
                                 Tu navegador no soporta el video.
                             </video>
                         </template>
                         <template v-else>
-                            <img v-if="capacitacion.path" :src="`/img/${capacitacion.path}`" alt="capacitacion Image" class="w-20 h-20 object-cover">
+                            <img v-if="capacitacion.path" :src="`/img/${capacitacion?.path}`" alt="capacitacion Image" class="w-20 h-20 object-cover">
                         </template>
+
+                        <!-- <div v-html="capacitacion?.youtube_iframe" :ref="'youtubeIframeContainer' + capacitacion?.id"></div>-->
+                        <div v-html="capacitacion?.youtube_iframe" v-resizeyoutube></div>
                     </td>
                     <td class="px-4 py-2">{{ capacitacion.titulo }}</td>
                     <td v-html="capacitacion.descripcion" class="px-4 py-2"></td>
@@ -57,7 +70,6 @@
         <div class="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-t-transparent border-theme-400"></div>
     </div>
 
-
     <create-capacitacion v-if="capacitacion_modal" @close_modal="capacitacion_modal = !capacitacion_modal" @create_capacitacion="create_capacitacion" />
     <confirmation-modal v-if="delete_capacitacion_modal" :message="'Estas seguro de eliminar la capacitacion? ' + capacitacion_selected.titulo" @cancel="delete_capacitacion_modal = !delete_capacitacion_modal" @confirm="delete_capacitacion(capacitacion_selected.id)"/>
     <edit-capacitacion v-if="edit_capacitacion_modal"  :capacitacion_edit="capacitacion_selected" @close_modal="edit_capacitacion_modal = !edit_capacitacion_modal" @edit_capacitacion="edit_capacitacion"/>
@@ -69,7 +81,20 @@ import { mapGetters, mapActions } from "vuex";
 import CreateCapacitacion from './CreateCapacitacion.vue';
 import EditCapacitacion from './EditCapacitacion.vue';
 
+const resizeyoutube = {
+  mounted: (el) => {
+    const iframe = el.querySelector('iframe');
+      if (iframe) {
+        iframe.style.width = '80px';
+        iframe.style.height = '80px';
+    }
+  }
+}
+
 export default {
+    directives: {
+        resizeyoutube
+    },
     components:{
         'create-capacitacion': CreateCapacitacion,
         'edit-capacitacion': EditCapacitacion
@@ -89,7 +114,7 @@ export default {
         ]),
         isVideo(path) {
             const videoExtensions = ['mp4', 'avi', 'mov', 'wmv', 'webm'];
-            const fileExtension = path.split('.').pop().toLowerCase();
+            const fileExtension = path?.split('.').pop().toLowerCase();
             return videoExtensions.includes(fileExtension);
         },
         async create_capacitacion(data) {
@@ -165,6 +190,21 @@ export default {
                 this.isLoading = false;
                 this.toast_notification({ message: response.data.message })
             }
+        },
+        redimesionar_videos_youtube() {
+            this.capacitaciones.forEach(capacitacion => {
+                if (capacitacion.youtube_iframe) {
+                    const container = this.$refs['youtubeContainer' + capacitacion.id];
+                    console.log(container);
+                    if (container) {
+                        const iframe = container.querySelector('iframe');
+                        if (iframe) {
+                            iframe.style.width = '80px';
+                            iframe.style.height = '80px';
+                        }
+                    }
+                }
+            });
         }
 
     },

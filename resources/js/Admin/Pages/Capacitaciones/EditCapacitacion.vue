@@ -23,10 +23,31 @@
                     </text-editor>
                 </div>
 
+                <div class="mb-4 border-b border-neutral-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <label for="youtube_iframe" class="block text-sm font-medium text-gray-700">Youtube iframe *</label>
+                        <switch-input
+                            id="show_youtube_iframe"
+                            :default_value="show_youtube_iframe"
+                            v-on:turn_on="show_youtube_iframe = true"
+                            v-on:turn_off="show_youtube_iframe = false"/>
+                    </div>
+                    <input v-if="show_youtube_iframe" type="text" id="youtube_iframe" v-model="youtube_iframe" class="mt-1 mb-4 p-2 w-full border border-gray-300 rounded-md" placeholder="<iframe></iframe>">
+                </div>
+
                 <div class="mb-4">
-                    <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
-                    <span class="text-xs text-neutral-400">Resolucion sugerida 1,304 x 1,116</span>
-                    <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <label for="path" class="block text-sm font-medium text-gray-700">Imagen *</label>
+                        <switch-input
+                            id="show_imagen"
+                            :default_value="show_imagen"
+                            v-on:turn_on="show_imagen = true"
+                            v-on:turn_off="show_imagen = false"/>
+                    </div>
+                    <div v-if="show_imagen">
+                        <span class="text-xs text-neutral-400">Resolucion sugerida 1,304 x 1,116</span>
+                        <input type="file" id="path" @change="handleImageUpload" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
                 </div>
 
                 <div class="flex justify-end space-x-2">
@@ -49,7 +70,11 @@ export default {
             orden: '',
             titulo: '',
             descripcion: '',
+            youtube_iframe: '',
             path: '',
+
+            show_youtube_iframe: false,
+            show_imagen: false,
         };
     },
     methods: {
@@ -66,6 +91,7 @@ export default {
                 'descripcion': this.descripcion,
             }
 
+            if(this.youtube_iframe) data.youtube_iframe = this.youtube_iframe;
             if(this.path) data.path = this.path;
             
             this.emit_event('edit_capacitacion', data);
@@ -75,6 +101,22 @@ export default {
         this.titulo = this.capacitacion_edit.titulo;
         this.orden = this.capacitacion_edit.orden;
         this.descripcion = this.capacitacion_edit.descripcion;
-    }
+        this.youtube_iframe = this.capacitacion_edit.youtube_iframe;
+        if(this.capacitacion_edit.youtube_iframe) this.show_youtube_iframe = true;
+    },
+    watch:{
+        show_youtube_iframe(value){
+            if(value){
+                this.show_imagen = false;
+                this.path = '';
+            }
+        },
+        show_imagen(value){
+            if(value){
+                this.show_youtube_iframe = false;
+                this.youtube_iframe = '';
+            }
+        }
+    },
 };
 </script>

@@ -86,8 +86,26 @@ export default {
             const desc = this.nosotros?.descripcion;
             const mid = Math.floor(desc?.length / 2);
 
-            this.firstHalf = desc?.slice(0, mid);
-            this.secondHalf = desc?.slice(mid);
+            const cutIndex = this.findNaturalCutPoint(desc, mid);
+            
+            this.firstHalf = desc?.slice(0, cutIndex);
+            this.secondHalf = desc?.slice(cutIndex);
+        },
+
+        findNaturalCutPoint(text, mid) {
+            const delimiters = [' '];
+            let cutIndex = mid;
+            let found = false;
+
+            while (!found && cutIndex > 0) {
+                if (delimiters.includes(text[cutIndex])) {
+                    found = true;
+                } else {
+                    cutIndex--;
+                }
+            }
+
+            return cutIndex;
         }
     },
     computed: {

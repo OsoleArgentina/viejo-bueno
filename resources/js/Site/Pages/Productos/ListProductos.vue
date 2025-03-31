@@ -6,8 +6,8 @@
                     <div class="absolute inset-0 bg-black opacity-20 rounded-md"></div>
                     <img :src="`/img/${categoria.path}`" alt="categoria Image" class="w-full h-96 object-cover rounded-md" />
                     
-                    <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white text-2xl font-bold z-10">
-                        {{ categoria.nombre }}
+                    <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-white text-2xl flex text-center font-bold z-10">
+                        <p class="w-full">{{ categoria.nombre }}</p>
                     </div>
                     
                     <div class="absolute inset-0 flex items-center justify-center z-10">

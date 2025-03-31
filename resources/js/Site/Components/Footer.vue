@@ -1,7 +1,7 @@
 <template>
 
     <div class="w-full bg-site-theme p-6 mt-10">
-      <div class="container mx-auto px-2 sm:px-0 flex sm:flex-row flex-col justify-between items-center">
+      <div class="container mx-auto py-5 sm:px-0 flex sm:flex-row flex-col justify-between">
         <div>
           <div class="flex flex-col gap-5 justify-center items-center space-x-4">
             <img :src="'img/logo-viejo-bueno-footer.png'" alt="Logo" class=" object-contain" />
@@ -24,10 +24,10 @@
           </div>
         </div>
         <div class="hidden sm:block">
-          <h3 class="font-medium mb-4">SECCIONES</h3>
-          <ul class="flex justify-between text-neutral-600">
-            <div class=" w-1/2">
-              <li v-for="(link, index) in footerLinks" :key="index" class="flex flex-col" >
+          <h3 class="font-semibold mb-4">SECCIONES</h3>
+          <ul class="flex gap-x-10 justify-between">
+            <div class="">
+              <li v-for="(link, index) in footerLinks" :key="index" class="flex flex-col">
                 <router-link :to="{ name: link.path}">
                   <div v-if="index <= 3" class="mb-4">
                     <a  class="hover:text-green-600">{{ link.text }}</a>
@@ -35,7 +35,7 @@
                 </router-link>
               </li>
             </div>
-            <div class="w-1/2">
+            <div class="">
               <li v-for="(link, index) in footerLinks" :key="index" class="" >
                 <router-link :to="{ name: link.path}">
                   <div v-if="index > 3" class="mb-4">
@@ -47,7 +47,7 @@
           </ul>
         </div>
         <div>
-          <h3 class="font-medium mb-5">DATOS DE CONTACTO</h3>
+          <h3 class="font-semibold mb-5">DATOS DE CONTACTO</h3>
           <div class="flex flex-col gap-5">
             <div class="flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="21" viewBox="0 0 16 21" fill="none">

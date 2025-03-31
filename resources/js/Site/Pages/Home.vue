@@ -135,8 +135,8 @@
 
             <div class="absolute inset-0 bg-black opacity-40"></div>
 
-            <div class="absolute inset-0 flex items-start sm:items-end justify-center text-white px-4 z-10">
-            <div class="flex sm:flex-row flex-col w-full items-center sm:px-20">
+            <div class="container mx-auto absolute inset-0 flex items-start sm:items-end justify-center text-white z-10">
+            <div class="flex sm:flex-row flex-col w-full items-center">
                 <div class="w-3/4">
                     <div class="w-16 border-t-2 border-white mb-5"></div>
                     <h2 class="text-5xl font-bold mb-10">{{ home_nosotros?.titulo }}</h2>
@@ -184,11 +184,11 @@
          </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             <div v-for="(novedad, index) in novedades" 
-            :key="index" class="flex flex-col justify-center cursor-pointer hover:shadow-xs">
-                <div class="mb-2">
-                    <img :src="`/img/${novedad.path}`" alt="novedad Image" class="w-full h-96 object-cover rounded-lg" />
+            :key="index" @click="go_to_novedad(novedad.id)" class="flex flex-col justify-center cursor-pointer hover:bg-neutral-100 duration-500">
+                <div class="">
+                    <img :src="`/img/${novedad.path}`" alt="novedad Image" class="w-full h-96 object-cover rounded-t-lg" />
                 </div>
-                <div class="w-full flex flex-col gap-y-1">
+                <div class="w-full flex flex-col gap-y-2 p-4">
                     <span class="text-theme-400 font-semibold text-lg">{{ novedad.titulo }}</span>
                     <h2 class="font-semibold">{{ novedad.subtitulo }}</h2>
                     <div class="text-sm" v-html="novedad.descripcion_corta"></div>
@@ -293,6 +293,12 @@ export default {
         'get_productos',
         'get_popup',
     ]),
+    go_to_novedad(novedad_id){
+        this.go_to_route(
+            'novedad',
+            { 'novedad_id': novedad_id }
+        )
+    },
     isVideo(path) {
         const videoExtensions = ['mp4', 'avi', 'mov', 'wmv', 'webm'];
         const fileExtension = path.split('.').pop().toLowerCase();

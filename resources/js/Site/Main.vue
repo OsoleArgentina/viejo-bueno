@@ -8,9 +8,9 @@
       <footer-site></footer-site>
   
       <!-- Botón de WhatsApp -->
-       <div class="container mx-auto">
+       <div class="">
            <a :href="'https://wa.me/' + formatWhatsApp(contacto.whatsapp)" target="_blank"
-             class=" fixed bottom-16 right-10 sm:right-45 bg-green-500 rounded-full p-4 shadow-lg cursor-pointer hover:bg-green-600 duration-300"
+             class="fixed bottom-20 right-0 bg-green-500 rounded-full p-4 mx-2 md:mx-26 xl:mx-30 2xl:mx-44 sm:p-5 shadow-lg cursor-pointer hover:bg-green-600 duration-300"
              @click="openWhatsApp"
            >
              <svg

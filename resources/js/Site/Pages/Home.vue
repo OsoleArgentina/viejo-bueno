@@ -246,6 +246,7 @@ export default {
     };
   },
   async created() {
+    window.addEventListener("beforeunload", this.clearLocalStorage);
     useHead({
       meta: [
         { name: 'description', content: this.metadatos[0].descripcion },
@@ -253,12 +254,17 @@ export default {
       ],
     })
     
-    const modalShown = localStorage.getItem("modalShown");
-    if (!modalShown) {
-      this.show_modal = true;
+    const sessionId = localStorage.getItem("sessionId");
+    const currentSessionId = Date.now().toString();
+    // Si no hay sessionId o es diferente al actual (nueva sesión)
+    if (!sessionId) {
+    this.show_modal = true;
+    // Almacena el ID de sesión actual
+    localStorage.setItem("sessionId", currentSessionId);
     }
     
-    localStorage.setItem("modalShown", "false");  
+    // Configura listener para cuando la pestaña/ventana se cierre
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
 
     await this.get_popup();
     await this.get_sliders();
@@ -277,10 +283,16 @@ export default {
     }
     this.startSlider();
   },
-  destroyed() {
+  beforeDestroy() {
+    // Asegúrate de eliminar el listener cuando el componente se destruya
+    window.removeEventListener("beforeunload", this.handleBeforeUnload);
     clearInterval(this.sliderInterval);
   },
   methods: {
+    handleBeforeUnload() {
+      // Elimina el sessionId para que el popup aparezca en la próxima visita
+      localStorage.removeItem("sessionId");
+    },
     ...mapActions([
         'get_sliders',
         'get_categorias_destacadas',

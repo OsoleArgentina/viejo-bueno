@@ -49,6 +49,7 @@ Route::get('/get_novedades', [NovedadesController::class, 'get_novedades'])->nam
 Route::get('/get_capacitaciones', [CapacitacionesController::class, 'get_capacitaciones'])->name('get_capacitaciones');
 Route::get('/get_categorias', [CategoriasController::class, 'get_categorias'])->name('get_categorias');
 Route::get('/get_popup', [PopUpController::class, 'get_popup'])->name('get_popup');
+Route::get('/get_nosotros_elegirnos', [NosotrosController::class, 'get_nosotros_elegirnos'])->name('get_nosotros_elegirnos');
 
 // MERCADO PAGO
 Route::post('/createPreference', [MercadoPagoController::class, 'createPreference'])->name('createPreference');
@@ -70,7 +71,6 @@ Route::middleware('auth_admin')->group(function () {
     // NOSOTROS
     Route::post('/set_nosotros', [NosotrosController::class, 'set_nosotros'])->name('set_nosotros');
     //ELEGIRNOS
-    Route::get('/get_nosotros_elegirnos', [NosotrosController::class, 'get_nosotros_elegirnos'])->name('get_nosotros_elegirnos');
     Route::post('/create_elegirnos', [NosotrosController::class, 'create_elegirnos'])->name('create_elegirnos');
     Route::post('/edit_elegirnos', [NosotrosController::class, 'edit_elegirnos'])->name('edit_elegirnos');
     Route::delete('/delete_elegirnos', [NosotrosController::class, 'delete_elegirnos'])->name('delete_elegirnos');

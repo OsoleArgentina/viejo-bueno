@@ -75,6 +75,7 @@ export default {
         })
         await this.get_nosotros();
         await this.get_nosotros_elegirnos();
+        // console.log(this.nosotros_elegirnos);
         this.splitDescription();
     },
     methods: {

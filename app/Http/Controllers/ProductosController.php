@@ -57,7 +57,7 @@ class ProductosController extends Controller
             'nombre' => 'required|string',
             'marca_id' => 'required',
             'precio' => 'required|numeric',
-            'orden' => 'required|string|max:2',
+            'orden' => 'required|string',
             'destacado' => 'nullable|boolean',
             'ficha_tecnica' => 'sometimes|required|mimes:pdf|max:20480',
             'subcategoria_id' => 'required',
@@ -106,7 +106,7 @@ class ProductosController extends Controller
             'nombre' => 'required|string',
             'marca_id' => 'required',
             'precio' => 'required|numeric',
-            'orden' => 'required|string|max:2',
+            'orden' => 'required|string',
             'ficha_tecnica' => 'sometimes|required|mimes:pdf|max:20480',
             'subcategoria_id' => 'required',
         ]);

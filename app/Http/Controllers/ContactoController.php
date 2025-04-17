@@ -78,7 +78,7 @@ class ContactoController extends Controller
 
         Mail::to($contacto->correo ?? 'example@gmail.com')->queue(new ContactoMail($data));
 
-        return $this->success_response('InformaciÃ³n enviada correctamente.', $data);
+        return $this->success_response('Informaci¨®n enviada correctamente.', $data);
     }
  
 }

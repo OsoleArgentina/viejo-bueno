@@ -28,7 +28,7 @@ class MarcasController extends Controller
     {   
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
-            'orden' => 'required|string|max:2',
+            'orden' => 'required|string',
             'destacado' => 'nullable|boolean',
             'categoria_id' => 'required',
             'path' => 'required|image|mimes:jpeg,png,jpg,svg|max:20480',
@@ -80,7 +80,7 @@ class MarcasController extends Controller
         $validator = Validator::make($request->all(), [
             'marca_id' => 'required',
             'nombre' => 'required|string',
-            'orden' => 'required|string|max:2',
+            'orden' => 'required|string',
             'categoria_id' => 'required',
             'path' => 'sometimes|required|image|mimes:jpeg,png,jpg,svg|max:20480',
         ]);

@@ -52,10 +52,8 @@
                       {{ section.name }}
                     </span>
                     <span class="ml-3" v-else>
-                      <router-link :to="{ name: section.path }" class="">
-                        <span class="">
-                          {{ section.name }}
-                        </span>
+                      <router-link :to="{ name: section.path }">
+                        {{ section.name }}
                       </router-link>
                     </span>
                   </div>

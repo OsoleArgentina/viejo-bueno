@@ -14,5 +14,7 @@ class Contacto extends Model
         'telefono',
         'correo',
         'whatsapp',
+         'instagram',
+        'facebook',
     ];
 }

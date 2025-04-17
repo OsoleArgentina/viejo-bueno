@@ -16,6 +16,7 @@ use App\Http\Controllers\MetadatosController;
 use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\PresupuestoController;
+use App\Http\Controllers\PopUpController;
 
 Route::get('/', function () {
     return view('site.site');
@@ -47,6 +48,8 @@ Route::get('/get_marcas', [MarcasController::class, 'get_marcas'])->name('get_ma
 Route::get('/get_novedades', [NovedadesController::class, 'get_novedades'])->name('get_novedades');
 Route::get('/get_capacitaciones', [CapacitacionesController::class, 'get_capacitaciones'])->name('get_capacitaciones');
 Route::get('/get_categorias', [CategoriasController::class, 'get_categorias'])->name('get_categorias');
+Route::get('/get_popup', [PopUpController::class, 'get_popup'])->name('get_popup');
+Route::get('/get_nosotros_elegirnos', [NosotrosController::class, 'get_nosotros_elegirnos'])->name('get_nosotros_elegirnos');
 
 // MERCADO PAGO
 Route::post('/createPreference', [MercadoPagoController::class, 'createPreference'])->name('createPreference');
@@ -68,7 +71,6 @@ Route::middleware('auth_admin')->group(function () {
     // NOSOTROS
     Route::post('/set_nosotros', [NosotrosController::class, 'set_nosotros'])->name('set_nosotros');
     //ELEGIRNOS
-    Route::get('/get_nosotros_elegirnos', [NosotrosController::class, 'get_nosotros_elegirnos'])->name('get_nosotros_elegirnos');
     Route::post('/create_elegirnos', [NosotrosController::class, 'create_elegirnos'])->name('create_elegirnos');
     Route::post('/edit_elegirnos', [NosotrosController::class, 'edit_elegirnos'])->name('edit_elegirnos');
     Route::delete('/delete_elegirnos', [NosotrosController::class, 'delete_elegirnos'])->name('delete_elegirnos');
@@ -122,5 +124,8 @@ Route::middleware('auth_admin')->group(function () {
 
     // METADATOS
     Route::post('/edit_metadato', [MetadatosController::class, 'edit_metadato'])->name('edit_metadato');
+
+    // POPUP
+    Route::post('/set_popup', [PopUpController::class, 'set_popup'])->name('set_popup');
 });
 

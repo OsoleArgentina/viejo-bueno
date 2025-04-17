@@ -28,6 +28,8 @@ class ContactoController extends Controller
             'telefono' => 'required|string',
             'correo' => 'required|email|max:255',
             'whatsapp' => 'required|string',
+            'instagram' => 'required|string',
+            'facebook' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -42,6 +44,8 @@ class ContactoController extends Controller
                 'telefono' => $request->telefono,
                 'correo' => $request->correo,
                 'whatsapp' => $request->whatsapp,
+                'instagram' => $request->instagram,
+                'facebook' => $request->facebook,
             ]
         );
 
@@ -74,7 +78,7 @@ class ContactoController extends Controller
 
         Mail::to($contacto->correo ?? 'example@gmail.com')->queue(new ContactoMail($data));
 
-        return $this->success_response('InformaciÃ³n enviada correctamente.', $data);
+        return $this->success_response('Informaci¨®n enviada correctamente.', $data);
     }
  
 }

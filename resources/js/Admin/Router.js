@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 // HOME PAGE
 import Main from '@admin/Main.vue'
@@ -29,72 +29,72 @@ const Routes = [
                 component: Dashboard,
             },
             {
-                path: "/sliders",
+                path: "/admin/sliders",
                 name: "sliders",
                 component: Sliders,
             },
             {
-                path: "/home-nosotros",
+                path: "/admin/home-nosotros",
                 name: "home-nosotros",
                 component: HomeNosotros,
             },
             {
-                path: "/nosotros",
+                path: "/admin/nosotros",
                 name: "nosotros",
                 component: Nosotros,
             },
             {
-                path: "/elegirnos",
+                path: "/admin/elegirnos",
                 name: "elegirnos",
                 component: Elegirnos,
             },
             {
-                path: "/categorias",
+                path: "/admin/categorias",
                 name: "categorias",
                 component: Categorias,
             },
             {
-                path: "/subcategorias",
+                path: "/admin/subcategorias",
                 name: "subcategorias",
                 component: Subcategorias,
             },
             {
-                path: "/productos",
+                path: "/admin/productos",
                 name: "productos",
                 component: Productos,
             },
             {
-                path: "/marcas",
+                path: "/admin/marcas",
                 name: "marcas",
                 component: Marcas,
             },
             {
-                path: "/novedades",
+                path: "/admin/novedades",
                 name: "novedades",
                 component: Novedades,
             },
             {
-                path: "/capacitaciones",
+                path: "/admin/capacitaciones",
                 name: "capacitaciones",
                 component: Capacitaciones,
             },
             {
-                path: "/contacto",
+                path: "/admin/contacto",
                 name: "contacto",
                 component: Contacto,
             },
             {
-                path: "/admins",
+                path: "/admin/admins",
                 name: "admins",
                 component: Admins,
             },
             {
-                path: "/metadatos",
+                path: "/admin/metadatos",
                 name: "metadatos",
                 component: Metadatos,
             },
             {
-                path: "/popup",
+                path: "/admin/popup",
                 name: "popup",
                 component: PopUp,
             },
@@ -103,8 +103,8 @@ const Routes = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: Routes,
-})
+});
 
 export default router

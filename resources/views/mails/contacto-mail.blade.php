@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                     <td><strong>Mensaje</strong></td>
-                    <td>{{ $data['mensaje'] ?? '' }}</td>
+                    <td>{{ $data['mensaje'] }}</td>
                 </tr>
             </tbody>
         </table>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactoMail;
+use Illuminate\Support\Facades\Http;
 
 class ContactoController extends Controller
 {
@@ -60,12 +61,27 @@ class ContactoController extends Controller
             'telefono' => 'nullable|string|max:255',
             'empresa' => 'nullable|string|max:255',
             'mensaje' => 'nullable|string|max:500',
+            'g-recaptcha-response' => 'required', // Validar que se envió el token
         ]);
-
+    
         if ($validator->fails()) {
             return $this->error_response($validator->messages()->first());
         }
-
+    
+        // Verificar el token de reCAPTCHA
+        $recaptchaSecret = env('RECAPTCHA_SECRET_KEY');
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => $recaptchaSecret,
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+    
+        $recaptchaResult = $response->json();
+    
+        if (!$recaptchaResult['success']) {
+            return $this->error_response('Verificación de reCAPTCHA fallida. Por favor, inténtelo de nuevo.');
+        }
+    
         $data = [
             'nombre' => $request->nombre,
             'correo' => $request->correo,
@@ -73,12 +89,12 @@ class ContactoController extends Controller
             'empresa' => $request->empresa,
             'mensaje' => $request->mensaje,
         ];
-
+    
         $contacto = Contacto::first();
-
+    
         Mail::to($contacto->correo ?? 'example@gmail.com')->queue(new ContactoMail($data));
-
-        return $this->success_response('Informaci��n enviada correctamente.', $data);
+    
+        return $this->success_response('Información enviada correctamente.', $data);
     }
  
 }

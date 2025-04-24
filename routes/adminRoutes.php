@@ -17,6 +17,10 @@ use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\PopUpController;
+use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 Route::get('/', function () {
     return view('site.site');
@@ -60,6 +64,10 @@ Route::middleware('auth_admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.admin', ['user' => auth()->user()]);
     })->name('dashboard');
+
+    Route::get('/admin/{any}', function () {
+        return view('admin.admin'); // Vue Admin App
+    })->where('any', '.*');
 
     // slider - HOME
     Route::post('/set_slider', [HomeController::class, 'set_slider'])->name('set_slider');
@@ -128,4 +136,9 @@ Route::middleware('auth_admin')->group(function () {
     // POPUP
     Route::post('/set_popup', [PopUpController::class, 'set_popup'])->name('set_popup');
 });
+
+Route::get('/{any}', function () {
+    return view('site.site'); // Tu vista principal de Vue, usualmente app.blade.php
+})->where('any', '.*');
+
 
